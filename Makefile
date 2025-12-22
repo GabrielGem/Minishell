@@ -1,7 +1,7 @@
 NAME = xaolins
 
 SRC =	main.c\
-		src/tree_func.c
+		src/tree_func.c	src/function.c
 
 OBJ =	$(SRC:.c=.o)
 

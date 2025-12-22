@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 15:59:24 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/19 16:04:36 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/12/22 11:39:02 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 typedef enum e_node_type
 {
 	NODE_COMMAND,
+	NODE_BUILTIN,
 	NODE_PIPE,
-	NODE_AND,
-	NODE_OR,
 	NODE_REDIRECT,
 	NODE_SEQUENCE
 }	t_node_type;
@@ -32,4 +31,5 @@ typedef struct s_ast_node
 	t_list				*redirects;
 }	t_ast_node;
 
+//builtins: echo, cd, pwd, export, unset, env, exit
 #endif
