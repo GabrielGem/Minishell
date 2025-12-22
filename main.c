@@ -6,15 +6,15 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/19 14:59:52 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/12/22 11:27:40 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
-	char	*line = NULL;
+	char	*line;
 
 	line = readline("$> ");
 	while (line)
@@ -22,5 +22,5 @@ int	main(void)
 		build_tree(line);
 		free(line);
 		line = readline("$> ");
-	}	
+	}
 }
