@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/22 14:46:21 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:45:52 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,11 @@ t_ast_node	*new(void)
 
 t_ast_node	*build_tree(char *line, char **env)
 {
-	char	**tokens;
-	int		i = 0;
-
+	t_list	*tokens;
 	(void)env;
 	if (!line)
 		return (NULL);
-	tokens = ft_split(line, ' ');
-	while (tokens[i])
-	{
-		printf("%s\n", tokens[i]);
-		i++;
-	}
-	ft_free_split(tokens);
+	
+	printf("%s\n", line);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/22 18:47:04 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:39:11 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,35 @@ char	*find_pipe(char *cmd)
 {
 	char	*new_cmd;
 	char	*sub_str;
-	char	*pipe;
+	char	*pipe_ch;
 
-	pipe = ft_strchr(cmd, '|');
-	if (!pipe)
+	pipe_ch = ft_strnstr(cmd, "|", ft_strlen(cmd));
+	if (!pipe_ch)
 		return (cmd);
-	if (!*(pipe - 1) == ' ')
+	while (pipe_ch)
 	{
-		sub_str = ft_substr(cmd, 0, ft_strlen(pipe));
-		new_cmd = ft_strjoin(sub_str, " ");
-		free(sub_str);
+		if (pipe_ch != cmd && *(pipe_ch - 1) != ' ')
+		{	
+			sub_str = ft_substr(cmd, 0, pipe_ch - new_cmd);
+			str_append(&sub_str, " |");
+			str_append(&sub_str, pipe_ch + 1);
+		}
+		if (*(pipe_ch + 1) != '\0' && *(pipe_ch + 1) != ' ')
+		{
+			new_cmd = ft_substr(new_cmd, 0, pipe_ch - new_cmd + 1);
+			str_append(&sub_str, " ");
+			str_append(&sub_str, pipe_ch + 1);
+			new_cmd = sub_str;
+		}
+		pipe_ch = ft_strchr(new_cmd, '|');
+		pipe_ch = ft_strchr(pipe_ch + 1, '|');
+
 	}
-	sub_str = ft_strjoin(new_cmd, "!");
-	free(new_cmd);
-	if (!*(pipe + 1) == ' ')
-		new_cmd = ft_strjoin(sub_str, " ");
-	free(sub_str);
+	free(cmd);
+	return (new_cmd);
+}
+
+char	*find_pipe2(char *cmd)
+{
 	
 }

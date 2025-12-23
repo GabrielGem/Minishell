@@ -1,7 +1,7 @@
 NAME = xaolins
 
 SRC =	main.c\
-		src/tree_func.c	src/function.c
+		src/tree_func.c	src/function.c src/parser_util.c
 
 OBJ =	$(SRC:.c=.o)
 
@@ -18,7 +18,7 @@ $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $^ $(LIBS) -o $@
 
 $(LIBFT) : $(DIR_LIBFT)
-	$(MAKE) -C $< all
+	$(MAKE) -C $^ all
 
 clean:
 	rm -f $(OBJ)
