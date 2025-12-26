@@ -6,11 +6,11 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 16:51:09 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/21 14:53:26 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/12/23 17:29:09 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hashtable.h"
+#include "minishell.h"
 
 static int	update_if_exists(t_hash_item *item, char *key, char *value);
 

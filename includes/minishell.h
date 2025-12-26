@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_st.h                                     :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 15:59:24 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/22 11:19:49 by gabrgarc         ###   ########.fr       */
+/*   Created: 2025/12/19 09:58:27 by mmaquine          #+#    #+#             */
+/*   Updated: 2025/12/25 11:27:02 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_ST_H
-# define MINISHELL_ST_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-typedef enum e_node_type
-{
-	NODE_COMMAND,
-	NODE_PIPE,
-	NODE_REDDIR_IN,
-	NODE_REDDIR_OUT,
-	NODE_APPEND,
-	NODE_HEREDOC,
-	NODE_SEQUENCE
-}	t_node_type;
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
-typedef struct s_ast_node
-{
-	t_node_type			type;
-	struct s_ast_node	*left;
-	struct s_ast_node	*right;
-	char				**param;
-	t_list				*redirects;
-}	t_ast_node;
+# include "minishell_st.h"
+# include "parser.h"
+# include "libft.h"
+# include "environment.h"
+# include "hashtable.h"
 
 #endif

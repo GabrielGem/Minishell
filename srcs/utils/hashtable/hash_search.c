@@ -6,11 +6,11 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 17:30:45 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/21 13:59:37 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/12/23 17:29:09 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hashtable.h"
+#include "minishell.h"
 
 char	*hash_search(t_hash_table *table, char *key)
 {

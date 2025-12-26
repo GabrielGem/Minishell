@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_valid_exec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/22 11:27:40 by gabrgarc         ###   ########.fr       */
+/*   Created: 2025/12/23 10:26:49 by gabrgarc          #+#    #+#             */
+/*   Updated: 2025/12/23 17:24:48 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/minishell.h"
+#include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	is_valid_executable(char *path)
 {
-	char	*line;
-
-	line = readline("$> ");
-	while (line)
-	{
-		build_tree(line);
-		free(line);
-		line = readline("$> ");
-	}
+	return (access(path, F_OK) == 0 && access(path, X_OK) == 0);
 }

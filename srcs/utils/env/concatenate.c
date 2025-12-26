@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash.c                                             :+:      :+:    :+:   */
+/*   concatenate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/20 16:14:49 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/21 09:38:05 by gabrgarc         ###   ########.fr       */
+/*   Created: 2025/12/23 10:42:47 by gabrgarc          #+#    #+#             */
+/*   Updated: 2025/12/23 17:24:47 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-*	hash(DJB2)
-*/
+#include "minishell.h"
 
-unsigned int	hash_function(char *key, int size)
+char **concatenate(char **strs, char *join)
 {
-	unsigned long	hash;
-	char			c;
+	char	*temp;
+	int		i;
 
-	hash = 5381;
-	while (*key)
+	i = 0;
+	while (strs[i])
 	{
-		c = *key;
-		hash = ((hash << 5) + hash) + c;
-		key++;
+		temp = ft_strjoin(strs[i], join);
+		free(strs[i]);
+		strs[i] = temp;
+		i++;
 	}
-	return (hash % size);
+	return (strs);
 }

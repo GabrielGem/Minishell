@@ -6,15 +6,12 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 16:12:02 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/21 14:53:55 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/12/24 14:46:54 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HASHTABLE_H
 # define HASHTABLE_H
-
-# include <stdlib.h>
-# include "libft/libft.h"
 
 typedef struct s_hash_item
 {

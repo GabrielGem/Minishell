@@ -6,11 +6,11 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 20:15:01 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/21 14:09:55 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/12/23 17:29:06 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hashtable.h"
+#include "minishell.h"
 
 static void	remove_item(t_hash_table *table, t_hash_item *actual,
 				t_hash_item *prev, unsigned int index);

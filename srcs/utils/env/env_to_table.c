@@ -6,11 +6,11 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 12:30:00 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/22 14:44:24 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/12/23 17:24:47 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hashtable.h"
+#include "minishell.h"
 
 static char	*extract_key(char *env_line);
 static char	*extract_value(char *env_line);
