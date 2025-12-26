@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree_func.c                                        :+:      :+:    :+:   */
+/*   minishell_st.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/23 15:45:52 by mmaquine         ###   ########.fr       */
+/*   Created: 2025/12/19 15:59:24 by mmaquine          #+#    #+#             */
+/*   Updated: 2025/12/24 15:11:30 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef MINISHELL_ST_H
+# define MINISHELL_ST_H
 
-t_ast_node	*new(void)
+# include "libft.h"
+
+typedef enum e_node_type
 {
-	t_ast_node	*node;
+	NODE_COMMAND,
+	NODE_PIPE,
+	NODE_REDDIR_IN,
+	NODE_REDDIR_OUT,
+	NODE_APPEND,
+	NODE_HEREDOC,
+	NODE_SEQUENCE
+}	t_node_type;
 
-	node = ft_calloc(1, sizeof(t_ast_node));
-	if (!node)
-		return (node);
-	return (node);
-}
-
-t_ast_node	*build_tree(char *line, char **env)
+typedef struct s_ast_node
 {
-	t_list	*tokens;
-	(void)env;
-	if (!line)
-		return (NULL);
-	
-	printf("%s\n", line);
-	return (NULL);
-}
+	t_node_type			type;
+	struct s_ast_node	*left;
+	struct s_ast_node	*right;
+	char				**param;
+	t_list				*redirects;
+}	t_ast_node;
+
+#endif

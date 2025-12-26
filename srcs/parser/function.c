@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/23 15:39:11 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/12/26 17:30:25 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 int	is_builtin(char *cmd)
 {
@@ -27,41 +27,31 @@ int	is_builtin(char *cmd)
 }
 
 /*
-When finding a | insert a ' ' before and after
+When finding a token create its token and
 */
-char	*find_pipe(char *cmd)
+void	split_token(t_list *tokens, char *token)
 {
-	char	*new_cmd;
-	char	*sub_str;
-	char	*pipe_ch;
+	char	*tkn;
+	char	*lstr;
+	char	*rstr;
+	// t_list	*ltkn;
 
-	pipe_ch = ft_strnstr(cmd, "|", ft_strlen(cmd));
-	if (!pipe_ch)
-		return (cmd);
-	while (pipe_ch)
+	while(tokens)
 	{
-		if (pipe_ch != cmd && *(pipe_ch - 1) != ' ')
-		{	
-			sub_str = ft_substr(cmd, 0, pipe_ch - new_cmd);
-			str_append(&sub_str, " |");
-			str_append(&sub_str, pipe_ch + 1);
-		}
-		if (*(pipe_ch + 1) != '\0' && *(pipe_ch + 1) != ' ')
+		tkn = ft_strnstr(tokens->content, token, ft_strlen(tokens->content));
+		if (tkn)
 		{
-			new_cmd = ft_substr(new_cmd, 0, pipe_ch - new_cmd + 1);
-			str_append(&sub_str, " ");
-			str_append(&sub_str, pipe_ch + 1);
-			new_cmd = sub_str;
+			lstr = ft_substr(tokens->content, 0, tkn - (char *)tokens->content);
+			rstr = ft_substr(tokens->content, tkn - (char *)tokens->content + 1,
+				ft_strlen(tokens->content));
+			// ltkn = ft_lstnew(lstr);
+			// ft_lstadd_front(&ltkn, ft_lstnew(token));
+			// if (ltkn->next)
+			// 	ltkn = ltkn->next;
+			// ft_lstadd_front(&ltkn, ft_lstnew(rstr));
+			// if (tokens->prev)
+			// 	tokens->prev->next = ltkn;
 		}
-		pipe_ch = ft_strchr(new_cmd, '|');
-		pipe_ch = ft_strchr(pipe_ch + 1, '|');
-
+		tokens = tokens->next;
 	}
-	free(cmd);
-	return (new_cmd);
-}
-
-char	*find_pipe2(char *cmd)
-{
-	
 }

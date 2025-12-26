@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser_util.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/23 14:23:41 by mmaquine         ###   ########.fr       */
+/*   Created: 2025/12/23 10:57:20 by mmaquine          #+#    #+#             */
+/*   Updated: 2025/12/26 17:07:31 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/minishell.h"
+#include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+void	str_append(char **str1, char *str2)
 {
-	char	*line;
+	char	*append;
 
-	(void)argc;
-	(void)argv;
-	line = NULL;
-	line = readline("$> ");
-	while (line)
-	{
-		build_tree(line, env);
-		line = readline("$> ");
-	}
+	append = ft_strjoin(*str1, str2);
+	free(*str1);
+	*str1 = append;
 }
