@@ -1,5 +1,5 @@
 NAME = xaolins
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -I./includes -I./libft
 LIBS = -Llibft -lft
 RDFLAGS = -lreadline

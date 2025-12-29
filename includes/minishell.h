@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:27 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/26 16:58:10 by mmaquine         ###   ########.fr       */
+/*   Updated: 2025/12/29 17:15:50 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# include "minishell_st.h"
-# include "parser.h"
 # include "libft.h"
-# include "environment.h"
 # include "hashtable.h"
+# include "structs.h"
+# include "parser.h"
+# include "environment.h"
 
 #endif
