@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:11:10 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/29 13:47:04 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2025/12/29 15:58:27 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ typedef enum e_type_redir
 	HEREDOC
 }	t_type_redir;
 
+enum e_builtin
+{
+	STANDART,
+	ECHO,
+	CD,
+	PWD,
+	EXPORT,
+	UNSET,
+	ENV,
+	EXIT
+};
+
 typedef struct s_ast_node
 {
 	t_node_type			type;
@@ -39,14 +51,13 @@ typedef struct s_redir
 {
 	t_type_redir	type;
 	char			*filename;
-	struct s_redir	*next;
 }	t_redir;
 
 typedef struct s_command
 {
-	int		is_builtin;
+	char	is_builtin;
 	char	**args;
-	t_redir	*redirects;
+	t_list	*redirects;
 }	t_command;
 
 typedef struct s_data
