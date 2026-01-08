@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2025/12/24 15:36:38 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/01/07 17:53:34 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,16 +22,17 @@ LEXER_SRCS =
 
 PARSER_SRCS = 
 
-EXECUTOR_SRCS = 
+EXECUTOR_SRCS = \
+	executor/handle_redirs.c
 
 BUILTINS_SRCS =
 
 UTILS_SRCS = \
-	utils/env/binary_search.c \
-	utils/env/concatenate.c \
+	utils/binary_search.c \
+	utils/concatenate.c \
+	utils/is_valid_exec.c \
 	utils/env/env_to_table.c \
 	utils/env/table_to_env.c \
-	utils/env/is_valid_exec.c \
 	utils/hashtable/hash.c \
 	utils/hashtable/hash_item.c \
 	utils/hashtable/hash_table.c \
