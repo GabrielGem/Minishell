@@ -6,35 +6,82 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:11:26 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/08 10:52:13 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/09 14:18:03 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	handle_redirs(t_list *lst)
-{
-	char	*filename;
-	int		fd;
-	int		last_fd;
+static int	open_file(char *file, int direction);
+static int	*handle_error(int *fds, char *file);
+static void	close_fds(int *fds);
+static void	update_fds(int *fds, int fd, int type);
 
-	last_fd = -1;
+int	*handle_redirs(t_list *lst)
+{
+	t_redir	*redir;
+	int		fd;
+	int		fds[2];
+
+	fds[0] = -1;
+	fds[1] = -1;
 	while (lst)
 	{
-		filename = ((t_redir *)lst->content)->filename;
-		fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		redir = (t_redir *)lst->content;
+		fd = open_file(redir->filename, redir->type);
 		if (fd == -1)
-		{
-			ft_putstr_fd("minishell: ", 2);
-			perror(filename);
-			if (last_fd != -1)
-				close(last_fd);
-			return (-1);
-		}
-		if (last_fd != -1)
-			close(last_fd);
-		last_fd = fd;
+			return (handle_error(fds, redir->filename));
+		update_fds(fds, fd, redir);
 		lst = lst->next;
 	}
-	return (last_fd);
+	return (fds);
+}
+
+static int	open_file(char *file, int direction)
+{
+	int		flags;
+	mode_t	mode;
+
+	mode = 0644;
+	if (direction == REDIN)
+		flags = O_RDONLY;
+	else if (direction == REDOUT)
+		flags = O_CREAT | O_WRONLY | O_TRUNC;
+	else
+		flags = O_CREAT | O_WRONLY | O_APPEND;
+	return (open(file, flags, mode));
+}
+
+static void	update_fds(int *fds, int fd, int type)
+{
+	if (type == REDIN)
+	{
+		if (fds[0] != -1)
+			close(fds[0]);
+		fds[0] = fd;
+	}
+	else
+	{
+		if (fds[1] != -1)
+			close(fds[1]);
+		fds[1] = fd;
+	}
+}
+
+static int	*handle_error(int *fds, char *file)
+{
+	ft_putstr_fd("minishell: ", 2);
+	perror(file);
+	close_fds(fds);
+	fds[0] = -1;
+	fds[1] = -1;
+	return (fds);
+}
+
+static void	close_fds(int *fds)
+{
+	if (fds[0] != -1)
+		close(fds[0]);
+	if (fds[1] != -1)
+		close(fds[1]);
 }
