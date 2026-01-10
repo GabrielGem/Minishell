@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:11:10 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/29 15:58:27 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/08 16:14:30 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_data
 {
 	t_hash_table	*env;
 	char			**envp;
+	t_ast_node		*root_node;
 	int				exit_status;
 }	t_data;
 
