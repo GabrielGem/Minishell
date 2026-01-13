@@ -6,11 +6,33 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/29 17:04:26 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/12 22:04:09 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell.h" //petroleiro
+
+static t_list	*initial_parser(char *line)
+{
+	char 	**split;
+	t_list	*tokens;
+	int		i;
+
+	if (!line)
+		return (NULL);
+	split = ft_split(line, ' ');
+	if(!split)
+		return (NULL);
+	i = 0;
+	tokens = NULL;
+	while (split[i])
+	{
+		ft_lstadd_back(&tokens, ft_lstnew(split[i]));
+		i++;
+	}
+	free(split);
+	return (tokens);
+}
 
 t_ast_node	*new(void)
 {
@@ -37,12 +59,12 @@ t_ast_node	*build_tree(char *line, char **env)
 	(void)env;
 	if (!line)
 		return (NULL);
-	tokens = ft_lstnew(line);
+	tokens = initial_parser(line);
 	tokens = split_token(tokens, "|");
-	tokens = split_token(tokens, ">");
-	tokens = split_token(tokens, "<");
-	tokens = split_token(tokens, ">>");
-	tokens = split_token(tokens, "<<");
+	// tokens = split_token(tokens, ">");
+	// tokens = split_token(tokens, "<");
+	// tokens = split_token(tokens, ">>");
+	// tokens = split_token(tokens, "<<");
 	_print_list(tokens);
 	ft_lstclear(&tokens, free);
 	return (NULL);
