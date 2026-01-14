@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/13 20:49:31 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:50:59 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,21 @@
 static void			print_tree(t_ast_node *root);
 static t_ast_node	*build_pseudo_tree(void);
 
-int	main(void)
+int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
+	char **envp __attribute__((unused)))
 {
-	char	*line;
-	t_ast_node	*tree;
+	char		*line;
+	t_ast_node	*root;
 
 	line = readline("$> ");
 	while (line)
 	{
-		tree = build_pseudo_tree();
-		print_tree(tree);
+		root = build_pseudo_tree();
+		print_tree(root);
 		free(line);
 		line = readline("$> ");
 	}
+	// clean tree
 	return (0);
 }
 
@@ -49,7 +51,7 @@ static t_ast_node	*build_pseudo_tree(void)
 
 	int	fds[2];
 	pipe(fds);
-	pipe_cmd->pipes = fds;
+	*(pipe_cmd->pipes) = fds;
 	pipe_cmd->stdin_backup = dup(STDIN_FILENO);
 	pipe_cmd->stdout_backup = dup(STDOUT_FILENO);
 	root->type = NODE_PIPE;
@@ -86,12 +88,36 @@ static t_ast_node	*build_pseudo_tree(void)
 	return (root);
 }
 
+static t_ast_node	*build_tree_polimorphic(void)
+{
+	t_ast_node	*root;
+	t_command	*cmd;
+	
+	root = ft_calloc(sizeof(t_ast_node), 1);
+	root->type = NODE_PIPE;
+
+	
+}
+
 static void	print_tree(t_ast_node *root)
 {
 	if (root != NULL)
 	{
 		if (root->type == NODE_PIPE)
-		ft_printf("%d\n", root->type);
+		{
+			ft_printf("PIPE:\n");
+			ft_printf("  %d, %d\n", ((t_exec *)root->param)->pipes[0],\
+									((t_exec *)root->param)->pipes[1]);
+		}
+		if (root->type == NODE_COMMAND)
+		{
+			ft_printf("CMD:\n");
+			char	**args = ((t_command *)root->param)->args;
+			while (*args)
+				ft_printf("  %s\n", *args++);
+			t_command *cmd = (t_command *)root->param;
+			ft_printf("  %s\n", ((t_redir *)cmd->redirects->content)->filename);
+		}
 		print_tree(root->left);
 		print_tree(root->right);
 	}
