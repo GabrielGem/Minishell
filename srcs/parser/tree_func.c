@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/12 22:04:09 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:48:44 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static t_list	*initial_parser(char *line)
 		i++;
 	}
 	free(split);
+	free(line);
 	return (tokens);
 }
 
@@ -62,10 +63,10 @@ t_ast_node	*build_tree(char *line, char **env)
 		return (NULL);
 	tokens = initial_parser(line);
 	tokens = split_token(tokens, "|");
-	// tokens = split_token(tokens, ">");
-	// tokens = split_token(tokens, "<");
-	// tokens = split_token(tokens, ">>");
-	// tokens = split_token(tokens, "<<");
+	tokens = split_token(tokens, ">");
+	tokens = split_token(tokens, "<");
+	tokens = split_token(tokens, ">>");
+	tokens = split_token(tokens, "<<");
 	_print_list(tokens);
 	ft_lstclear(&tokens, free);
 	return (NULL);

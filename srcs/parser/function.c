@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/12 22:17:18 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:49:44 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,31 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-static void 
+static t_list *add_tokens(char *content, char *token_found)
+{
+	t_list	*ltkn;
+	char	*lstr;
+	char	*rstr;
+
+	lstr = ft_substr(content, 0, token_found - content);
+	rstr = ft_substr(content, token_found - content + 1, ft_strlen(content));
+	if (!ft_strlen(lstr))
+	{
+		free(lstr);
+		lstr = NULL;
+	}
+	if (!ft_strlen(rstr))
+	{
+		free(rstr);
+		rstr = NULL;
+	}
+	if (lstr)
+		ltkn = ft_lstnew(lstr);
+	ft_lstadd_back(&ltkn, ft_lstnew(ft_strdup(token_found)));
+	if (rstr)
+		ft_lstadd_back(&ltkn, ft_lstnew(rstr));
+	return (ltkn);
+}
 
 /*
 When finding a token create its token and
@@ -33,21 +57,14 @@ When finding a token create its token and
 void	*split_token(t_list *tokens, char *token)
 {
 	char	*tkn;
-	char	*lstr;
-	char	*rstr;
 	t_list	*ltkn;
 
 	while(tokens)
 	{
 		tkn = ft_strnstr(tokens->content, token, ft_strlen(tokens->content));
-		if (tkn && ft_strlen(tkn) != ft_strlen(tokens->content))
+		if (tkn)
 		{
-			lstr = ft_substr(tokens->content, 0, tkn - (char *)tokens->content);
-			rstr = ft_substr(tokens->content, tkn - (char *)tokens->content + 1,
-				ft_strlen(tokens->content));
-			ltkn = ft_lstnew(lstr);
-			ft_lstadd_back(&ltkn, ft_lstnew(ft_strdup(token)));
-			ft_lstadd_back(&ltkn, ft_lstnew(rstr));
+			ltkn = add_tokens(tokens->content, tkn);
 			if (tokens->prev)
 			{
 				tokens->prev->next = ltkn;
