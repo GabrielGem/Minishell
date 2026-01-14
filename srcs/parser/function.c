@@ -25,6 +25,8 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
+static void 
+
 /*
 When finding a token create its token and
 */
@@ -38,7 +40,7 @@ void	*split_token(t_list *tokens, char *token)
 	while(tokens)
 	{
 		tkn = ft_strnstr(tokens->content, token, ft_strlen(tokens->content));
-		if (tkn && ft_strlen(tkn) != ft_strlen(token))
+		if (tkn && ft_strlen(tkn) != ft_strlen(tokens->content))
 		{
 			lstr = ft_substr(tokens->content, 0, tkn - (char *)tokens->content);
 			rstr = ft_substr(tokens->content, tkn - (char *)tokens->content + 1,

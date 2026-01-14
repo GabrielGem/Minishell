@@ -44,7 +44,8 @@ t_ast_node	*new(void)
 	return (node);
 }
 
-void	_print_list(t_list *node)
+// will print the linked list of tokens
+static void	_print_list(t_list *node)
 {
 	while (node)
 	{
