@@ -62,11 +62,13 @@ t_ast_node	*build_tree(char *line, char **env)
 	if (!line)
 		return (NULL);
 	tokens = initial_parser(line);
-	tokens = split_token(tokens, "|");
-	tokens = split_token(tokens, ">");
-	tokens = split_token(tokens, "<");
-	tokens = split_token(tokens, ">>");
-	tokens = split_token(tokens, "<<");
+	tokens = split_token(tokens, "|", NULL);
+	tokens = split_token(tokens, ">>", NULL);
+	tokens = split_token(tokens, "<<", NULL);
+	tokens = split_token(tokens, ">", ">>");
+	tokens = split_token(tokens, "<", "<<");
+	tokens = split_token(tokens, "\'", NULL);
+	tokens = split_token(tokens, "\"", NULL);
 	_print_list(tokens);
 	ft_lstclear(&tokens, free);
 	return (NULL);

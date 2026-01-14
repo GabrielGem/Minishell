@@ -25,14 +25,15 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-static t_list *add_tokens(char *content, char *token_found)
+static t_list *add_tokens(char *content, char *token_found, char *token)
 {
 	t_list	*ltkn;
 	char	*lstr;
 	char	*rstr;
 
+	ltkn = NULL;
 	lstr = ft_substr(content, 0, token_found - content);
-	rstr = ft_substr(content, token_found - content + 1, ft_strlen(content));
+	rstr = ft_substr(content, token_found - content + ft_strlen(token), ft_strlen(content));
 	if (!ft_strlen(lstr))
 	{
 		free(lstr);
@@ -45,7 +46,7 @@ static t_list *add_tokens(char *content, char *token_found)
 	}
 	if (lstr)
 		ltkn = ft_lstnew(lstr);
-	ft_lstadd_back(&ltkn, ft_lstnew(ft_strdup(token_found)));
+	ft_lstadd_back(&ltkn, ft_lstnew(ft_strdup(token)));
 	if (rstr)
 		ft_lstadd_back(&ltkn, ft_lstnew(rstr));
 	return (ltkn);
@@ -54,7 +55,7 @@ static t_list *add_tokens(char *content, char *token_found)
 /*
 When finding a token create its token and
 */
-void	*split_token(t_list *tokens, char *token)
+void	*split_token(t_list *tokens, char *token, char *forbid)
 {
 	char	*tkn;
 	t_list	*ltkn;
@@ -62,9 +63,11 @@ void	*split_token(t_list *tokens, char *token)
 	while(tokens)
 	{
 		tkn = ft_strnstr(tokens->content, token, ft_strlen(tokens->content));
-		if (tkn)
+		if (tkn && (ft_strlen(token) != ft_strlen(tkn)
+			|| (ft_strlen(tokens->content) != ft_strlen(tkn)))
+			&& ft_strcmp(tkn, forbid))
 		{
-			ltkn = add_tokens(tokens->content, tkn);
+			ltkn = add_tokens(tokens->content, tkn, token);
 			if (tokens->prev)
 			{
 				tokens->prev->next = ltkn;
