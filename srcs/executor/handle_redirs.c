@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:11:26 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/09 14:18:03 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:07:47 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int	*handle_redirs(t_list *lst)
 {
 	t_redir	*redir;
 	int		fd;
-	int		fds[2];
+	int		*fds;
 
+	fds = ft_calloc(sizeof(int), 2);
 	fds[0] = -1;
 	fds[1] = -1;
 	while (lst)
@@ -31,7 +32,7 @@ int	*handle_redirs(t_list *lst)
 		fd = open_file(redir->filename, redir->type);
 		if (fd == -1)
 			return (handle_error(fds, redir->filename));
-		update_fds(fds, fd, redir);
+		update_fds(fds, fd, redir->type);
 		lst = lst->next;
 	}
 	return (fds);
