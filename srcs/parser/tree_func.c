@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/14 14:48:44 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/15 17:42:44 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h" //petroleiro
+#include "minishell.h"
 
 static t_list	*initial_parser(char *line)
 {
@@ -55,12 +55,18 @@ static void	_print_list(t_list *node)
 	}
 }
 
-t_ast_node	*build_tree(char *line, char **env)
+t_ast_node	*tokenizer(char *line, char **env)
 {
 	t_list	*tokens;
+
 	(void)env;
 	if (!line)
 		return (NULL);
+	if (!check_spaces(line))
+	{
+		free(line);
+		return (NULL);
+	}
 	tokens = initial_parser(line);
 	tokens = split_token(tokens, "|", NULL);
 	tokens = split_token(tokens, ">>", NULL);
@@ -72,4 +78,12 @@ t_ast_node	*build_tree(char *line, char **env)
 	_print_list(tokens);
 	ft_lstclear(&tokens, free);
 	return (NULL);
+}
+
+int	verify_quotes(char *line, int mode)
+{
+	while (line)
+	{
+		
+	}
 }

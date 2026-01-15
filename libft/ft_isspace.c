@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_util.c                                      :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/23 10:57:20 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/15 14:50:50 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/01/15 14:00:37 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/01/15 14:12:18 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	str_append(char **str1, char *str2)
-{
-	char	*append;
-
-	append = ft_strjoin(*str1, str2);
-	free(*str1);
-	*str1 = append;
-}
-
 /*
-Verify if lines only has spaces
+	Checks for white-space characters. In the "C" and "POSIX" locales, these
+	are: space, form-feed('\f'), newline ('\n'), carriage return ('\r'), hori-
+	zontal tab ('\t'), and vertical tab ('\v')
 */
-int	check_spaces(char *line)
+int	ft_isspace(int c)
 {
-	int	i;
-
-	if (!line)
+	if (c == ' ' || (c >= 9 && c <= 13))
+		return (1);
+	else
 		return (0);
-	i = -1;
-	while (line[++i])
-		if (ft_isspace(line[i]))
-			return (0);
-	return (1);
 }

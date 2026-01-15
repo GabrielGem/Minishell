@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/14 14:45:04 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/15 13:13:54 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **env)
 	line = readline("$> ");
 	while (line)
 	{
-		build_tree(line, env);
+		tokenizer(line, env);
 		line = readline("$> ");
 	}
 }

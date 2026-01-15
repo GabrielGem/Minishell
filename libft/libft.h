@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:46:16 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/29 14:12:01 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:09:48 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
+int		ft_isspace(int c);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcat(char *dst, const char *src, size_t dsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dsize);

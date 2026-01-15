@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/14 15:49:44 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:26:16 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static t_list *add_tokens(char *content, char *token_found, char *token)
 
 	ltkn = NULL;
 	lstr = ft_substr(content, 0, token_found - content);
-	rstr = ft_substr(content, token_found - content + ft_strlen(token), ft_strlen(content));
+	rstr = ft_substr(content, token_found - content + ft_strlen(token),
+		ft_strlen(content));
 	if (!ft_strlen(lstr))
 	{
 		free(lstr);
