@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/14 18:45:22 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/15 10:58:22 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,53 +34,52 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 
 static t_ast_node	*build_tree_polimorphic(void)
 {
-	t_ast_node	*root;
+	//t_ast_node	*root;
 	t_ast_node	*node1;
-	t_ast_node	*node2;
-	t_exec		*pipe;
+	//t_ast_node	*node2;
+	//t_exec		*pipes;
 	t_command	*cmd;
 	t_command	*cmd2;
 
-	pipe = ft_calloc(sizeof(t_exec), 1);
-	pipe->type.base = NODE_PIPE;
-	int fd[2];
-	pipe(fd);
-	pipe->pipes = fd;
-	pipe->stdin_backup = dup(STDIN_FILENO);
-	pipe->stdout_backup = dup(STDOUT_FILENO);
-	root = ft_calloc(sizeof(t_ast_node), 1);
-	root = (t_ast_node *)pipe;
+	//pipes = ft_calloc(sizeof(t_exec), 1);
+	//pipes->type.base = NODE_PIPE;
+	//int fd[2];
+	//pipe(fd);
+	//pipes->pipes = &fd;
+	//pipes->stdin_backup = dup(STDIN_FILENO);
+	//pipes->stdout_backup = dup(STDOUT_FILENO);
+	//root = ft_calloc(sizeof(t_ast_node), 1);
+	//root = (t_ast_node *)pipe;
 
 	cmd = ft_calloc(sizeof(t_command), 1);
 	cmd->type.base = NODE_COMMAND;
-	cmd->args = ft_calloc(sizeof(char *), 4);
-	cmd->args[0] = "/usr/bin/grep";
-	cmd->args[1] = "grep";
-	cmd->args[2] = "a";
-	cmd->args[3] = NULL;
-	cmd->redirects = ft_lstnew(malloc(sizeof(t_redir)));
-	t_redir *redirect = ((t_redir *)cmd->redirects->content);
-	redirect->type = REDIN;
-	redirect->filename = "file1";
+	cmd->args = ft_calloc(sizeof(char *), 3);
+	cmd->args[0] = "/usr/bin/ls";
+	cmd->args[1] = "ls";
+	cmd->args[2] = NULL;
+	//cmd->redirects = ft_lstnew(malloc(sizeof(t_redir)));
+	//t_redir *redirect = ((t_redir *)cmd->redirects->content);
+	//redirect->type = REDIN;
+	//redirect->filename = "file1";
 	node1 = ft_calloc(sizeof(t_ast_node), 1);
 	node1 = (t_ast_node *)cmd;
 
-	cmd2 = ft_calloc(sizeof(t_command), 1);
-	cmd2->type.base = NODE_COMMAND;
-	cmd2->args = ft_calloc(sizeof(char *), 4);
-	cmd2->args[0] = "/usr/bin/wc";
-	cmd2->args[1] = "wc";
-	cmd2->args[2] = "-l";
-	cmd2->args[3] = NULL;
-	t_redir *redirect2 = ((t_redir *)cmd->redirects->content);
-	redirect2->type = REDOUT;
-	redirect2->filename = "file2;
-	node2 = ft_calloc(sizeof(t_ast_node), 1);
-	node2 = (t_ast_node *)cmd2;
+	//cmd2 = ft_calloc(sizeof(t_command), 1);
+	//cmd2->type.base = NODE_COMMAND;
+	//cmd2->args = ft_calloc(sizeof(char *), 4);
+	//cmd2->args[0] = "/usr/bin/wc";
+	//cmd2->args[1] = "wc";
+	//cmd2->args[2] = "-l";
+	//cmd2->args[3] = NULL;
+	//t_redir *redirect2 = ((t_redir *)cmd->redirects->content);
+	//redirect2->type = REDOUT;
+	//redirect2->filename = "file2";
+	//node2 = ft_calloc(sizeof(t_ast_node), 1);
+	//node2 = (t_ast_node *)cmd2;
 
-	root->left = (t_sheets *)node1;
-	root->right = (t_sheets *)node2;
-	return (root);
+	//root->left = (t_sheets *)node1;
+	//root->right = (t_sheets *)node2;
+	return (node1);
 }
 
 static void	print_tree2(t_ast_node *root)
