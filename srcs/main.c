@@ -6,22 +6,22 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/15 18:44:22 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/16 12:12:47 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static t_ast_node	*build_tree_polimorphic(void);
-static void			print_tree(t_ast_node *root);
-void				free_command(t_node *leaf);
+static void			print_tree(t_ast_node *tree);
+void				free_command(t_command *cmd);
+void				free_tree(t_ast_node *tree);
 
 int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 	char **envp)
 {
-	char		*line;
-	t_ast_node	*root;
-	t_data		context;
+	char	*line;
+	t_data	context;
 
 	context = (t_data){0};
 	context.envp = envp;
@@ -30,9 +30,10 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 		line = readline("$> ");
 		if (line == NULL)
 			break ;
-		root = build_tree_polimorphic();
-		print_tree(root);
-		executor((t_node *)root, &context);
+		context.root = build_tree_polimorphic();
+		print_tree(context.root);
+		executor(&context);
+		free_tree(context.root);
 		free(line);
 	}
 	free(line);
@@ -54,20 +55,20 @@ static t_ast_node	*build_tree_polimorphic(void)
 	return (node1);
 }
 
-static void	print_tree(t_ast_node *root)
+static void	print_tree(t_ast_node *tree)
 {
-	if (root == NULL)
+	if (tree == NULL)
 		return ;
-	if (root->type.base == NODE_PIPE)
+	if (tree->type.base == NODE_PIPE)
 	{
 		ft_printf("PIPE:\n");
-		print_tree((t_ast_node *)root->left);
-		print_tree((t_ast_node *)root->right);
+		print_tree((t_ast_node *)tree->left);
+		print_tree((t_ast_node *)tree->right);
 	}
-	if (root->type.base == NODE_COMMAND)
+	if (tree->type.base == NODE_COMMAND)
 	{
 		ft_printf("  CMD:\n");
-		char **args = ((t_command *)root)->args;
+		char **args = ((t_command *)tree)->args;
 		if (args == NULL)
 		{
 			ft_printf("    Error: args is NULL\n");
@@ -78,13 +79,25 @@ static void	print_tree(t_ast_node *root)
 	}
 }
 
-void	free_command(t_command *cmd)
+void	free_tree(t_ast_node *tree)
 {
-	ft_free_split(cmd->args);
-	ft_lstclear(cmd->redirects, &free_redir);
+	if (tree == NULL)
+		return ;
+	//if (tree->type.base == NODE_COMMAND)
+	//	free_pipe((t_exec *)tree);
+	//free_tree((t_ast_node *)tree->left);
+	//free_tree((t_ast_node *)tree->right);
+	if (tree->type.base == NODE_COMMAND)
+		free_command((t_command *)tree);
 }
 
 void	free_redir(void *redir)
 {
-	free(redir->filename);
+	free(((t_redir *)redir)->filename);
+}
+
+void	free_command(t_command *cmd)
+{
+	ft_free_split(cmd->args);
+	ft_lstclear(&cmd->redirects, free_redir);
 }
