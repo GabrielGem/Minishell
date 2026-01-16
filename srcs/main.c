@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/16 12:12:47 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/16 17:30:24 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static t_ast_node	*build_tree_polimorphic(void)
 	cmd = ft_calloc(sizeof(t_command), 1);
 	cmd->type.base = NODE_COMMAND;
 	cmd->args = ft_calloc(sizeof(char *), 3);
-	cmd->args[0] = "/usr/bin/ls";
-	cmd->args[1] = "ls";
+	cmd->args[0] = ft_strdup("/usr/bin/ls");
+	cmd->args[1] = ft_strdup("ls");
 	cmd->args[2] = NULL;
 	node1 = (t_ast_node *)cmd;
 	return (node1);
@@ -100,4 +100,5 @@ void	free_command(t_command *cmd)
 {
 	ft_free_split(cmd->args);
 	ft_lstclear(&cmd->redirects, free_redir);
+	free(cmd);
 }
