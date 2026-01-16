@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/01/07 17:53:34 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/01/15 21:44:01 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ LEXER_SRCS =
 PARSER_SRCS = 
 
 EXECUTOR_SRCS = \
+	executor/executor.c \
+	executor/handle_command.c \
 	executor/handle_redirs.c
 
 BUILTINS_SRCS =
@@ -49,6 +51,7 @@ SRCS := $(addprefix srcs/, $(SRCS))
 
 OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
+OBJS_DIRS = $(sort $(dir $(OBJS)))
 
 DIR_LIBFT = ./libft
 LIBFT = $(DIR_LIBFT)/libft.a
@@ -58,20 +61,24 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBS) $(RDFLAGS)
 
+$(OBJS): | $(OBJS_DIR)
+
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIRS)
+
 $(OBJS_DIR)%.o: %.c
-	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(LIBFT): $(DIR_LIBFT)
 	$(MAKE) -C $< all
 
 clean:
-	rm -rf $(OBJS_DIR)
 	$(MAKE) -C $(DIR_LIBFT) clean
+	rm -rf $(OBJS_DIR)
 
 fclean: clean
-	rm -f $(NAME)
 	$(MAKE) -C $(DIR_LIBFT) fclean
+	rm -f $(NAME)
 
 re: fclean all
 
