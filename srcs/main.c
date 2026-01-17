@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/16 17:30:24 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/16 21:57:33 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,28 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 static t_ast_node	*build_tree_polimorphic(void)
 {
 	t_ast_node	*node1;
-	t_command	*cmd;
 
-	cmd = ft_calloc(sizeof(t_command), 1);
+	t_command	*cmd;
+	cmd = ft_calloc(1, sizeof(t_command));
 	cmd->type.base = NODE_COMMAND;
-	cmd->args = ft_calloc(sizeof(char *), 3);
-	cmd->args[0] = ft_strdup("/usr/bin/ls");
-	cmd->args[1] = ft_strdup("ls");
-	cmd->args[2] = NULL;
+	cmd->args = ft_calloc(4, sizeof(char *));
+	cmd->args[0] = ft_strdup("/usr/bin/wc");
+	cmd->args[1] = ft_strdup("wc");
+	cmd->args[2] = ft_strdup("-l");
+	cmd->args[3] = NULL;
+
+	//t_redir	*redir;
+	//redir = ft_calloc(1, sizeof(t_redir));
+	//redir->type = REDOUT;
+	//redir->filename = ft_strdup("file1");
+	//ft_lstadd_back(&cmd->redirects, ft_lstnew(redir));
+
+	t_redir	*redir2;
+	redir2 = ft_calloc(1, sizeof(t_redir));
+	redir2->type = REDIN;
+	redir2->filename = ft_strdup("infile");
+	ft_lstadd_back(&cmd->redirects, ft_lstnew(redir2));
+
 	node1 = (t_ast_node *)cmd;
 	return (node1);
 }
@@ -67,15 +81,24 @@ static void	print_tree(t_ast_node *tree)
 	}
 	if (tree->type.base == NODE_COMMAND)
 	{
+		t_command	*cmd = (t_command *)tree;
+		t_list		*node = cmd->redirects;
+		char 		**args = cmd->args;
+		t_redir 	*red;
+
 		ft_printf("  CMD:\n");
-		char **args = ((t_command *)tree)->args;
-		if (args == NULL)
+		if (args != NULL)
+			while (*args)
+				ft_printf("\t%s\n", *args++);
+		if (node)
 		{
-			ft_printf("    Error: args is NULL\n");
-			return ;
+			while (node)
+			{
+				red = (t_redir *)node->content;
+				ft_putendl_fd(red->filename, 1);
+				node = node->next;
+			}
 		}
-		while (*args)
-			ft_printf("  %s\n", *args++);
 	}
 }
 
@@ -94,6 +117,7 @@ void	free_tree(t_ast_node *tree)
 void	free_redir(void *redir)
 {
 	free(((t_redir *)redir)->filename);
+	free(redir);
 }
 
 void	free_command(t_command *cmd)
