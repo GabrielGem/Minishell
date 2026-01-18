@@ -72,6 +72,16 @@ $(OBJS_DIR)%.o: %.c
 $(LIBFT): $(DIR_LIBFT)
 	$(MAKE) -C $< all
 
+val:
+	clear
+	valgrind -q \
+	--leak-check=full \
+	--track-origins=yes \
+	--track-fds=yes \
+	--show-leak-kinds=all \
+	--suppressions=readline.supp \
+	./$(NAME)
+
 clean:
 	$(MAKE) -C $(DIR_LIBFT) clean
 	rm -rf $(OBJS_DIR)
