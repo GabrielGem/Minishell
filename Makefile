@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/01/16 16:28:31 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/01/19 10:55:49 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,14 +73,9 @@ $(LIBFT): $(DIR_LIBFT)
 	$(MAKE) -C $< all
 
 val:
-	clear
-	valgrind -q \
-	--leak-check=full \
-	--track-origins=yes \
-	--track-fds=yes \
-	--show-leak-kinds=all \
-	--suppressions=readline.supp \
-	./$(NAME)
+	@valgrind -q --leak-check=full --track-origins=yes \
+	--track-fds=yes --show-leak-kinds=all \
+	--suppressions=readline.supp ./$(NAME)
 
 clean:
 	$(MAKE) -C $(DIR_LIBFT) clean
