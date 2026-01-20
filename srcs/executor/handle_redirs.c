@@ -74,8 +74,8 @@ static int	*handle_error(int *fds, char *file)
 	ft_putstr_fd("minishell: ", 2);
 	perror(file);
 	close_fds(fds);
-	fds[0] = -1;
-	fds[1] = -1;
+	fds[0] = 1;
+	fds[1] = 1;
 	return (fds);
 }
 
