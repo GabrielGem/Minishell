@@ -53,11 +53,11 @@ static t_ast_node	*build_tree_polimorphic(void)
 	cmd->args[2] = ft_strdup("-l");
 	cmd->args[3] = NULL;
 
-	//t_redir	*redir;
-	//redir = ft_calloc(1, sizeof(t_redir));
-	//redir->type = REDOUT;
-	//redir->filename = ft_strdup("file1");
-	//ft_lstadd_back(&cmd->redirects, ft_lstnew(redir));
+	t_redir	*redir;
+	redir = ft_calloc(1, sizeof(t_redir));
+	redir->type = REDOUT;
+	redir->filename = ft_strdup("file1");
+	ft_lstadd_back(&cmd->redirects, ft_lstnew(redir));
 
 	t_redir	*redir2;
 	redir2 = ft_calloc(1, sizeof(t_redir));
