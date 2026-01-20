@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/15 17:42:44 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/19 11:41:04 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,19 @@ t_ast_node	*tokenizer(char *line, char **env)
 	return (NULL);
 }
 
-int	verify_quotes(char *line, int mode)
+t_quote_mode	verify_quotes(char *line, char quote, t_quote_mode mode)
 {
 	while (line)
 	{
-		
+		if (line == quote && quote == '\"' && mode == NORMAL_MODE)
+			verify_quotes(++line, quote, IN_DOUBLE_QUOTE);
+		if (line == quote && quote == '\"' && mode == IN_DOUBLE_QUOTE)
+			verify_quotes(++line, quote, NORMAL_MODE);
+		if (line == quote && quote == '\'' && mode == NORMAL_MODE)
+			verify_quotes(++line, quote, IN_SINGLE_QUOTE);
+		if (line == quote && quote == '\'' && mode == IN_SINGLE_QUOTE)
+			verify_quotes(++line, quote, NORMAL_MODE);
+		line++;
 	}
+	return (mode);
 }

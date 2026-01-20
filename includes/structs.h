@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:11:10 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/29 13:47:04 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/19 11:24:46 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef enum e_quote_mode
+{
+	NORMAL_MODE,
+	IN_DOUBLE_QUOTE,
+	IN_SINGLE_QUOTE
+}	t_quote_mode;
 
 typedef enum e_node_type
 {

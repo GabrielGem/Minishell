@@ -1,10 +1,6 @@
 #ifndef PARSER_H
 # define PRSER_H
 
-# define NORMAL_MODE		0
-# define IN_DOUBLE_QUOTE	1
-# define IN_SINGLE_QUOTE	2
-
 t_ast_node	*new_node(void);
 t_ast_node	*tokenizer(char *line, char **env);
 
