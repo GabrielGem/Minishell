@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 13:14:12 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/16 11:22:37 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:48:47 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	executor(t_data *context)
 {
 	t_handle		ft;
 	static t_handle	map[2] = {
-		//&handle_pipe,
-		&handle_command
+		&handle_command,
+		&handle_pipe
 	};
 
 	if (context->root == NULL)
