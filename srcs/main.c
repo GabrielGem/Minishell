@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/20 21:15:40 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/21 11:10:59 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,7 @@ int	main(int argc, char **argv, char **env)
 	line = readline("$> ");
 	while (line)
 	{
-		// tokenizer(line, env);
-		if (check_quotes(line, '\"'))
-		{
-			char *c = ft_strrchr(line, '\"');
-			*c = ' ';
-		}
+
 		printf("\t%s\n", line);
 		free(line);
 		line = readline("$> ");

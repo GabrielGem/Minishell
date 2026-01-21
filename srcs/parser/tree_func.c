@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/20 17:48:11 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:19:23 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,42 @@ int	check_quotes(char *line, char quote)
 		line++;
 	}
 	return (mode);
+}
+
+t_list	*evaluate_quotes(t_list *token, char *quote)
+{
+	char	*start;
+	char	*end;
+
+	start = NULL;
+	end = NULL;
+	start = ft_strchr(token->content, quote);
+	if (start)
+		end = ft_strchr(start + 1, quote);
+}
+
+void	*resolve_quotes(t_list *tokens, char quote)
+{
+	char	*quote;
+	char	*d_quote;
+
+	if (!tokens)
+		return (NULL);
+	quote = NULL;
+	d_quote = NULL;
+	while (tokens)
+	{
+		quote = ft_strchr(tokens->content, '\'');
+		d_quote = ft_strchr(tokens->content, '\"');
+		if (quote == d_quote)
+		{
+			tokens->next = tokens;
+			continue ;
+		}
+		if (d_quote && d_quote < quote)
+			tokens = evaluate_quotes(tokens, d_quote);
+		else if (quote && quote < d_quote)
+			tokens = evaluate_quotes(tokens, quote);
+		tokens->next = tokens;
+	}
 }
