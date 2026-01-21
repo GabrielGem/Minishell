@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/16 21:57:33 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:56:36 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,42 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 
 static t_ast_node	*build_tree_polimorphic(void)
 {
-	t_ast_node	*node1;
+	t_ast_node	*root;
 
 	t_command	*cmd;
 	cmd = ft_calloc(1, sizeof(t_command));
 	cmd->type.base = NODE_COMMAND;
 	cmd->args = ft_calloc(4, sizeof(char *));
-	cmd->args[0] = ft_strdup("/usr/bin/wc");
-	cmd->args[1] = ft_strdup("wc");
-	cmd->args[2] = ft_strdup("-l");
-	cmd->args[3] = NULL;
+	cmd->args[0] = ft_strdup("/usr/bin/ls");
+	cmd->args[1] = ft_strdup("ls");
+	cmd->args[2] = NULL;
 
-	t_redir	*redir;
-	redir = ft_calloc(1, sizeof(t_redir));
-	redir->type = REDOUT;
-	redir->filename = ft_strdup("file1");
-	ft_lstadd_back(&cmd->redirects, ft_lstnew(redir));
+	t_command	*cmd2;
+	cmd2 = ft_calloc(1, sizeof(t_command));
+	cmd2->type.base = NODE_COMMAND;
+	cmd2->args = ft_calloc(4, sizeof(char *));
+	cmd2->args[0] = ft_strdup("/usr/bin/wc");
+	cmd2->args[1] = ft_strdup("wc");
+	cmd2->args[2] = ft_strdup("-l");
+	cmd2->args[3] = NULL;
 
-	t_redir	*redir2;
-	redir2 = ft_calloc(1, sizeof(t_redir));
-	redir2->type = REDIN;
-	redir2->filename = ft_strdup("infile");
-	ft_lstadd_back(&cmd->redirects, ft_lstnew(redir2));
+	//t_redir	*redir;
+	//redir = ft_calloc(1, sizeof(t_redir));
+	//redir->type = REDOUT;
+	//redir->filename = ft_strdup("file1");
+	//ft_lstadd_back(&cmd->redirects, ft_lstnew(redir));
 
-	node1 = (t_ast_node *)cmd;
-	return (node1);
+	//t_redir	*redir2;
+	//redir2 = ft_calloc(1, sizeof(t_redir));
+	//redir2->type = REDIN;
+	//redir2->filename = ft_strdup("infile");
+	//ft_lstadd_back(&cmd->redirects, ft_lstnew(redir2));
+
+	root = ft_calloc(1, sizeof(t_ast_node *));
+	root->type.base = NODE_PIPE;
+	root->left = (t_node *)cmd;
+	root->right = (t_node *)cmd2;
+	return (root);
 }
 
 static void	print_tree(t_ast_node *tree)
