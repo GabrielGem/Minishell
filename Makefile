@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/01/19 10:55:49 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/01/21 16:58:06 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ PARSER_SRCS =
 EXECUTOR_SRCS = \
 	executor/executor.c \
 	executor/handle_command.c \
+	executor/handle_pipe.c \
 	executor/handle_redirs.c
 
 BUILTINS_SRCS =
