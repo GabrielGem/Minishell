@@ -10,4 +10,5 @@ int			*tokenizer_quoting(t_list **tokens, char *line, int mode);
 //utils
 void		str_append(char **str1, char *str2);
 int			check_spaces(char *line);
+int			check_quotes(char *line, char quote);
 #endif

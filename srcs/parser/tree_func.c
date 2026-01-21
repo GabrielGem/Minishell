@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/19 11:41:04 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:48:11 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,25 +73,23 @@ t_ast_node	*tokenizer(char *line, char **env)
 	tokens = split_token(tokens, "<<", NULL);
 	tokens = split_token(tokens, ">", ">>");
 	tokens = split_token(tokens, "<", "<<");
-	tokens = split_token(tokens, "\'", NULL);
-	tokens = split_token(tokens, "\"", NULL);
 	_print_list(tokens);
 	ft_lstclear(&tokens, free);
 	return (NULL);
 }
 
-t_quote_mode	verify_quotes(char *line, char quote, t_quote_mode mode)
+/*
+	Return 1 if all quotes are closed, 0 otherwise
+*/
+int	check_quotes(char *line, char quote)
 {
-	while (line)
+	int	mode;
+
+	mode = 0;
+	while (*line)
 	{
-		if (line == quote && quote == '\"' && mode == NORMAL_MODE)
-			verify_quotes(++line, quote, IN_DOUBLE_QUOTE);
-		if (line == quote && quote == '\"' && mode == IN_DOUBLE_QUOTE)
-			verify_quotes(++line, quote, NORMAL_MODE);
-		if (line == quote && quote == '\'' && mode == NORMAL_MODE)
-			verify_quotes(++line, quote, IN_SINGLE_QUOTE);
-		if (line == quote && quote == '\'' && mode == IN_SINGLE_QUOTE)
-			verify_quotes(++line, quote, NORMAL_MODE);
+		if (*line == quote)
+			mode = !mode;
 		line++;
 	}
 	return (mode);
