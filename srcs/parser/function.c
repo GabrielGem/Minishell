@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/19 11:33:56 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:02:03 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-static t_list *add_tokens(char *content, char *token_found, char *token)
+t_list *add_tokens(char *content, char *token_found, char *token)
 {
 	t_list	*ltkn;
 	char	*lstr;
@@ -54,7 +54,7 @@ static t_list *add_tokens(char *content, char *token_found, char *token)
 }
 
 /*
-When finding a token create its token and
+When finding a token create its token and...
 */
 void	*split_token(t_list *tokens, char *token, char *forbid)
 {

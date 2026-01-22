@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/21 11:10:59 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:54:08 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
+	t_list	*token;
+	t_list	*new_list;
+	t_list	*iterate;
 
 	(void)argc;
 	(void)argv;
@@ -24,9 +27,16 @@ int	main(int argc, char **argv, char **env)
 	line = readline("$> ");
 	while (line)
 	{
-
-		printf("\t%s\n", line);
-		free(line);
+		token = ft_lstnew(line);
+		new_list = evaluate_quotes(token, '\"');
+		iterate = new_list;
+		while (iterate)
+		{
+			printf("%s\n", (char *)(iterate->content));
+			iterate = iterate->next;
+		}
+		ft_lstclear(&new_list, free);
+		ft_lstdelone(token, free);
 		line = readline("$> ");
 	}
 }

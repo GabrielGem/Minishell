@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/21 15:19:23 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:24:43 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,38 +97,38 @@ int	check_quotes(char *line, char quote)
 
 t_list	*evaluate_quotes(t_list *token, char *quote)
 {
-	char	*start;
+	t_list	*new_token;
 	char	*end;
 
-	start = NULL;
-	end = NULL;
-	start = ft_strchr(token->content, quote);
-	if (start)
-		end = ft_strchr(start + 1, quote);
+	end = ft_strchr(quote + 1, *quote);
+	if (!end)
+		return (NULL);
+	new_token = add_tokens(token->content, quote, end);
+	return (new_token);
 }
 
-void	*resolve_quotes(t_list *tokens, char quote)
+void	*resolve_quotes(t_list *tokens)
 {
-	char	*quote;
+	char	*s_quote;
 	char	*d_quote;
 
 	if (!tokens)
 		return (NULL);
-	quote = NULL;
+	s_quote = NULL;
 	d_quote = NULL;
 	while (tokens)
 	{
-		quote = ft_strchr(tokens->content, '\'');
+		s_quote = ft_strchr(tokens->content, '\'');
 		d_quote = ft_strchr(tokens->content, '\"');
-		if (quote == d_quote)
+		if (s_quote == d_quote)
 		{
 			tokens->next = tokens;
 			continue ;
 		}
-		if (d_quote && d_quote < quote)
+		if (d_quote && d_quote < s_quote)
 			tokens = evaluate_quotes(tokens, d_quote);
-		else if (quote && quote < d_quote)
-			tokens = evaluate_quotes(tokens, quote);
+		else if (s_quote && s_quote < d_quote)
+			tokens = evaluate_quotes(tokens, s_quote);
 		tokens->next = tokens;
 	}
 }

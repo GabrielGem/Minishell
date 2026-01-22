@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:57:20 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/15 14:50:50 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:23:12 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,18 @@ int	check_spaces(char *line)
 			return (0);
 	return (1);
 }
+
+/*
+	Separate current string in 3 (at most) strings and insert
+	on the list. Frees the separated token content
+*/
+// t_list	*tear_string(t_list *token, char *start, char *end)
+// {
+// 	t_list	*new_tokens;
+// 	char	*lstr;
+// 	char	*rstr;
+
+// 	lstr = NULL;
+// 	rstr = NULL;
+// 	lstr = ft_substr(token->content, 0, end - start);
+// }
