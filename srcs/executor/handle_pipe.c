@@ -6,43 +6,54 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 10:34:18 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/21 22:23:02 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/22 19:28:42 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+static int	pipe_recursive(t_ast_node *leaf, int input_fd, int output_fd, \
+	t_data *context);
+
 int	handle_pipe(t_ast_node *leaf, t_data *context)
 {
-	int		pipefd[2];
-	pid_t	pid1;
-	pid_t	pid2;
+	pipe_recursive(leaf, STDIN_FILENO, STDOUT_FILENO, context);
+	return (0);
+}
 
-	if (pipe(pipefd) == -1)
-		return (1);
-	pid1 = fork();
-	if (pid1 == 0)
+static int	pipe_recursive(t_ast_node *leaf, int input_fd, int output_fd, \
+	t_data *context)
+{
+	int		pipefd[2];
+
+	if (leaf->type.base == NODE_PIPE)
 	{
-		close(pipefd[0]);
-		dup2(pipefd[1], STDOUT_FILENO);
+		int	stdout_backup = dup(output_fd);
+		pipe(pipefd);
+		pipe_recursive((t_ast_node *)leaf->left, input_fd, pipefd[1], context);
 		close(pipefd[1]);
-		context->exit_status = executor((t_ast_node *)leaf->left, context);
-		free_tree(leaf);
-		exit(context->exit_status);
+		dup2(stdout_backup, STDOUT_FILENO);
+		close(stdout_backup);
+		pipe_recursive((t_ast_node *)leaf->right, pipefd[0], output_fd, context);
+		close(pipefd[0]);
+		if (input_fd != STDIN_FILENO)
+			close(input_fd);
+		if (output_fd != STDOUT_FILENO)
+			close(output_fd);
 	}
-	pid2 = fork();
-	if (pid2 == 0)
+	else if (leaf->type.base == NODE_COMMAND)
 	{
-		close(pipefd[1]);
-		dup2(pipefd[0], STDIN_FILENO);
-		close(pipefd[0]);
-		context->exit_status = executor((t_ast_node *)leaf->right, context);
-		free_tree(leaf);
-		exit(context->exit_status);
+		if (input_fd != STDIN_FILENO)
+		{
+			dup2(input_fd, STDIN_FILENO);
+			close(input_fd);
+		}
+		if (output_fd != STDOUT_FILENO)
+		{
+			dup2(output_fd, STDOUT_FILENO);
+			close(output_fd);
+		}
+		executor(leaf, context);
 	}
-	close(pipefd[0]);
-	close(pipefd[1]);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
 	return (0);
 }
