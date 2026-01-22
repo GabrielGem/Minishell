@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/01/21 16:58:06 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/01/21 21:20:43 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ EXECUTOR_SRCS = \
 BUILTINS_SRCS =
 
 UTILS_SRCS = \
+	utils/free.c \
 	utils/binary_search.c \
 	utils/concatenate.c \
 	utils/is_valid_exec.c \
