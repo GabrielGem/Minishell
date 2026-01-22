@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/21 16:56:36 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/21 21:19:57 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static t_ast_node	*build_tree_polimorphic(void);
 static void			print_tree(t_ast_node *tree);
-void				free_command(t_command *cmd);
-void				free_tree(t_ast_node *tree);
 
 int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 	char **envp)
@@ -32,34 +30,41 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 			break ;
 		context.root = build_tree_polimorphic();
 		print_tree(context.root);
-		executor(&context);
+		executor(context.root, &context);
 		free_tree(context.root);
 		free(line);
 	}
-	free(line);
 	return (0);
 }
 
 static t_ast_node	*build_tree_polimorphic(void)
 {
-	t_ast_node	*root;
-
 	t_command	*cmd;
 	cmd = ft_calloc(1, sizeof(t_command));
 	cmd->type.base = NODE_COMMAND;
 	cmd->args = ft_calloc(4, sizeof(char *));
 	cmd->args[0] = ft_strdup("/usr/bin/ls");
 	cmd->args[1] = ft_strdup("ls");
-	cmd->args[2] = NULL;
+	cmd->args[2] = ft_strdup("-l");
+	cmd->args[3] = NULL;
 
 	t_command	*cmd2;
 	cmd2 = ft_calloc(1, sizeof(t_command));
 	cmd2->type.base = NODE_COMMAND;
 	cmd2->args = ft_calloc(4, sizeof(char *));
-	cmd2->args[0] = ft_strdup("/usr/bin/wc");
-	cmd2->args[1] = ft_strdup("wc");
-	cmd2->args[2] = ft_strdup("-l");
+	cmd2->args[0] = ft_strdup("/usr/bin/grep");
+	cmd2->args[1] = ft_strdup("grep");
+	cmd2->args[2] = ft_strdup("^d");
 	cmd2->args[3] = NULL;
+
+	//t_command	*cmd3;
+	//cmd3 = ft_calloc(1, sizeof(t_command));
+	//cmd3->type.base = NODE_COMMAND;
+	//cmd3->args = ft_calloc(4, sizeof(char *));
+	//cmd3->args[0] = ft_strdup("/usr/bin/wc");
+	//cmd3->args[1] = ft_strdup("wc");
+	//cmd3->args[2] = ft_strdup("-l");
+	//cmd3->args[3] = NULL;
 
 	//t_redir	*redir;
 	//redir = ft_calloc(1, sizeof(t_redir));
@@ -73,11 +78,18 @@ static t_ast_node	*build_tree_polimorphic(void)
 	//redir2->filename = ft_strdup("infile");
 	//ft_lstadd_back(&cmd->redirects, ft_lstnew(redir2));
 
-	root = ft_calloc(1, sizeof(t_ast_node *));
-	root->type.base = NODE_PIPE;
-	root->left = (t_node *)cmd;
-	root->right = (t_node *)cmd2;
-	return (root);
+	t_ast_node	*pipe1;
+	//t_ast_node	*pipe2;
+
+	pipe1 = ft_calloc(1, sizeof(t_ast_node));
+	pipe1->type.base = NODE_PIPE;
+	pipe1->left = (t_node *)cmd;
+	pipe1->right = (t_node *)cmd2;
+	//pipe2 = ft_calloc(1, sizeof(t_ast_node));
+	//pipe2->type.base = NODE_PIPE;
+	//pipe2->left = (t_node *)pipe1;
+	//pipe2->right = (t_node *)cmd3;
+	return (pipe1);
 }
 
 static void	print_tree(t_ast_node *tree)
@@ -111,29 +123,4 @@ static void	print_tree(t_ast_node *tree)
 			}
 		}
 	}
-}
-
-void	free_tree(t_ast_node *tree)
-{
-	if (tree == NULL)
-		return ;
-	//if (tree->type.base == NODE_COMMAND)
-	//	free_pipe((t_exec *)tree);
-	//free_tree((t_ast_node *)tree->left);
-	//free_tree((t_ast_node *)tree->right);
-	if (tree->type.base == NODE_COMMAND)
-		free_command((t_command *)tree);
-}
-
-void	free_redir(void *redir)
-{
-	free(((t_redir *)redir)->filename);
-	free(redir);
-}
-
-void	free_command(t_command *cmd)
-{
-	ft_free_split(cmd->args);
-	ft_lstclear(&cmd->redirects, free_redir);
-	free(cmd);
 }
