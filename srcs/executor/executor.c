@@ -6,13 +6,13 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 13:14:12 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/21 16:48:47 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:40:57 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	executor(t_data *context)
+int	executor(t_ast_node *root, t_data *context)
 {
 	t_handle		ft;
 	static t_handle	map[2] = {
@@ -20,9 +20,9 @@ int	executor(t_data *context)
 		&handle_pipe
 	};
 
-	if (context->root == NULL)
+	if (root == NULL)
 		return (0);
-	ft = map[context->root->type.base];
-	ft(context->root, context);
+	ft = map[root->type.base];
+	ft(root, context);
 	return (context->exit_status);
 }
