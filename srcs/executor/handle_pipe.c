@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 10:34:18 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/21 16:59:25 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/21 22:23:02 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,35 @@
 
 int	handle_pipe(t_ast_node *leaf, t_data *context)
 {
-	t_exec	*pipe_context;
-	int		*pipefd;
+	int		pipefd[2];
+	pid_t	pid1;
+	pid_t	pid2;
 
-	if (leaf->type.base == NODE_COMMAND)
-		handle_command(leaf, context);
-	pipefd = NULL;
-	if (pipe(pipefd))
+	if (pipe(pipefd) == -1)
 		return (1);
-	pipe_context = ft_calloc(1, sizeof(t_exec));
-	pipe_context->stdin_backup = dup(STDIN_FILENO);
-	pipe_context->stdout_backup = dup(STDOUT_FILENO);
-	if (fork() == 0)
+	pid1 = fork();
+	if (pid1 == 0)
 	{
+		close(pipefd[0]);
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[1]);
-		handle_pipe((t_ast_node *)leaf->left, context);
+		context->exit_status = executor((t_ast_node *)leaf->left, context);
+		free_tree(leaf);
+		exit(context->exit_status);
+	}
+	pid2 = fork();
+	if (pid2 == 0)
+	{
+		close(pipefd[1]);
 		dup2(pipefd[0], STDIN_FILENO);
 		close(pipefd[0]);
-		dup2(pipe_context->stdout_backup, STDOUT_FILENO);
-		handle_pipe((t_ast_node *)leaf->right, context);
+		context->exit_status = executor((t_ast_node *)leaf->right, context);
+		free_tree(leaf);
+		exit(context->exit_status);
 	}
 	close(pipefd[0]);
 	close(pipefd[1]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
 	return (0);
 }
