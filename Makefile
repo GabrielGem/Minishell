@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/01/21 21:20:43 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/01/23 20:49:49 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,13 @@ EXECUTOR_SRCS = \
 BUILTINS_SRCS =
 
 UTILS_SRCS = \
-	utils/free.c \
 	utils/binary_search.c \
 	utils/concatenate.c \
 	utils/is_valid_exec.c \
 	utils/env/env_to_table.c \
 	utils/env/table_to_env.c \
+	utils/free/free_tree.c \
+	utils/free/free_context.c \
 	utils/hashtable/hash.c \
 	utils/hashtable/hash_item.c \
 	utils/hashtable/hash_table.c \
