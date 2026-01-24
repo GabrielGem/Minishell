@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/21 21:19:57 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/24 18:10:03 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 		context.root = build_tree_polimorphic();
 		print_tree(context.root);
 		executor(context.root, &context);
-		free_tree(context.root);
+		free_context(&context);
 		free(line);
 	}
 	return (0);
