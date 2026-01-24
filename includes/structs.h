@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:11:10 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/16 10:07:50 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:03:25 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,12 @@ typedef struct s_command
 	t_list	*redirects;
 }	t_command;
 
-typedef struct e_exec
-{
-	t_node	type;
-	int		**pipes;
-	int		*pids;
-	int		cmd_count;
-	int		stdin_backup;
-	int		stdout_backup;
-}	t_exec;
-
 typedef struct s_data
 {
 	t_hash_table	*env;
 	char			**envp;
 	t_ast_node		*root;
+	t_list			*fds;
 	int				exit_status;
 }	t_data;
 
