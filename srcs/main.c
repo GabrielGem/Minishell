@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/24 18:10:03 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/26 11:34:00 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,18 @@ static t_ast_node	*build_tree_polimorphic(void)
 	cmd = ft_calloc(1, sizeof(t_command));
 	cmd->type.base = NODE_COMMAND;
 	cmd->args = ft_calloc(4, sizeof(char *));
-	cmd->args[0] = ft_strdup("/usr/bin/ls");
-	cmd->args[1] = ft_strdup("ls");
-	cmd->args[2] = ft_strdup("-l");
+	cmd->args[0] = ft_strdup("/usr/bin/cat");
+	cmd->args[1] = ft_strdup("cat");
+	cmd->args[2] = ft_strdup("teste.txt");
 	cmd->args[3] = NULL;
 
 	t_command	*cmd2;
 	cmd2 = ft_calloc(1, sizeof(t_command));
 	cmd2->type.base = NODE_COMMAND;
 	cmd2->args = ft_calloc(4, sizeof(char *));
-	cmd2->args[0] = ft_strdup("/usr/bin/grep");
-	cmd2->args[1] = ft_strdup("grep");
-	cmd2->args[2] = ft_strdup("^d");
+	cmd2->args[0] = ft_strdup("/usr/bin/cat");
+	cmd2->args[1] = ft_strdup("cat");
+	cmd2->args[2] = ft_strdup("-e");
 	cmd2->args[3] = NULL;
 
 	//t_command	*cmd3;
