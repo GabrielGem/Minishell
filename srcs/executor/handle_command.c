@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:22:38 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/26 15:56:17 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/26 16:53:42 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int			handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 	t_data *context);
 static void	duplicate_fd(int new_fd, int old_fd);
-static void	redirects(t_list *redirs);
+static void	redirects(t_list *redirs, t_data *context);
 
 int	handle_command(t_ast_node *leaf, t_data *context)
 {
@@ -40,7 +40,7 @@ int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 		if (output_fd != STDOUT_FILENO)
 			duplicate_fd(output_fd, STDOUT_FILENO);
 		if (cmd->redirects != NULL)
-			redirects(cmd->redirs);
+			redirects(cmd->redirects, context);
 		execve(cmd->args[0], &cmd->args[1], context->envp);
 		ft_putstr_fd("minishell: ", 2);
 		perror(cmd->args[0]);
@@ -52,7 +52,7 @@ int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 	if (output_fd != STDOUT_FILENO)
 		close(output_fd);
 	status = 0;
-	waitpid(id, &status, WNOHANG);
+	waitpid(id, &status, 0);
 	return (WEXITSTATUS(status));
 }
 
@@ -62,7 +62,7 @@ static void	duplicate_fd(int new_fd, int old_fd)
 	close(new_fd);
 }
 
-static void	redirects(t_list *redirs)
+static void	redirects(t_list *redirs, t_data *context)
 {
 	int	*fds;
 
