@@ -10,6 +10,6 @@ void		*split_token(t_list *tokens, char *cmd, char *forbid);
 void		str_append(char **str1, char *str2);
 int			check_spaces(char *line);
 int			check_quotes(char *line, char quote);
-t_list		*evaluate_quotes(t_list *tokens, char quote);
+t_list		*evaluate_quotes(t_list *tokens, char *quote);
 t_list		*add_tokens(char *content, char *token_found, char *token);
 #endif

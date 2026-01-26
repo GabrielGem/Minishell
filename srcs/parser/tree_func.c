@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/22 16:24:43 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:48:13 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	_print_list(t_list *node)
 t_ast_node	*tokenizer(char *line, char **env)
 {
 	t_list	*tokens;
-
 	(void)env;
 	if (!line)
 		return (NULL);
@@ -78,33 +77,24 @@ t_ast_node	*tokenizer(char *line, char **env)
 	return (NULL);
 }
 
-/*
-	Return 1 if all quotes are closed, 0 otherwise
-*/
-int	check_quotes(char *line, char quote)
-{
-	int	mode;
 
-	mode = 0;
-	while (*line)
-	{
-		if (*line == quote)
-			mode = !mode;
-		line++;
-	}
-	return (mode);
-}
-
-t_list	*evaluate_quotes(t_list *token, char *quote)
+t_list	*evaluate_quotes(t_list *token, char *quote_pos)
 {
-	t_list	*new_token;
+	char	*lstr;
+	char	*rstr;
+	char	*mstr;
 	char	*end;
 
-	end = ft_strchr(quote + 1, *quote);
+	end = ft_strchr(quote_pos + 1, *quote_pos);
 	if (!end)
-		return (NULL);
-	new_token = add_tokens(token->content, quote, end);
-	return (new_token);
+		return (token);
+	lstr = ft_substr(token->content, 0, quote_pos - (char *)(token->content));
+	mstr = ft_substr(token->content, quote_pos - (char *)(token->content),
+		end - quote_pos + 1);
+	rstr = ft_substr(token->content, end + 1 - (char *)(token->content),
+		ft_strlen(end));
+	if (lstr && ft_strlen)
+	return (token);
 }
 
 void	*resolve_quotes(t_list *tokens)
@@ -131,4 +121,5 @@ void	*resolve_quotes(t_list *tokens)
 			tokens = evaluate_quotes(tokens, s_quote);
 		tokens->next = tokens;
 	}
+	return (NULL); //corrigir
 }
