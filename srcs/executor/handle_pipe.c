@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 10:34:18 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/26 11:27:33 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/26 16:49:42 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static int	pipe_recursive(t_ast_node *leaf, int input_fd, int output_fd, \
 
 int	handle_pipe(t_ast_node *leaf, t_data *context)
 {
-	return (pipe_recursive(leaf, STDIN_FILENO, STDOUT_FILENO, context));
+	int	last_status;
+
+	last_status = pipe_recursive(leaf, STDIN_FILENO, STDOUT_FILENO, context);
+	return (last_status);
 }
 
 static int	pipe_recursive(t_ast_node *leaf, int input_fd, int output_fd, \
