@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/26 14:48:13 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/27 19:11:35 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,17 @@ t_ast_node	*tokenizer(char *line, char **env)
 	return (NULL);
 }
 
+// static t_list	**helper_evaluate_quotes(t_list **token, char *str)
+// {
+// 	if (str && !ft_strlen(str))
+// 	{
+// 		free(str);
+// 		str = NULL;
+// 	}
+// 	if (str)
+// 		ft_lstadd_back(token, ft_lstnew(str));
+// 	return (token);
+// }
 
 t_list	*evaluate_quotes(t_list *token, char *quote_pos)
 {
@@ -84,7 +95,9 @@ t_list	*evaluate_quotes(t_list *token, char *quote_pos)
 	char	*rstr;
 	char	*mstr;
 	char	*end;
+	t_list	*new_token;
 
+	new_token = NULL;
 	end = ft_strchr(quote_pos + 1, *quote_pos);
 	if (!end)
 		return (token);
@@ -93,8 +106,29 @@ t_list	*evaluate_quotes(t_list *token, char *quote_pos)
 		end - quote_pos + 1);
 	rstr = ft_substr(token->content, end + 1 - (char *)(token->content),
 		ft_strlen(end));
-	if (lstr && ft_strlen)
-	return (token);
+	if (lstr && !ft_strlen(lstr))
+	{
+		free(lstr);
+		lstr = NULL;		
+	}
+	if (mstr && !ft_strlen(mstr))
+	{
+		free(mstr);
+		mstr = NULL;
+	}
+	if (rstr && !ft_strlen(rstr))
+	{
+		free(rstr);
+		rstr = NULL;
+	}
+	if (lstr)
+		new_token = ft_lstnew(lstr);
+	if (mstr)
+		ft_lstadd_back(&new_token, ft_lstnew(mstr));
+	if (rstr)
+		ft_lstadd_back(&new_token, ft_lstnew(rstr));
+	ft_lstdelone(token, free);
+	return (new_token);
 }
 
 void	*resolve_quotes(t_list *tokens)
