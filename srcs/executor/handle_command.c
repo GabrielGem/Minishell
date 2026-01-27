@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:22:38 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/26 16:53:42 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:56:22 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,24 @@ static void	redirects(t_list *redirs, t_data *context);
 
 int	handle_command(t_ast_node *leaf, t_data *context)
 {
-	return (handle_command_fd(leaf, STDIN_FILENO, STDOUT_FILENO, context));
+	int	status;
+
+	handle_command_fd(leaf, STDIN_FILENO, STDOUT_FILENO, context);
+	status = wait_processes(context->pids);
+	return (status);
 }
 
 int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 	t_data *context)
 {
 	t_command	*cmd;
-	pid_t		id;
-	int			status;
+	pid_t		pid;
 
 	cmd = (t_command *)leaf;
-	id = fork();
-	if (id == -1)
+	pid = fork();
+	if (pid == -1)
 		return (-1);
-	if (id == 0)
+	if (pid == 0)
 	{
 		if (input_fd != STDIN_FILENO)
 			duplicate_fd(input_fd, STDIN_FILENO);
@@ -51,9 +54,8 @@ int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 		close(input_fd);
 	if (output_fd != STDOUT_FILENO)
 		close(output_fd);
-	status = 0;
-	waitpid(id, &status, 0);
-	return (WEXITSTATUS(status));
+	ft_lstadd_back(&context->pids, ft_lstnew((void *)(long)pid));
+	return (0);
 }
 
 static void	duplicate_fd(int new_fd, int old_fd)

@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 10:34:18 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/26 16:49:42 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:09:42 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	handle_pipe(t_ast_node *leaf, t_data *context)
 {
 	int	last_status;
 
-	last_status = pipe_recursive(leaf, STDIN_FILENO, STDOUT_FILENO, context);
+	pipe_recursive(leaf, STDIN_FILENO, STDOUT_FILENO, context);
+	last_status = wait_processes(context->pids);
 	return (last_status);
 }
 
