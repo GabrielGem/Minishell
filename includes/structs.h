@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:11:10 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/23 18:03:25 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/27 13:57:10 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_data
 	char			**envp;
 	t_ast_node		*root;
 	t_list			*fds;
+	t_list			*pids;
 	int				exit_status;
 }	t_data;
 
