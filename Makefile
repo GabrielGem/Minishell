@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/01/23 20:49:49 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/01/27 16:02:21 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ PARSER_SRCS =
 
 EXECUTOR_SRCS = \
 	executor/executor.c \
+	executor/wait_processes.c \
 	executor/handle_command.c \
 	executor/handle_pipe.c \
 	executor/handle_redirs.c
