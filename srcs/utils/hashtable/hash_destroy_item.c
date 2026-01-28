@@ -6,11 +6,11 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 09:45:53 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/23 17:29:07 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/28 15:32:29 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "hashtable.h"
 
 void	destroy_item(t_hash_item *item)
 {
