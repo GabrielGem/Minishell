@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:11:10 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/27 13:57:10 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/28 18:20:36 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ enum e_builtin
 	ECHO,
 	CD,
 	PWD,
-	EXPORT,
+	B_EXPORT,
 	UNSET,
-	ENV,
+	B_ENV,
 	EXIT
 };
 
