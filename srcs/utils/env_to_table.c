@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 12:30:00 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/23 17:24:47 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/28 19:16:25 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_hash_table	*env_to_table(char **env)
 
 	if (!env)
 		return (NULL);
-	table = create_table(257);
+	table = create_table(INITIAL_SIZE);
 	if (!table)
 		return (NULL);
 	i = 0;
@@ -33,7 +33,7 @@ t_hash_table	*env_to_table(char **env)
 		key = extract_key(env[i]);
 		value = extract_value(env[i]);
 		if (key && value)
-			hash_upsert(table, key, value);
+			hash_upsert(table, key, value, ENV);
 		free(key);
 		free(value);
 		i++;
