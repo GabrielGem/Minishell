@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   table_to_env.c                                     :+:      :+:    :+:   */
+/*   table_to_array_of_pointers.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 16:29:26 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/23 17:24:48 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/28 19:28:36 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_env_str(char *key, char *value);
+static char	*get_array_str(char *key, char *value);
 
-char	**table_to_env(t_hash_table *table)
+char	**table_to_array_of_pointers(t_hash_table *table)
 {
 	char		**env;
 	t_hash_item	*item;
@@ -32,7 +32,7 @@ char	**table_to_env(t_hash_table *table)
 		item = table->items[i];
 		while (item)
 		{
-			env[j] = get_env_str(item->key, item->value);
+			env[j] = get_array_str(item->key, item->value);
 			j++;
 			item = item->next;
 		}
@@ -41,7 +41,7 @@ char	**table_to_env(t_hash_table *table)
 	return (env);
 }
 
-static char	*get_env_str(char *key, char *value)
+static char	*get_array_str(char *key, char *value)
 {
 	char	*temp;
 	char	*str;
