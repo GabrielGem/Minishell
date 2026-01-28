@@ -5,20 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/20 17:30:45 by gabrgarc          #+#    #+#             */
-/*   Updated: 2025/12/23 17:29:09 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/01/28 15:33:36 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/01/28 18:09:11 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "hashtable.h"
 
-char	*hash_search(t_hash_table *table, char *key)
+char	*hash_search(t_hash_table *table, char *key, t_hash_type tag)
 {
 	unsigned int	index;
 	t_hash_item		*actual_item;
 	int				key_len;
 
-	if (!table || !key)
+	if (!table || !key || tag < ENV || tag > EXPORT)
 		return (NULL);
 	index = hash_function(key, table->size);
 	actual_item = table->items[index];
@@ -27,7 +27,8 @@ char	*hash_search(t_hash_table *table, char *key)
 	key_len = ft_strlen(key) + 1;
 	while (actual_item)
 	{
-		if (ft_strncmp(actual_item->key, key, key_len) == 0)
+		if (ft_strncmp(actual_item->key, key, key_len) == 0
+			&& actual_item->tag == tag)
 			return (actual_item->value);
 		actual_item = actual_item->next;
 	}
