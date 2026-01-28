@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/01/27 16:02:21 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/01/28 19:24:30 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,8 @@ UTILS_SRCS = \
 	utils/binary_search.c \
 	utils/concatenate.c \
 	utils/is_valid_exec.c \
-	utils/env/env_to_table.c \
-	utils/env/table_to_env.c \
+	utils/env_to_table.c \
+	utils/table_to_array_of_pointers.c \
 	utils/free/free_tree.c \
 	utils/free/free_context.c \
 	utils/hashtable/hash.c \
