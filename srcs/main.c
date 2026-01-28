@@ -6,14 +6,15 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/26 16:54:52 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/28 21:48:07 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_ast_node	*build_tree_polimorphic(void);
+//static t_ast_node	*build_tree_polimorphic(void);
 static void			print_tree(t_ast_node *tree);
+void print_hash_table(t_hash_table *table);
 
 int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 	char **envp)
@@ -22,22 +23,24 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 	t_data	context;
 
 	context = (t_data){0};
-	context.envp = envp;
+	context.env = env_to_table(envp);
+	print_hash_table(context.env);
 	while (1)
 	{
 		line = readline("$> ");
 		if (line == NULL)
 			break ;
-		context.root = build_tree_polimorphic();
+		//context.root = build_tree_polimorphic();
+		context.root = NULL;
 		print_tree(context.root);
 		executor(context.root, &context);
-		ft_printf("echo $?\n%d\n", context.exit_status);
+		//ft_printf("echo $?\n%d\n", context.exit_status);
 		free_context(&context);
 		free(line);
 	}
 	return (0);
 }
-
+/*
 static t_ast_node	*build_tree_polimorphic(void)
 {
 	t_command	*cmd;
@@ -92,7 +95,7 @@ static t_ast_node	*build_tree_polimorphic(void)
 	//pipe2->right = (t_node *)cmd3;
 	return (pipe1);
 }
-
+*/
 static void	print_tree(t_ast_node *tree)
 {
 	if (tree == NULL)
@@ -124,4 +127,40 @@ static void	print_tree(t_ast_node *tree)
 			}
 		}
 	}
+}
+
+void print_hash_table(t_hash_table *table)
+{
+    if (!table || !table->items)
+    {
+        printf("Tabela vazia ou não inicializada.\n");
+        return;
+    }
+
+    printf("--- Conteúdo da Tabela Hash (%d/%d itens) ---\n", table->count, table->size);
+
+    for (int i = 0; i < table->size; i++)
+    {
+        t_hash_item *current = table->items[i];
+
+        // Só printamos o índice se ele contiver algum item (opcional)
+        if (current)
+        {
+            printf("Bucket [%d]: ", i);
+            while (current)
+            {
+                printf("[%s = %s (Tag: %s)]", 
+                    current->key, 
+                    current->value ? current->value : "NULL",
+                    current->tag == ENV ? "ENV" : "EXPORT");
+
+                if (current->next)
+                    printf(" -> ");
+                
+                current = current->next;
+            }
+            printf("\n");
+        }
+    }
+    printf("-------------------------------------------\n");
 }
