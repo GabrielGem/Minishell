@@ -1,53 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   table_to_array_of_pointers.c                       :+:      :+:    :+:   */
+/*   table_for_array_of_items.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 16:29:26 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/28 19:28:36 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/29 15:56:45 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_array_str(char *key, char *value);
-
-char	**table_to_array_of_pointers(t_hash_table *table)
+t_hash_item	**table_for_array_of_items(t_hash_table *table, int count)
 {
-	char		**env;
+	t_hash_item	**array;
 	t_hash_item	*item;
 	int			i;
 	int			j;
 
-	env = ft_calloc(sizeof(char *), table->count + 1);
-	if (!env)
+	array = ft_calloc(count + 1, sizeof(t_hash_item *));
+	if (!array)
 		return (NULL);
-	env[table->count] = NULL;
 	i = 0;
 	j = 0;
 	while (i < table->size)
 	{
 		item = table->items[i];
-		while (item)
+		while(item)
 		{
-			env[j] = get_array_str(item->key, item->value);
-			j++;
+			array[j] = item;
 			item = item->next;
+			j++;
 		}
 		i++;
 	}
-	return (env);
-}
-
-static char	*get_array_str(char *key, char *value)
-{
-	char	*temp;
-	char	*str;
-
-	temp = ft_strjoin(key, "=");
-	str = ft_strjoin(temp, value);
-	free(temp);
-	return (str);
+	return (array);
 }
