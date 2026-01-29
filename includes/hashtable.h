@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:30:06 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/28 19:20:38 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/29 10:04:43 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 typedef enum s_hash_type
 {
 	ENV = 1,
-	EXPORT
+	EXPORT,
+	SET
 }	t_hash_type;
 
 typedef struct s_hash_item
