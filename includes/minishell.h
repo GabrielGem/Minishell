@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:27 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/15 13:36:32 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/29 15:25:15 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "hashtable.h"
 # include "structs.h"
 # include "parser.h"
-# include "environment.h"
+# include "utils.h"
 # include "executor.h"
 
 #endif
