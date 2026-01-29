@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/28 21:48:07 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/29 14:35:29 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 //static t_ast_node	*build_tree_polimorphic(void);
 static void			print_tree(t_ast_node *tree);
 void print_hash_table(t_hash_table *table);
+void	print_array_items(t_hash_item **array, int count);
 
 int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 	char **envp)
@@ -24,12 +25,16 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 
 	context = (t_data){0};
 	context.env = env_to_table(envp);
-	print_hash_table(context.env);
 	while (1)
 	{
 		line = readline("$> ");
 		if (line == NULL)
 			break ;
+		print_hash_table(context.env);
+		int count = count_items(context.env, ENV);
+		t_hash_item **array = array_of_items(context.env, count);
+		sort_array_of_items(array, count);
+		print_array_items(array, count);
 		//context.root = build_tree_polimorphic();
 		context.root = NULL;
 		print_tree(context.root);
@@ -40,6 +45,24 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 	}
 	return (0);
 }
+
+void	print_array_items(t_hash_item **array, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		if (array[i]->value == NULL)
+			printf("declare -x %s=\"\"\n", array[i]->key);
+		else if (array[i]->value == '\0')
+			printf("declare -x %s=\n", array[i]->key);
+		else
+			printf("declare -x %s=\"%s\"\n", array[i]->key, array[i]->value);
+		i++;
+	}
+}
+
 /*
 static t_ast_node	*build_tree_polimorphic(void)
 {
