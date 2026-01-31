@@ -6,13 +6,14 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 16:29:26 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/29 15:56:45 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/30 11:30:49 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_hash_item	**table_for_array_of_items(t_hash_table *table, int count)
+t_hash_item	**table_for_array_of_items(t_hash_table *table, int count,\
+			t_hash_type tag)
 {
 	t_hash_item	**array;
 	t_hash_item	*item;
@@ -27,11 +28,14 @@ t_hash_item	**table_for_array_of_items(t_hash_table *table, int count)
 	while (i < table->size)
 	{
 		item = table->items[i];
-		while(item)
+		while (item)
 		{
-			array[j] = item;
+			if (item->tag == tag)
+			{
+				array[j] = item;
+				j++;
+			}
 			item = item->next;
-			j++;
 		}
 		i++;
 	}
