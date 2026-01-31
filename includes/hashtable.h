@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:30:06 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/29 10:04:43 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/31 16:53:52 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_hash_table	*create_table(int size);
 t_hash_item		*hash_item(char *key, char *value, t_hash_type tag);
 unsigned int	hash_function(char *key, int size);
 int				hash_upsert(t_hash_table *table, char *key, char *value, t_hash_type tag);
+int				hash_update_tag(t_hash_table *table, char *key, t_hash_type old_tag, t_hash_type new_tag);
 char			*hash_search(t_hash_table *table, char *key, t_hash_type tag);
 int				hash_delete(t_hash_table *table, char *key, t_hash_type tag);
 void			destroy_item(t_hash_item *item);
