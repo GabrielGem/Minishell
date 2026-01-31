@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 13:18:06 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/29 15:50:44 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/30 11:31:54 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	count_size(void **array)
 {
 	int	count;
 
+	count = 0;
 	while (*array)
 	{
 		count++;
