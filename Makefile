@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/01/28 19:24:30 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/01/31 17:10:20 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,20 +29,29 @@ EXECUTOR_SRCS = \
 	executor/handle_pipe.c \
 	executor/handle_redirs.c
 
-BUILTINS_SRCS =
+BUILTINS_SRCS = \
+	builtins/export.c
 
 UTILS_SRCS = \
 	utils/binary_search.c \
 	utils/concatenate.c \
 	utils/is_valid_exec.c \
 	utils/env_to_table.c \
-	utils/table_to_array_of_pointers.c \
+	utils/table_for_array_of_items.c \
+	utils/count_items_by_tag.c \
+	utils/sort_array_of_items.c \
+	utils/extract_key.c \
+	utils/extract_value.c \
+	utils/export_utils/get_sorted_export_items.c \
+	utils/export_utils/is_valid_identifier.c \
+	utils/export_utils/print_invalid_identifier.c \
 	utils/free/free_tree.c \
 	utils/free/free_context.c \
 	utils/hashtable/hash.c \
 	utils/hashtable/hash_item.c \
 	utils/hashtable/hash_table.c \
 	utils/hashtable/hash_upsert.c \
+	utils/hashtable/hash_update_tag.c \
 	utils/hashtable/hash_search.c \
 	utils/hashtable/hash_delete.c \
 	utils/hashtable/hash_destroy_item.c \
