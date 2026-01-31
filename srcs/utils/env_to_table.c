@@ -6,14 +6,11 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 12:30:00 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/28 19:16:25 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/31 17:15:05 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*extract_key(char *env_line);
-static char	*extract_value(char *env_line);
 
 t_hash_table	*env_to_table(char **env)
 {
@@ -39,40 +36,4 @@ t_hash_table	*env_to_table(char **env)
 		i++;
 	}
 	return (table);
-}
-
-static char	*extract_key(char *env_line)
-{
-	char	*equal_sign;
-	char	*key;
-	int		key_len;
-
-	if (!env_line)
-		return (NULL);
-	equal_sign = ft_strchr(env_line, '=');
-	if (!equal_sign)
-	{
-		key = ft_strdup(env_line);
-		return (key);
-	}
-	key_len = equal_sign - env_line;
-	key = ft_substr(env_line, 0, key_len);
-	return (key);
-}
-
-static char	*extract_value(char *env_line)
-{
-	char	*equal_sign;
-	char	*value;
-
-	if (!env_line)
-		return (NULL);
-	equal_sign = ft_strchr(env_line, '=');
-	if (!equal_sign)
-	{
-		value = ft_strdup("");
-		return (value);
-	}
-	value = ft_strdup(equal_sign + 1);
-	return (value);
 }
