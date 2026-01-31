@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:35:42 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/28 18:09:51 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/01/31 14:15:31 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	hash_upsert(t_hash_table *table, char *key, char *value, t_hash_type tag)
 	unsigned int	index;
 	int				update_result;
 
-	if (!table || !key || !value || tag < ENV || tag > EXPORT)
+	if (!table || !key || tag < ENV || tag > SET)
 		return (-1);
 	index = hash_function(key, table->size);
 	if (table->items[index] != NULL)
@@ -50,14 +50,14 @@ static int	update_if_exists(t_hash_item *item, char *key, char *value, t_hash_ty
 	actual_item = item;
 	while (actual_item != NULL)
 	{
-		if (ft_strncmp(actual_item->key, key, key_len) == 0
-			&& actual_item->tag == tag)
+		if (ft_strncmp(actual_item->key, key, key_len) == 0)
 		{
 			new_value = ft_strdup(value);
 			if (!new_value)
 				return (-1);
 			free(actual_item->value);
 			actual_item->value = new_value;
+			actual_item->tag = tag;
 			return (1);
 		}
 		actual_item = actual_item->next;
