@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/22 15:02:03 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/31 16:07:30 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ When finding a token create its token and...
 void	*split_token(t_list *tokens, char *token, char *forbid)
 {
 	char	*tkn;
-	t_list	*ltkn;
+	t_list	*new_tokens;
+	t_list	*last;
 
 	while(tokens)
 	{
@@ -68,19 +69,21 @@ void	*split_token(t_list *tokens, char *token, char *forbid)
 			|| (ft_strlen(tokens->content) != ft_strlen(tkn)))
 			&& ft_strcmp(tkn, forbid))
 		{
-			ltkn = add_tokens(tokens->content, tkn, token);
+			new_tokens = add_tokens(tokens->content, tkn, token);
 			if (tokens->prev)
 			{
-				tokens->prev->next = ltkn;
-				ltkn->prev = tokens->prev;
+				tokens->prev->next = new_tokens;
+				new_tokens->prev = tokens->prev;
 			}
-			(ft_lstlast(ltkn))->next = tokens->next;
+			(ft_lstlast(new_tokens))->next = tokens->next;
 			if (tokens->next)
-				tokens->next->prev = (ft_lstlast(ltkn));
+				tokens->next->prev = (ft_lstlast(new_tokens));
 			ft_lstdelone(tokens, free);
-			tokens = ft_lstfirst(ltkn);
+			tokens = ft_lstfirst(new_tokens);
+			//tokens = insert_new_tokens(tokens->prev, new_tokens, tokens->next);
 		}
+		last = tokens;
 		tokens = tokens->next;
 	}
-	return (ft_lstfirst(ltkn));
+	return (ft_lstfirst(last));
 }

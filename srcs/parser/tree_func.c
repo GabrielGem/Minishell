@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/27 19:11:35 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/30 20:06:58 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_ast_node	*tokenizer(char *line, char **env)
 	(void)env;
 	if (!line)
 		return (NULL);
-	if (!check_spaces(line))
+	if (check_spaces(line))
 	{
 		free(line);
 		return (NULL);
@@ -135,25 +135,49 @@ void	*resolve_quotes(t_list *tokens)
 {
 	char	*s_quote;
 	char	*d_quote;
+	t_list	*last;
 
 	if (!tokens)
 		return (NULL);
-	s_quote = NULL;
-	d_quote = NULL;
 	while (tokens)
 	{
 		s_quote = ft_strchr(tokens->content, '\'');
 		d_quote = ft_strchr(tokens->content, '\"');
-		if (s_quote == d_quote)
+		if (s_quote == d_quote || is_quote_token(tokens, '\'') 
+			|| is_quote_token(tokens, '\"'))
 		{
 			tokens->next = tokens;
 			continue ;
 		}
 		if (d_quote && d_quote < s_quote)
-			tokens = evaluate_quotes(tokens, d_quote);
+			last = evaluate_quotes(tokens, d_quote);
 		else if (s_quote && s_quote < d_quote)
-			tokens = evaluate_quotes(tokens, s_quote);
+			last = evaluate_quotes(tokens, s_quote);
+		tokens = last;
 		tokens->next = tokens;
 	}
 	return (NULL); //corrigir
+}
+
+char	is_quote_token(t_list *token, char tkn)
+{
+	char	*str;
+
+	if (!token || !token->content)
+		return (0);
+	str = token->content;
+	if (str[0] == tkn || str[ft_strlen(str) - 1] == tkn)
+		return (1);
+	return (0);
+}
+
+/*
+Add new tokens iten(s) list between existing tokens
+*/
+void	*insert_new_tokens(t_list *left, t_list *mid, t_list *right)
+{
+	ft_lstadd_after(left, mid);
+	mid = ft_lstlast(mid);
+	ft_lstadd_after(mid, right);
+	return (ft_lstfirst(mid));
 }

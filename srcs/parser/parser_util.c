@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:57:20 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/22 16:23:12 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/30 19:58:34 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	str_append(char **str1, char *str2)
 
 /*
 Verify if lines only has spaces
+Return: 1 if only has spaces, 0 otherwise
 */
 int	check_spaces(char *line)
 {
@@ -32,7 +33,7 @@ int	check_spaces(char *line)
 		return (0);
 	i = -1;
 	while (line[++i])
-		if (ft_isspace(line[i]))
+		if (!ft_isspace(line[i]))
 			return (0);
 	return (1);
 }
