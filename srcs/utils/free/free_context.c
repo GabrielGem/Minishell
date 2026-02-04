@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 20:14:17 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/27 15:19:00 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/04 13:59:22 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	free_context(t_data *context)
 	free_tree(context->root);
 	ft_lstclear(&context->fds, close_fd);
 	ft_lstclear(&context->pids, close_pid);
+	close(context->stdin_backup);
+	close(context->stdout_backup);
 }
 
 void	close_fd(void *fd)

@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:11:10 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/28 18:20:36 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/04 10:31:49 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ enum e_builtin
 	B_EXPORT,
 	UNSET,
 	B_ENV,
-	EXIT
+	EXIT,
+	COUNT
 };
 
 typedef enum e_node_type
@@ -68,8 +69,9 @@ typedef struct s_command
 typedef struct s_data
 {
 	t_hash_table	*env;
-	char			**envp;
 	t_ast_node		*root;
+	int				stdin_backup;
+	int				stdout_backup;
 	t_list			*fds;
 	t_list			*pids;
 	int				exit_status;

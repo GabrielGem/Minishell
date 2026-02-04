@@ -6,16 +6,16 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/29 14:35:29 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:16:19 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//static t_ast_node	*build_tree_polimorphic(void);
+static t_ast_node	*build_tree_polimorphic(void);
 static void			print_tree(t_ast_node *tree);
-void print_hash_table(t_hash_table *table);
-void	print_array_items(t_hash_item **array, int count);
+void				print_hash_table(t_hash_table *table);
+void				print_array_items(t_hash_item **array, int count);
 
 int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 	char **envp)
@@ -25,63 +25,42 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
 
 	context = (t_data){0};
 	context.env = env_to_table(envp);
+	context.stdin_backup = dup(STDIN_FILENO);
+	context.stdout_backup = dup(STDOUT_FILENO);
 	while (1)
 	{
 		line = readline("$> ");
 		if (line == NULL)
 			break ;
-		print_hash_table(context.env);
-		int count = count_items(context.env, ENV);
-		t_hash_item **array = array_of_items(context.env, count);
-		sort_array_of_items(array, count);
-		print_array_items(array, count);
-		//context.root = build_tree_polimorphic();
-		context.root = NULL;
+		context.root = build_tree_polimorphic();
 		print_tree(context.root);
 		executor(context.root, &context);
-		//ft_printf("echo $?\n%d\n", context.exit_status);
+		//print_hash_table(context.env);
 		free_context(&context);
 		free(line);
 	}
 	return (0);
 }
 
-void	print_array_items(t_hash_item **array, int count)
-{
-	int	i;
-
-	i = 0;
-	while (i < count)
-	{
-		if (array[i]->value == NULL)
-			printf("declare -x %s=\"\"\n", array[i]->key);
-		else if (array[i]->value == '\0')
-			printf("declare -x %s=\n", array[i]->key);
-		else
-			printf("declare -x %s=\"%s\"\n", array[i]->key, array[i]->value);
-		i++;
-	}
-}
-
-/*
 static t_ast_node	*build_tree_polimorphic(void)
 {
 	t_command	*cmd;
 	cmd = ft_calloc(1, sizeof(t_command));
 	cmd->type.base = NODE_COMMAND;
-	cmd->args = ft_calloc(4, sizeof(char *));
-	cmd->args[0] = ft_strdup("/usr/bin/cat");
-	cmd->args[1] = ft_strdup("cat");
-	cmd->args[2] = ft_strdup("teste.txt");
-	cmd->args[3] = NULL;
+	cmd->is_builtin = B_EXPORT;
+	cmd->args = ft_calloc(3, sizeof(char *));
+	cmd->args[0] = ft_strdup("export");
+	cmd->args[1] = ft_strdup("b");
+	//cmd->args[2] = ft_strdup("teste.txt");
+	cmd->args[2] = NULL;
 
 	t_command	*cmd2;
 	cmd2 = ft_calloc(1, sizeof(t_command));
 	cmd2->type.base = NODE_COMMAND;
 	cmd2->args = ft_calloc(4, sizeof(char *));
-	cmd2->args[0] = ft_strdup("/usr/bin/cat");
-	cmd2->args[1] = ft_strdup("cat");
-	cmd2->args[2] = ft_strdup("-e");
+	cmd2->args[0] = ft_strdup("/usr/bin/wc");
+	cmd2->args[1] = ft_strdup("wc");
+	cmd2->args[2] = ft_strdup("-l");
 	cmd2->args[3] = NULL;
 
 	//t_command	*cmd3;
@@ -118,7 +97,7 @@ static t_ast_node	*build_tree_polimorphic(void)
 	//pipe2->right = (t_node *)cmd3;
 	return (pipe1);
 }
-*/
+
 static void	print_tree(t_ast_node *tree)
 {
 	if (tree == NULL)

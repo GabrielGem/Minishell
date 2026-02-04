@@ -6,12 +6,14 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 10:24:41 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/30 10:30:22 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:18:55 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
+
+typedef int	(*t_builtin)(t_data *context, char **args);
 
 int	b_export(t_data *context, char **args);
 
