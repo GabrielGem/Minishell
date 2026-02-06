@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:57:20 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/30 19:58:34 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/03 19:24:25 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,28 @@ int	check_spaces(char *line)
 	return (1);
 }
 
-/*
-	Separate current string in 3 (at most) strings and insert
-	on the list. Frees the separated token content
-*/
-// t_list	*tear_string(t_list *token, char *start, char *end)
-// {
-// 	t_list	*new_tokens;
-// 	char	*lstr;
-// 	char	*rstr;
+char	is_quote_token(t_list *token, char tkn)
+{
+	char	*str;
 
-// 	lstr = NULL;
-// 	rstr = NULL;
-// 	lstr = ft_substr(token->content, 0, end - start);
-// }
+	if (!token || !token->content)
+		return (0);
+	str = token->content;
+	if (str[0] == tkn && str[ft_strlen(str) - 1] == tkn)
+		return (1);
+	return (0);
+}
+
+void	insert_new_tokens(t_list **hd, t_list *lt, t_list *md, t_list *rt)
+{
+	if (lt)
+	{
+		lt->next = md;
+		md->prev = lt;
+	}
+	else if (hd)
+		*hd = md;
+	(ft_lstlast(md))->next = rt;
+	if (rt)
+		rt->prev = ft_lstlast(md);
+}

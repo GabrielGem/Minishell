@@ -11,7 +11,9 @@ LEXER_SRCS =
 PARSER_SRCS = \
 	parser/function.c\
 	parser/parser_util.c\
-	parser/tree_func.c
+	parser/tree_func.c\
+	parser/quotes.c\
+	parser/spaces.c
 
 EXECUTOR_SRCS = 
 

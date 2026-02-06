@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/31 16:07:30 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/04 09:35:05 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-t_list *add_tokens(char *content, char *token_found, char *token)
+t_list	*add_tokens(char *content, char *token_found, char *token)
 {
 	t_list	*ltkn;
 	char	*lstr;
@@ -34,7 +34,7 @@ t_list *add_tokens(char *content, char *token_found, char *token)
 	ltkn = NULL;
 	lstr = ft_substr(content, 0, token_found - content);
 	rstr = ft_substr(content, token_found - content + ft_strlen(token),
-		ft_strlen(content));
+			ft_strlen(content));
 	if (!ft_strlen(lstr))
 	{
 		free(lstr);
@@ -60,30 +60,24 @@ void	*split_token(t_list *tokens, char *token, char *forbid)
 {
 	char	*tkn;
 	t_list	*new_tokens;
-	t_list	*last;
+	t_list	*head;
+	t_list	*next_node;
 
-	while(tokens)
+	head = tokens;
+	while (tokens)
 	{
+		next_node = tokens->next;
 		tkn = ft_strnstr(tokens->content, token, ft_strlen(tokens->content));
 		if (tkn && (ft_strlen(token) != ft_strlen(tkn)
-			|| (ft_strlen(tokens->content) != ft_strlen(tkn)))
+				|| (ft_strlen(tokens->content) != ft_strlen(tkn)))
 			&& ft_strcmp(tkn, forbid))
 		{
 			new_tokens = add_tokens(tokens->content, tkn, token);
-			if (tokens->prev)
-			{
-				tokens->prev->next = new_tokens;
-				new_tokens->prev = tokens->prev;
-			}
-			(ft_lstlast(new_tokens))->next = tokens->next;
-			if (tokens->next)
-				tokens->next->prev = (ft_lstlast(new_tokens));
+			insert_new_tokens(&head, tokens->prev, new_tokens, tokens->next);
 			ft_lstdelone(tokens, free);
 			tokens = ft_lstfirst(new_tokens);
-			//tokens = insert_new_tokens(tokens->prev, new_tokens, tokens->next);
 		}
-		last = tokens;
-		tokens = tokens->next;
+		tokens = next_node;
 	}
-	return (ft_lstfirst(last));
+	return (head);
 }
