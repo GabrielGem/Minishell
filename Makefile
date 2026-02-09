@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/04 12:00:53 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/02/07 18:34:32 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ UTILS_SRCS = \
 	utils/export_utils/is_valid_identifier.c \
 	utils/export_utils/print_invalid_identifier.c \
 	utils/free/free_tree.c \
-	utils/free/free_context.c \
+	utils/free/free_shell.c \
 	utils/hashtable/hash.c \
 	utils/hashtable/hash_item.c \
 	utils/hashtable/hash_table.c \
@@ -58,8 +58,12 @@ UTILS_SRCS = \
 	utils/hashtable/hash_destroy_item.c \
 	utils/hashtable/hash_destroy_table.c
 
+TESTS_SRCS = \
+	ft_test/print_functions.c \
+	ft_test/build_tree_polimorphic.c
+
 SRCS := $(MAIN_SRC) $(LEXER_SRCS) $(PARSER_SRCS) \
-		$(EXECUTOR_SRCS) $(BUILTINS_SRCS) $(UTILS_SRCS)
+		$(EXECUTOR_SRCS) $(BUILTINS_SRCS) $(UTILS_SRCS) $(TESTS_SRCS)
 
 SRCS := $(addprefix srcs/, $(SRCS))
 
