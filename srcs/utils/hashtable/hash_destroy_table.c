@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 19:27:21 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/28 15:33:04 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/06 11:03:16 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	destroy_table(t_hash_table *table)
 	t_hash_item	*next;
 	int			index;
 
-	if (!table)
+	if (!table || !table->items)
 		return ;
 	index = 0;
 	while (index < table->size)
