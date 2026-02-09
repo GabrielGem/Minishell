@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 15:18:09 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/04 11:57:47 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/06 15:44:42 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "hashtable.h"
 # include "structs.h"
 
-void			free_context(t_data *context);
+void			free_shell(t_data *context);
 void			free_tree(t_ast_node *tree);
 
 char			*binary_search(char **path, char *cmd);
