@@ -17,7 +17,7 @@ static int	*handle_error(int *fds, char *file);
 static void	close_fds(int *fds);
 static void	update_fds(int *fds, int fd, int type);
 
-int	*handle_redirs(t_list *lst)
+int	*handle_redirs(t_list *lst, t_data *context)
 {
 	t_redir	*redir;
 	int		fd;
@@ -29,7 +29,7 @@ int	*handle_redirs(t_list *lst)
 	while (lst)
 	{
 		redir = (t_redir *)lst->content;
-		fd = open_file(redir->filename, redir->type);
+		fd = open_file(redir->filename, redir->type, context);
 		if (fd == -1)
 			return (handle_error(fds, redir->filename));
 		update_fds(fds, fd, redir->type);
@@ -38,11 +38,13 @@ int	*handle_redirs(t_list *lst)
 	return (fds);
 }
 
-static int	open_file(char *file, int direction)
+static int	open_file(char *file, int direction, t_data *context)
 {
 	int		flags;
 	mode_t	mode;
 
+	if (direction == HEREDOC)
+		return (process_heredoc(file, context));
 	mode = 0644;
 	if (direction == REDIN)
 		flags = O_RDONLY;
