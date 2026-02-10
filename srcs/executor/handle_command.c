@@ -53,7 +53,7 @@ int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 	setup_pipe(input_fd, output_fd);
 	if (cmd->redirects != NULL)
 	{
-		redirect_file = handle_redirs(cmd->redirects);
+		redirect_file = handle_redirs(cmd->redirects, context);
 		if (redirect_file[0] != -1)
 			setup_fd(redirect_file[0], STDIN_FILENO);
 		if (redirect_file[1] != -1)
