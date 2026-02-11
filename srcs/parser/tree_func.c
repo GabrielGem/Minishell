@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/19 14:57:01 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:02:44 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ t_ast_node	*new(void)
 t_ast_node	*build_tree(char *line)
 {
 	char	**tokens;
-	int		i = 0;
+	int		i;
 
+	i = 0;
 	if (!line)
 		return (NULL);
 	tokens = ft_split(line, ' ');

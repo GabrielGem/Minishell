@@ -6,13 +6,13 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 15:05:55 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/09 18:36:01 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:50:19 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	update_work_directory(t_data *data, char *new_dir);
+static int	update_work_directory(t_data *data, char *new_dir);
 
 int	b_cd(t_data *context, char **args)
 {
@@ -27,7 +27,7 @@ int	b_cd(t_data *context, char **args)
 		target_dir = hash_search(context->env, "HOME", ENV);
 	else if (!ft_strncmp(args[1], "-", 2))
 	{
-		target_dir = hash_search(context->env, "OLDPWD");
+		target_dir = hash_search(context->env, "OLDPWD", ENV);
 		ft_putendl_fd(target_dir, STDOUT_FILENO);
 	}
 	else
@@ -44,7 +44,7 @@ static int	update_work_directory(t_data *context, char *new_dir)
 	old_dir = getcwd(NULL, 0);
 	if (chdir(new_dir) == -1)
 	{
-		ft_putstr_fd("minishell: cd");
+		ft_putstr_fd("minishell: cd", 2);
 		perror(new_dir);
 		free(old_dir);
 		return (1);

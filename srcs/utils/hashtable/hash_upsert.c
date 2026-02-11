@@ -6,13 +6,14 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:35:42 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/31 14:15:31 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:08:24 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hashtable.h"
 
-static int	update_if_exists(t_hash_item *item, char *key, char *value, t_hash_type tag);
+static int	update_if_exists(t_hash_item *item, char *key, char *value, \
+		t_hash_type tag);
 
 int	hash_upsert(t_hash_table *table, char *key, char *value, t_hash_type tag)
 {
@@ -40,7 +41,8 @@ int	hash_upsert(t_hash_table *table, char *key, char *value, t_hash_type tag)
 	return (0);
 }
 
-static int	update_if_exists(t_hash_item *item, char *key, char *value, t_hash_type tag)
+static int	update_if_exists(t_hash_item *item, char *key, char *value, \
+		t_hash_type tag)
 {
 	t_hash_item	*actual_item;
 	char		*new_value;

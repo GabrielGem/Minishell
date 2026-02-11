@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/07 18:34:32 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/02/11 18:42:53 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,18 @@ EXECUTOR_SRCS = \
 	executor/wait_processes.c \
 	executor/handle_command.c \
 	executor/handle_pipe.c \
-	executor/handle_redirs.c
+	executor/handle_redirs.c \
+	executor/handle_fds.c
 
 BUILTINS_SRCS = \
-	builtins/export.c
+	builtins/cd.c \
+	builtins/echo.c \
+	builtins/env.c \
+	builtins/exit.c \
+	builtins/export.c \
+	builtins/pwd.c \
+	builtins/unset.c
+	
 
 UTILS_SRCS = \
 	utils/binary_search.c \

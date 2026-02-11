@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:33:21 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/28 18:07:35 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:10:27 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_hash_item	*hash_item(char *key, char *value, t_hash_type tag)
 	item = ft_calloc(sizeof(t_hash_item), 1);
 	if (!item)
 		return (NULL);
-	item->next = NULL;
 	item->tag = tag;
 	item->key = ft_strdup(key);
 	if (!item->key)
@@ -39,7 +38,5 @@ t_hash_item	*hash_item(char *key, char *value, t_hash_type tag)
 			return (NULL);
 		}
 	}
-	else
-		item->value = NULL;
 	return (item);
 }

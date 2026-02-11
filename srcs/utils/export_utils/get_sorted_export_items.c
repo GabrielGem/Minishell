@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 14:53:05 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/31 16:28:56 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:07:28 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_hash_item	**get_sorted_export_items(t_hash_table *table)
 	export_count = count_items_by_tag(table, EXPORT);
 	export_items = table_for_array_of_items(table, export_count, EXPORT);
 	result = (t_hash_item **)ft_join_array_of_pointers((void **)env_items, \
-(void **)export_items);
+			(void **)export_items);
 	free(env_items);
 	free(export_items);
 	sort_array_of_items(result, env_count + export_count);

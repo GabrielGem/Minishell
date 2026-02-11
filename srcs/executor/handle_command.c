@@ -6,20 +6,17 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:22:38 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/09 18:23:49 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:39:48 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "tests.h"
 
-int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
+int			handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 	t_data *context);
-int	exec_builtin(t_data *context, char **args, int nb_builtin);
-int	exec_command(t_data *context, char **args);
-static void	setup_pipe(int input_fd, int output_fd);
-static void setup_fd(int new_fd, int old_fd);
-void	restore_fd(t_data *context);
+static int	exec_builtin(t_data *context, char **args, int nb_builtin);
+static int	exec_command(t_data *context, char **args);
 
 int	handle_command(t_ast_node *leaf, t_data *context)
 {
@@ -34,7 +31,8 @@ int	handle_command(t_ast_node *leaf, t_data *context)
 	{
 		pid = fork();
 		if (pid == 0)
-			status = handle_command_fd(leaf, STDIN_FILENO, STDOUT_FILENO, context);
+			status = handle_command_fd(leaf, STDIN_FILENO, STDOUT_FILENO, \
+				context);
 		ft_lstadd_back(&context->pids, ft_lstnew((void *)(long)pid));
 	}
 	if (context->pids != NULL)
@@ -71,15 +69,7 @@ int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 	return (status);
 }
 
-void	restore_fd(t_data *context)
-{
-	if (STDIN_FILENO != context->stdin_backup)
-		dup2(context->stdin_backup, STDIN_FILENO);
-	if (STDOUT_FILENO != context->stdout_backup)
-		dup2(context->stdout_backup, STDOUT_FILENO);
-}
-
-int	exec_builtin(t_data *context, char **args, int nb_builtin)
+static int	exec_builtin(t_data *context, char **args, int nb_builtin)
 {
 	int					status;
 	t_builtin			ft;
@@ -98,7 +88,7 @@ int	exec_builtin(t_data *context, char **args, int nb_builtin)
 	return (status);
 }
 
-int	exec_command(t_data *context, char **args)
+static int	exec_command(t_data *context, char **args)
 {
 	char	**path;
 	char	*command_path;
@@ -124,19 +114,4 @@ int	exec_command(t_data *context, char **args)
 	perror(args[0]);
 	free_context(context);
 	exit(127);
-}
-
-static void	setup_pipe(int input_fd, int output_fd)
-{
-	setup_fd(input_fd, STDIN_FILENO);
-	setup_fd(output_fd, STDOUT_FILENO);
-}
-
-static void setup_fd(int new_fd, int old_fd)
-{
-	if (new_fd != old_fd)
-	{
-		dup2(new_fd, old_fd);
-		close(new_fd);
-	}
 }

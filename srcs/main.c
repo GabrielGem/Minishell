@@ -6,14 +6,14 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/07 17:22:38 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:02:02 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "tests.h"
 
-int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),\
+int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)), \
 	char **envp)
 {
 	char	*line;

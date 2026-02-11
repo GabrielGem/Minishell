@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 15:18:09 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/06 15:44:42 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:56:44 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char			**concatenate(char **strs, char *join);
 
 t_hash_table	*env_to_table(char **env);
 char			**table_to_envp(t_hash_table *table);
-t_hash_item		**table_for_array_of_items(t_hash_table *table, int count,\
+t_hash_item		**table_for_array_of_items(t_hash_table *table, int count, \
 				t_hash_type tag);
 int				count_items_by_tag(t_hash_table *table, t_hash_type tag);
 void			sort_array_of_items(t_hash_item **array, int count);
