@@ -15,4 +15,5 @@ t_list		*add_tokens(char *content, char *token_found, char *token);
 t_list		*resolve_quotes(t_list *tokens);
 char		is_quote_token(t_list *token, char tkn);
 void		insert_new_tokens(t_list **hd, t_list *lt, t_list *md, t_list *rt);
+char		is_redirect(char *token);
 #endif

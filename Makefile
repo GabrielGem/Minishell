@@ -6,14 +6,14 @@ RDFLAGS = -lreadline
 
 MAIN_SRC = main.c
 
-LEXER_SRCS = 
+LEXER_SRCS = \
+	lexer/function.c\
+	lexer/lexer_util.c\
+	lexer/lexer_func.c\
+	lexer/quotes.c\
+	lexer/spaces.c
 
 PARSER_SRCS = \
-	parser/function.c\
-	parser/parser_util.c\
-	parser/tree_func.c\
-	parser/quotes.c\
-	parser/spaces.c
 
 EXECUTOR_SRCS = 
 
