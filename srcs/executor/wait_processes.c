@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 15:55:05 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/07 16:40:57 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/11 22:04:39 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	wait_processes(t_list *pids)
 		waitpid((pid_t)(long)current->content, &status, 0);
 		if (WIFEXITED(status))
 			last_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			last_status = 128 + WTERMSIG(status);
 		current = current->next;
 	}
 	return (last_status);
