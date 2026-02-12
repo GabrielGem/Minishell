@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:27 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/30 10:30:49 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:46:38 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <dirent.h>
+# include <errno.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
