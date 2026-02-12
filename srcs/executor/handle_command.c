@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:22:38 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/11 18:39:48 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/12 16:47:25 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 		if (redirect_file[1] != -1)
 			setup_fd(redirect_file[1], STDOUT_FILENO);
 		if (redirect_file[0] == 1 || redirect_file[1] == 1)
+		{
+			free(redirect_file);
+			free_shell(context);
 			exit(1);
+		}
 		free(redirect_file);
 	}
 	status = 0;
@@ -90,28 +94,25 @@ static int	exec_builtin(t_data *context, char **args, int nb_builtin)
 
 static int	exec_command(t_data *context, char **args)
 {
-	char	**path;
 	char	*command_path;
 	char	**envp;
+	int		error_code;
 
-	command_path = args[0];
-	if (!ft_strchr(args[0], '/'))
-	{
-		path = ft_split(hash_search(context->env, "PATH", ENV), ':');
-		command_path = binary_search(path, args[0]);
-	}
+	command_path = get_path(args[0], context);
 	if (!command_path)
+		exit_error(args[0], 127, context);
+	error_code = valid_command(command_path, context);
+	if (error_code != 0)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(args[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
-		free_context(context);
-		exit(127);
+		if (command_path != args[0])
+			free(command_path);
+		exit_error(args[0], error_code, context);
 	}
 	envp = table_to_envp(context->env);
-	execve(command_path, &args[1], envp);
+	execve(command_path, args, envp);
 	ft_putstr_fd("minishell: ", 2);
+	ft_free_split(envp);
 	perror(args[0]);
-	free_context(context);
+	free_shell(context);
 	exit(127);
 }
