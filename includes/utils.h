@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 15:18:09 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/11 17:56:44 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/12 16:54:11 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 void			free_shell(t_data *context);
 void			free_tree(t_ast_node *tree);
 
+char			*get_path(char *cmd, t_data *contexte);
 char			*binary_search(char **path, char *cmd);
 int				is_valid_executable(char *path);
+int				valid_command(char *cmd);
+int				file_exist(char *path);
+int				exit_error(char *cmd, int code, t_data *context);
 
 char			**concatenate(char **strs, char *join);
 
