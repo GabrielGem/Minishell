@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:22:38 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/12 16:47:25 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:05:27 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static int	exec_command(t_data *context, char **args)
 	command_path = get_path(args[0], context);
 	if (!command_path)
 		exit_error(args[0], 127, context);
-	error_code = valid_command(command_path, context);
+	error_code = valid_command(command_path);
 	if (error_code != 0)
 	{
 		if (command_path != args[0])
