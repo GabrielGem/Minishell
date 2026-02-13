@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:11:10 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/12 16:53:09 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:53:50 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ enum e_builtin
 	UNSET,
 	B_ENV,
 	EXIT,
+	EMPTY,
 	COUNT
 };
 

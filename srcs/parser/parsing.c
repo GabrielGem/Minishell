@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 20:20:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/13 10:50:19 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:00:15 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ t_command	*parse_command(t_list **tokens, t_data *context)
 	else
 		cmd->is_builtin = 0;
 	*tokens = current;
+	ft_lstclear(&args_list, free);
 	return (cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/13 12:58:05 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:56:41 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 char	is_builtin(char *cmd)
 {
-	if (!ft_strcmp(cmd, "echo")
-		|| !ft_strcmp(cmd, "cd")
-		|| !ft_strcmp(cmd, "pwd")
-		|| !ft_strcmp(cmd, "export")
-		|| !ft_strcmp(cmd, "unset")
-		|| !ft_strcmp(cmd, "env")
-		|| !ft_strcmp(cmd, "exit"))
-		return (1);
+	if (!cmd)
+		return (EMPTY);
+	if (!ft_strcmp(cmd, "echo"))
+		return (ECHO);
+	if (!ft_strcmp(cmd, "cd"))
+		return (CD);
+	if (!ft_strcmp(cmd, "pwd"))
+		return (PWD);
+	if (!ft_strcmp(cmd, "export"))
+		return (EXPORT);
+	if (!ft_strcmp(cmd, "unset"))
+		return (UNSET);
+	if (!ft_strcmp(cmd, "env"))
+		return (ENV);
+	if (!ft_strcmp(cmd, "exit"))
+		return (EXIT);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 13:01:25 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/13 16:11:57 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:27:34 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void	tree_build(char *line, t_data *context)
 	tokens = NULL;
 	tree = NULL;
 	tokens = tokenizer(line);
+	(void)context;
 	if (!tokens)
 		return ;
 	tree = parse_pipeline(&tokens, context);
 	ft_print_ast(tree);
-	free(tokens);
+	ft_lstclear(&tokens, free);
 	free_tree(tree);
 }
