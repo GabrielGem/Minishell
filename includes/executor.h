@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:47:46 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/11 18:38:26 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:06:36 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 		t_data *context);
 int		*handle_redirs(t_list *lst, t_data *context);
 int		handle_pipe(t_ast_node *leaf, t_data *context);
+int		process_heredoc(char *delimiter, t_data *context);
 
 int		wait_processes(t_list *pids);
 
