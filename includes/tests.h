@@ -6,13 +6,14 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 15:57:57 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/06 16:07:11 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/13 14:25:03 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TESTS_H
 # define TESTS_H
 
+void		ft_print_ast(t_ast_node *root);
 void		free_context(t_data *data);
 t_data		*init_shell(char **envp);
 void		print_tree(t_ast_node *tree);
