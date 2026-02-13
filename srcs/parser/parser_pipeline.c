@@ -6,11 +6,12 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 13:01:25 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/13 14:55:47 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:11:57 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "tests.h"
 
 t_ast_node	*parse_pipeline(t_list **tokens, t_data *context)
 {
@@ -43,6 +44,7 @@ void	tree_build(char *line, t_data *context)
 	if (!tokens)
 		return ;
 	tree = parse_pipeline(&tokens, context);
+	ft_print_ast(tree);
 	free(tokens);
 	free_tree(tree);
 }
