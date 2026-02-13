@@ -14,25 +14,45 @@ LEXER_SRCS = \
 	lexer/spaces.c
 
 PARSER_SRCS = \
+	parser/parser_pipeline.c \
+	parser/parser_util.c \
+	parser/parsing.c \
+	parser/tree_func.c
 
-EXECUTOR_SRCS = 
+EXECUTOR_SRCS = \
+	executor/handle_redirs.c
 
 BUILTINS_SRCS =
 
 UTILS_SRCS = \
-# 	utils/env/binary_search.c \
-# 	utils/env/concatenate.c \
-# 	utils/env/env_to_table.c \
-# 	utils/env/table_to_env.c \
-# 	utils/env/is_valid_exec.c \
+	utils/free/free_tree.c \
+	utils/free/free_shell.c \
+	utils/env_to_table.c
+# 	utils/binary_search.c \
+# 	utils/concatenate.c \
+# 	utils/is_valid_exec.c \
+# 	utils/table_to_envp.c \
+# 	utils/table_for_array_of_items.c \
+# 	utils/count_items_by_tag.c \
+# 	utils/sort_array_of_items.c \
+# 	utils/extract_key.c \
+# 	utils/extract_value.c \
+# 	utils/export_utils/get_sorted_export_items.c \
+# 	utils/export_utils/is_valid_identifier.c \
+# 	utils/export_utils/print_invalid_identifier.c \
 # 	utils/hashtable/hash.c \
 # 	utils/hashtable/hash_item.c \
 # 	utils/hashtable/hash_table.c \
 # 	utils/hashtable/hash_upsert.c \
+# 	utils/hashtable/hash_update_tag.c \
 # 	utils/hashtable/hash_search.c \
 # 	utils/hashtable/hash_delete.c \
 # 	utils/hashtable/hash_destroy_item.c \
 # 	utils/hashtable/hash_destroy_table.c
+
+TESTS_SRCS = \
+	ft_test/print_functions.c
+# 	ft_test/build_tree_polimorphic.c
 
 SRCS := $(MAIN_SRC) $(LEXER_SRCS) $(PARSER_SRCS) \
 		$(EXECUTOR_SRCS) $(BUILTINS_SRCS) $(UTILS_SRCS)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree_func.c                                        :+:      :+:    :+:   */
+/*   lexer_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/06 11:27:14 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/13 14:55:10 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,10 @@ t_ast_node	*new(void)
 	return (node);
 }
 
-// will print the linked list of tokens
-static void	_print_list(t_list *node)
-{
-	while (node)
-	{
-		printf("%s\n", (char *)node->content);
-		node = node->next;
-	}
-}
-
-t_ast_node	*tokenizer(char *line, char **env)
+t_list	*tokenizer(char *line)
 {
 	t_list	*tokens;
 
-	(void)env;
 	if (!line)
 		return (NULL);
 	if (check_spaces(line))
@@ -59,7 +48,5 @@ t_ast_node	*tokenizer(char *line, char **env)
 	tokens = split_token(tokens, "<<", NULL);
 	tokens = split_token(tokens, ">", ">>");
 	tokens = split_token(tokens, "<", "<<");
-	_print_list(tokens);
-	ft_lstclear(&tokens, free);
-	return (NULL);
+	return (tokens);
 }

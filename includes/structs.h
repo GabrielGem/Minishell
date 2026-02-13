@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:11:10 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/06 18:38:00 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/12 16:53:09 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ typedef struct s_command
 typedef struct s_data
 {
 	t_hash_table	*env;
-	char			**envp;
 	t_ast_node		*root;
+	int				stdin_backup;
+	int				stdout_backup;
 	t_list			*fds;
 	t_list			*pids;
 	int				exit_status;

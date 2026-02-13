@@ -1,53 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/13 14:17:18 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/01/23 20:14:17 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/02/13 15:15:50 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "tests.h"
 
-t_data	*init_shell(char **envp)
+void	free_shell(t_data *context)
 {
-	t_data	*context;
-
-	context = ft_calloc(1, sizeof(t_data));
-	context->env = env_to_table(envp);
-	context->stdin_backup = dup(STDIN_FILENO);
-	context->stdout_backup = dup(STDOUT_FILENO);
-	context->root = NULL;
-	return (context);
-}
-
-void	free_context(t_data *context)
-{
+	destroy_table(context->env);
+	context->env = NULL;
 	free_tree(context->root);
 	context->root = NULL;
 	ft_lstclear(&context->fds, close_fd);
 	ft_lstclear(&context->pids, close_pid);
+	close(context->stdin_backup);
+	close(context->stdout_backup);
+	free(context);
 }
 
-int	main(int argc, char **argv, char **env)
+void	close_fd(void *fd)
 {
-	char	*line;
-	t_data	*context;
+	close((int)(long)fd);
+}
 
-	(void)argc;
-	(void)argv;
-	context = init_shell(env);
-	line = NULL;
-	line = readline("$> ");
-	while (line)
-	{
-		add_history(line);
-		tree_build(line, context);
-		line = readline("$> ");
-	}
-	rl_clear_history();
+void	close_pid(void *pid)
+{
+	(void)pid;
+	return ;
 }
