@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	open_file(char *file, int direction);
+static int	open_file(char *file, int direction, t_data *context);
 static int	*handle_error(int *fds, char *file);
 static void	close_fds(int *fds);
 static void	update_fds(int *fds, int fd, int type);

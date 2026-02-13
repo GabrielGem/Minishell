@@ -5,37 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/11 18:02:44 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/02/12 13:50:18 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/02/13 15:02:43 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-t_ast_node	*new(void)
+t_ast_node	*node_last(t_ast_node *lst)
 {
-	t_ast_node	*node;
-
-	node = ft_calloc(1, sizeof(t_ast_node));
-	if (!node)
-		return (node);
-	return (node);
-}
-
-t_ast_node	*build_tree(char *line)
-{
-	char	**tokens;
-	int		i;
-
-	i = 0;
-	if (!line)
+	if (!lst)
 		return (NULL);
-	tokens = ft_split(line, ' ');
-	while (tokens[i])
-	{
-		printf("%s\n", tokens[i]);
-		i++;
-	}
-	ft_free_split(tokens);
-	return (NULL);
+	while (lst->right)
+		lst = (t_ast_node *)(lst->right);
+	return (lst);
 }
+
+// void	ast_node_add_back(t_ast_node **lst, t_ast_node *new)
+// {
+// 	t_ast_node	*nxt;
+
+// 	if (!lst)
+// 		return ;
+// 	if (!(*lst))
+// 		(*lst) = new;
+// 	else
+// 	{
+// 		nxt = ft_lstlast(*lst);
+// 		nxt->right = (t_node *)new;
+// 		new->left = (t_node *)nxt;
+// 	}
+// }

@@ -6,12 +6,16 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 10:15:14 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/11/10 10:40:07 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:57:39 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+Similar to ft_strcmp, except it compares only the first (at most) n bytes of s1
+and s2.
+*/
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned char	*ss1;
@@ -30,11 +34,23 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (*ss1 - *ss2);
 }
 
+/*
+Returns an integer indicating the result of the comparison, as follows:
+- 0, if the s1 and s2 are equal
+- a negative value if s1 is less than s2;
+- a positive value if s1 is greater tha s2.
+*/
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t			n;
 	size_t			ns2;
 
+	if (s1 == NULL && s2 == NULL)
+		return (0);
+	if (s2 == NULL)
+		return (s1[0]);
+	if (s1 == NULL)
+		return (-s2[0]);
 	n = ft_strlen(s1);
 	ns2 = ft_strlen(s2);
 	if (ns2 > n)

@@ -1,6 +1,6 @@
 NAME = libft.a
 
-SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c\
+SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c	ft_isspace.c\
 ft_isascii.c	ft_isprint.c	ft_strlen.c		ft_strlcat.c\
 ft_strlcpy.c 	ft_strncmp.c	ft_strchr.c		ft_strrchr.c\
 ft_strnstr.c	ft_bzero.c		ft_memset.c		ft_memcpy.c\
@@ -12,20 +12,19 @@ ft_putchar_fd.c	ft_putstr_fd.c	ft_putendl_fd.c	ft_putnbr_fd.c\
 get_next_line.c	ft_putnbr_u.c	ft_printf.c ft_lstadd_back_bonus.c\
 ft_lstadd_front_bonus.c	ft_lstclear_bonus.c	ft_lstdelone_bonus.c\
 ft_lstiter_bonus.c	ft_lstlast_bonus.c	ft_lstmap_bonus.c	ft_lstnew_bonus.c\
+ft_lstadd_after.c	ft_lstadd_before.c	ft_lstfirst.c\
 ft_lstsize_bonus.c	gnl_gc.c ft_join_array_of_pointers.c
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = --no-warnings -g
+CFLAGS = -Wall -Wextra -Werror -g
 
 .PHONY: all clean fclean re
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rcs $@ $(OBJ)
-
-%.o: %.c
-	@cc $(CFLAGS) -c $^ -o $@
+	@ar rcs $@ $(OBJ)
 
 clean:
 	rm -f $(OBJ)

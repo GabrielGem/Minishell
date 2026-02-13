@@ -21,7 +21,7 @@ int		executor(t_ast_node *root, t_data *context);
 int		handle_command(t_ast_node *leaf, t_data *context);
 int		handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 		t_data *context);
-int		*handle_redirs(t_list *lst);
+int		*handle_redirs(t_list *lst, t_data *context);
 int		handle_pipe(t_ast_node *leaf, t_data *context);
 
 int		wait_processes(t_list *pids);

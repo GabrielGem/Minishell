@@ -18,9 +18,18 @@ RDFLAGS = -lreadline
 
 MAIN_SRC = main.c
 
-LEXER_SRCS = 
+LEXER_SRCS = \
+	lexer/function.c\
+	lexer/lexer_util.c\
+	lexer/lexer_func.c\
+	lexer/quotes.c\
+	lexer/spaces.c
 
-PARSER_SRCS = 
+PARSER_SRCS = \
+	parser/parser_pipeline.c \
+	parser/parser_util.c \
+	parser/parsing.c \
+	parser/tree_func.c
 
 EXECUTOR_SRCS = \
 	executor/executor.c \
@@ -38,7 +47,6 @@ BUILTINS_SRCS = \
 	builtins/export.c \
 	builtins/pwd.c \
 	builtins/unset.c
-	
 
 UTILS_SRCS = \
 	utils/binary_search.c \
@@ -110,6 +118,7 @@ clean:
 fclean: clean
 	$(MAKE) -C $(DIR_LIBFT) fclean
 	rm -f $(NAME)
+	$(MAKE) -C $(DIR_LIBFT) fclean
 
 re: fclean all
 

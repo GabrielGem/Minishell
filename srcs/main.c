@@ -13,28 +13,6 @@
 #include "minishell.h"
 #include "tests.h"
 
-int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)), \
-	char **envp)
-{
-	char	*line;
-	t_data	*context;
-
-	context = init_shell(envp);
-	while (1)
-	{
-		line = readline("$> ");
-		if (line == NULL)
-			break ;
-		context->root = build_tree_polimorphic();
-		ft_print_ast(context->root);
-		executor(context->root, context);
-		free_context(context);
-		free(line);
-	}
-	free_shell(context);
-	return (0);
-}
-
 t_data	*init_shell(char **envp)
 {
 	t_data	*context;
@@ -53,4 +31,23 @@ void	free_context(t_data *context)
 	context->root = NULL;
 	ft_lstclear(&context->fds, close_fd);
 	ft_lstclear(&context->pids, close_pid);
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	char	*line;
+	t_data	*context;
+
+	(void)argc;
+	(void)argv;
+	context = init_shell(env);
+	line = NULL;
+	line = readline("$> ");
+	while (line)
+	{
+		add_history(line);
+		tree_build(line, context);
+		line = readline("$> ");
+	}
+	rl_clear_history();
 }
