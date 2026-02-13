@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_shell.c                                       :+:      :+:    :+:   */
+/*   sort_array_of_items.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 20:14:17 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/07 18:07:17 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/01/29 15:56:20 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/01/29 15:56:42 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "tests.h"
 
-void	free_shell(t_data *context)
+void	sort_array_of_items(t_hash_item **array, int count)
 {
-	destroy_table(context->env);
-	context->env = NULL;
-	free_tree(context->root);
-	context->root = NULL;
-	ft_lstclear(&context->fds, close_fd);
-	ft_lstclear(&context->pids, close_pid);
-	close(context->stdin_backup);
-	close(context->stdout_backup);
-	free(context);
-}
+	t_hash_item	*temp;
+	int			i;
+	int			j;
 
-void	close_fd(void *fd)
-{
-	close((int)(long)fd);
-}
-
-void	close_pid(void *pid)
-{
-	(void)pid;
-	return ;
+	i = 0;
+	while (i < count)
+	{
+		j = i + 1;
+		while (j < count)
+		{
+			if (ft_strcmp(array[i]->key, array[j]->key) > 0)
+			{
+				temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
 }

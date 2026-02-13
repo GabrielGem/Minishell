@@ -56,3 +56,4 @@ dkms.conf
 *.dwo
 .vscode/
 valgrind-output.log
+*.swp

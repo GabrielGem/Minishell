@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_shell.c                                       :+:      :+:    :+:   */
+/*   handle_fds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 20:14:17 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/07 18:07:17 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/02/11 18:36:22 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/02/11 18:37:27 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "tests.h"
 
-void	free_shell(t_data *context)
+void	restore_fd(t_data *context)
 {
-	destroy_table(context->env);
-	context->env = NULL;
-	free_tree(context->root);
-	context->root = NULL;
-	ft_lstclear(&context->fds, close_fd);
-	ft_lstclear(&context->pids, close_pid);
-	close(context->stdin_backup);
-	close(context->stdout_backup);
-	free(context);
+	if (STDIN_FILENO != context->stdin_backup)
+		dup2(context->stdin_backup, STDIN_FILENO);
+	if (STDOUT_FILENO != context->stdout_backup)
+		dup2(context->stdout_backup, STDOUT_FILENO);
 }
 
-void	close_fd(void *fd)
+void	setup_pipe(int input_fd, int output_fd)
 {
-	close((int)(long)fd);
+	setup_fd(input_fd, STDIN_FILENO);
+	setup_fd(output_fd, STDOUT_FILENO);
 }
 
-void	close_pid(void *pid)
+void	setup_fd(int new_fd, int old_fd)
 {
-	(void)pid;
-	return ;
+	if (new_fd != old_fd)
+	{
+		dup2(new_fd, old_fd);
+		close(new_fd);
+	}
 }

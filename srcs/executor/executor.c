@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_shell.c                                       :+:      :+:    :+:   */
+/*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 20:14:17 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/07 18:07:17 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/01/14 13:14:12 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/01/23 17:23:41 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "tests.h"
 
-void	free_shell(t_data *context)
+int	executor(t_ast_node *root, t_data *context)
 {
-	destroy_table(context->env);
-	context->env = NULL;
-	free_tree(context->root);
-	context->root = NULL;
-	ft_lstclear(&context->fds, close_fd);
-	ft_lstclear(&context->pids, close_pid);
-	close(context->stdin_backup);
-	close(context->stdout_backup);
-	free(context);
-}
+	t_handle		ft;
+	static t_handle	map[2] = {
+		&handle_command,
+		&handle_pipe
+	};
 
-void	close_fd(void *fd)
-{
-	close((int)(long)fd);
-}
-
-void	close_pid(void *pid)
-{
-	(void)pid;
-	return ;
+	if (root == NULL)
+		return (0);
+	ft = map[root->type.base];
+	context->exit_status = ft(root, context);
+	return (context->exit_status);
 }

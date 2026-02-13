@@ -30,7 +30,8 @@ enum e_builtin
 	B_EXPORT,
 	UNSET,
 	B_ENV,
-	EXIT
+	EXIT,
+	COUNT
 };
 
 typedef enum e_node_type
@@ -47,7 +48,7 @@ typedef struct s_redir
 
 typedef struct s_node
 {
-	t_node_type base;
+	t_node_type	base;
 }	t_node;
 
 typedef struct s_ast_node
@@ -75,4 +76,5 @@ typedef struct s_data
 	t_list			*pids;
 	int				exit_status;
 }	t_data;
+
 #endif

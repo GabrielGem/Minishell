@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_shell.c                                       :+:      :+:    :+:   */
+/*   wait_processes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 20:14:17 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/07 18:07:17 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/01/27 15:55:05 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/02/11 22:04:39 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "tests.h"
 
-void	free_shell(t_data *context)
+int	wait_processes(t_list *pids)
 {
-	destroy_table(context->env);
-	context->env = NULL;
-	free_tree(context->root);
-	context->root = NULL;
-	ft_lstclear(&context->fds, close_fd);
-	ft_lstclear(&context->pids, close_pid);
-	close(context->stdin_backup);
-	close(context->stdout_backup);
-	free(context);
-}
+	int		status;
+	int		last_status;
+	t_list	*current;
 
-void	close_fd(void *fd)
-{
-	close((int)(long)fd);
-}
-
-void	close_pid(void *pid)
-{
-	(void)pid;
-	return ;
+	current = pids;
+	status = 0;
+	last_status = 0;
+	while (current)
+	{
+		waitpid((pid_t)(long)current->content, &status, 0);
+		if (WIFEXITED(status))
+			last_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			last_status = 128 + WTERMSIG(status);
+		current = current->next;
+	}
+	return (last_status);
 }

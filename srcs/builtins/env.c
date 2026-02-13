@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_shell.c                                       :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 20:14:17 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/07 18:07:17 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/02/09 14:12:36 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/02/11 19:03:39 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "tests.h"
 
-void	free_shell(t_data *context)
+int	b_env(t_data *context, char **args)
 {
-	destroy_table(context->env);
-	context->env = NULL;
-	free_tree(context->root);
-	context->root = NULL;
-	ft_lstclear(&context->fds, close_fd);
-	ft_lstclear(&context->pids, close_pid);
-	close(context->stdin_backup);
-	close(context->stdout_backup);
-	free(context);
-}
+	t_hash_item		*item;
+	t_hash_table	*table;
+	int				i;
 
-void	close_fd(void *fd)
-{
-	close((int)(long)fd);
-}
-
-void	close_pid(void *pid)
-{
-	(void)pid;
-	return ;
+	(void)args;
+	table = context->env;
+	i = 0;
+	while (i < table->size)
+	{
+		item = table->items[i];
+		while (item)
+		{
+			if (item[i].tag == ENV)
+				printf("%s=\"%s\"\n", item[i].key, item[i].value);
+			item = item->next;
+		}
+		i++;
+	}
+	return (0);
 }

@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_shell.c                                       :+:      :+:    :+:   */
+/*   binary_search.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 20:14:17 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/07 18:07:17 by gabrgarc         ###   ########.fr       */
+/*   Created: 2025/12/23 10:09:42 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/02/12 09:19:03 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "tests.h"
 
-void	free_shell(t_data *context)
+char	*binary_search(char **path, char *cmd)
 {
-	destroy_table(context->env);
-	context->env = NULL;
-	free_tree(context->root);
-	context->root = NULL;
-	ft_lstclear(&context->fds, close_fd);
-	ft_lstclear(&context->pids, close_pid);
-	close(context->stdin_backup);
-	close(context->stdout_backup);
-	free(context);
-}
+	char	*path_binary;
+	char	*temp;
 
-void	close_fd(void *fd)
-{
-	close((int)(long)fd);
-}
-
-void	close_pid(void *pid)
-{
-	(void)pid;
-	return ;
+	while (*path)
+	{
+		temp = ft_strjoin(*path, "/");
+		path_binary = ft_strjoin(temp, cmd);
+		free(temp);
+		if (file_exist(path_binary))
+			return (path_binary);
+		free(path_binary);
+		path++;
+	}
+	return (NULL);
 }

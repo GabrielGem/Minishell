@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:11:26 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/13 15:11:46 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:07:47 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ static int	open_file(char *file, int direction, t_data *context)
 	int		flags;
 	mode_t	mode;
 
-	(void)context;
-	// if (direction == HEREDOC)
-	// 	return (process_heredoc(file, context));
+	if (direction == HEREDOC)
+		return (process_heredoc(file, context));
 	mode = 0644;
 	if (direction == REDIN)
 		flags = O_RDONLY;
