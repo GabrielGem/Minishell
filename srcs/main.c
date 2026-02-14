@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/13 16:43:13 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/14 16:35:00 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,18 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_data	*context;
+	t_ast_node	*tree;
 
 	(void)argc;
 	(void)argv;
 	context = init_shell(env);
-	line = NULL;
 	line = readline("$> ");
 	while (line)
 	{
 		add_history(line);
-		tree_build(line, context);
+		tree = tree_build(line, context);
+		executor(tree, context);
+		free_context(context);
 		line = readline("$> ");
 	}
 	free_shell(context);
