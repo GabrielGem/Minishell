@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/13 17:56:41 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/14 21:36:14 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,15 @@ void	*split_token(t_list *tokens, char *token, char *forbid)
 		tokens = next_node;
 	}
 	return (head);
+}
+
+void	print_tokens(t_list	*tokens)
+{
+	if (!tokens)
+		return ;
+	while (tokens)
+	{
+		ft_printf("%s\n", tokens->content);
+		tokens = tokens->next;
+	}
 }
