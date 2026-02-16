@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:43:36 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/11 18:51:16 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/16 17:23:40 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	b_echo(t_data *context, char **args)
 		new_line_flag = 1;
 		args++;
 	}
+	args++;
 	while (*args)
 	{
 		ft_putstr_fd(*args, STDOUT_FILENO);
