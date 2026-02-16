@@ -13,7 +13,7 @@ get_next_line.c	ft_putnbr_u.c	ft_printf.c ft_lstadd_back_bonus.c\
 ft_lstadd_front_bonus.c	ft_lstclear_bonus.c	ft_lstdelone_bonus.c\
 ft_lstiter_bonus.c	ft_lstlast_bonus.c	ft_lstmap_bonus.c	ft_lstnew_bonus.c\
 ft_lstadd_after.c	ft_lstadd_before.c	ft_lstfirst.c\
-ft_lstsize_bonus.c	gnl_gc.c ft_join_array_of_pointers.c
+ft_lstsize_bonus.c	gnl_gc.c ft_join_array_of_pointers.c ft_uitoa_base.c
 
 OBJ = $(SRC:.c=.o)
 
