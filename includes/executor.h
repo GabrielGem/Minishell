@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:47:46 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/29 15:39:31 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:00:14 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,10 @@ int	*handle_redirs(t_list *lst);
 int	handle_pipe(t_ast_node *leaf, t_data *context);
 
 int	wait_processes(t_list *pids);
+
+int	hunt_heredoc(t_ast_node *tree, t_data *context);
+int	handle_command_heredoc(t_ast_node *leaf, t_data *context);
+int	handle_pipe_heredoc(t_ast_node *tree, t_data *context);
+int	process_heredoc(char *delimiter, char *temp_file, t_data *context);
 
 #endif
