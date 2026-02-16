@@ -6,13 +6,13 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 10:25:43 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/16 16:00:29 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/16 18:39:00 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	hunt_heredoc(t_ast_node *tree, t_data *context)
+void	hunt_heredoc(t_ast_node *tree, t_data *context)
 {
 	t_handle		ft;
 	static t_handle	map[2] = {
@@ -24,5 +24,5 @@ int	hunt_heredoc(t_ast_node *tree, t_data *context)
 		return ;
 	ft = map[tree->type.base];
 	ft(tree, context);
-	return (0);
+	return ;
 }
