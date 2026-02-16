@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:22:38 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/13 16:05:27 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:39:12 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ static int	exec_builtin(t_data *context, char **args, int nb_builtin)
 	int					status;
 	t_builtin			ft;
 	static t_builtin	map[COUNT] = {
-		&b_echo,
-		&b_cd,
-		&b_pwd,
-		&b_export,
-		&b_unset,
-		&b_env,
-		&b_exit
+		[ECHO] = b_echo,
+		[CD] = b_cd,
+		[PWD] = b_pwd,
+		[B_EXPORT] = b_export,
+		[UNSET] = b_unset,
+		[B_ENV] = b_env,
+		[EXIT] = b_exit
 	};
 
 	ft = map[nb_builtin];
