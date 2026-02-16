@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 14:12:36 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/11 19:03:39 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/14 17:45:01 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	b_env(t_data *context, char **args)
 		item = table->items[i];
 		while (item)
 		{
-			if (item[i].tag == ENV)
-				printf("%s=\"%s\"\n", item[i].key, item[i].value);
+			if (item->tag == ENV)
+				printf("%s=\"%s\"\n", item->key, item->value);
 			item = item->next;
 		}
 		i++;
