@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:46:16 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/29 15:51:21 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/16 11:05:19 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	**ft_join_array_of_pointers(void **a1, void **a2);
+char	*ft_uitoa_base(unsigned long int n, char *symbols);
 
 //Novos projetos
 int		ft_printf(const char *format, ...);

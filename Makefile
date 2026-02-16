@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/11 18:42:53 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/02/16 16:12:25 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,11 @@ EXECUTOR_SRCS = \
 	executor/handle_command.c \
 	executor/handle_pipe.c \
 	executor/handle_redirs.c \
-	executor/handle_fds.c
+	executor/handle_fds.c \
+	executor/heredoc/hunt_heredoc.c \
+	executor/heredoc/handle_command_heredoc.c \
+	executor/heredoc/handle_pipe_heredoc.c \
+	executor/heredoc/heredoc.c
 
 BUILTINS_SRCS = \
 	builtins/cd.c \
