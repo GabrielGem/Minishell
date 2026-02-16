@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/13 16:07:33 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/02/16 16:31:58 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,10 @@ EXECUTOR_SRCS = \
 	executor/handle_redirs.c \
 	executor/handle_fds.c \
 	executor/heredoc.c
+	executor/heredoc/hunt_heredoc.c \
+	executor/heredoc/handle_command_heredoc.c \
+	executor/heredoc/handle_pipe_heredoc.c \
+	executor/heredoc/heredoc.c
 
 BUILTINS_SRCS = \
 	builtins/cd.c \
@@ -119,7 +123,6 @@ clean:
 fclean: clean
 	$(MAKE) -C $(DIR_LIBFT) fclean
 	rm -f $(NAME)
-	$(MAKE) -C $(DIR_LIBFT) fclean
 
 re: fclean all
 

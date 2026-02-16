@@ -6,18 +6,21 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:46:16 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/15 14:09:48 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/16 16:32:40 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 1
 # endif
+
 # ifndef MAX_FD
 #  define MAX_FD 8192
 # endif
@@ -79,6 +82,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	**ft_join_array_of_pointers(void **a1, void **a2);
+char	*ft_uitoa_base(unsigned long int n, char *symbols);
 
 //Novos projetos
 int		ft_printf(const char *format, ...);

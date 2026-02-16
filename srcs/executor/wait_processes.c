@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 15:55:05 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/11 22:04:39 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/13 20:13:34 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	wait_processes(t_list *pids)
 	int		last_status;
 	t_list	*current;
 
+	if (pids == NULL)
+		return (0);
 	current = pids;
 	status = 0;
 	last_status = 0;
