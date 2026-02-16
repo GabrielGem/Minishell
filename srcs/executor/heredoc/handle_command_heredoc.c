@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 16:43:27 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/16 16:49:02 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/16 18:24:39 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	handle_command_heredoc(t_ast_node *leaf, t_data *context)
 	t_list	*list;
 	t_redir	*redir;
 	char	*name;
-	void	*fd;
 
 	(void)context;
 	cmd = (t_command *)leaf;
@@ -31,8 +30,7 @@ int	handle_command_heredoc(t_ast_node *leaf, t_data *context)
 		if (redir->type == HEREDOC)
 		{
 			name = generate_unique_name();
-			fd = (void *)(long)process_heredoc(redir->filename, name);
-			ft_lstadd_back(&context->fds, fd);
+			process_heredoc(redir->filename, name);
 			free(redir->filename);
 			redir->filename = name;
 		}
