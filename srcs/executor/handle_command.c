@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:22:38 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/16 16:32:55 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/16 17:12:31 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 	setup_pipe(input_fd, output_fd);
 	if (cmd->redirects != NULL)
 	{
-		redirect_file = handle_redirs(cmd->redirects, context);
+		redirect_file = handle_redirs(cmd->redirects);
 		if (redirect_file[0] != -1)
 			setup_fd(redirect_file[0], STDIN_FILENO);
 		if (redirect_file[1] != -1)

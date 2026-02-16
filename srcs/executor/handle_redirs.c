@@ -6,18 +6,18 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:11:26 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/16 16:23:44 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/16 17:56:47 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	open_file(char *file, int direction, t_data *context);
+static int	open_file(char *file, int direction);
 static int	*handle_error(int *fds, char *file);
 static void	close_fds(int *fds);
 static void	update_fds(int *fds, int fd, int type);
 
-int	*handle_redirs(t_list *lst, t_data *context)
+int	*handle_redirs(t_list *lst)
 {
 	t_redir	*redir;
 	int		fd;
@@ -29,7 +29,9 @@ int	*handle_redirs(t_list *lst, t_data *context)
 	while (lst)
 	{
 		redir = (t_redir *)lst->content;
-		fd = open_file(redir->filename, redir->type, context);
+		fd = open_file(redir->filename, redir->type);
+		if (redir->type == HEREDOC)
+			unlink(redir->filename);
 		if (fd == -1)
 			return (handle_error(fds, redir->filename));
 		update_fds(fds, fd, redir->type);
@@ -38,7 +40,7 @@ int	*handle_redirs(t_list *lst, t_data *context)
 	return (fds);
 }
 
-static int	open_file(char *file, int direction, t_data *context)
+static int	open_file(char *file, int direction)
 {
 	int		flags;
 	mode_t	mode;
@@ -55,7 +57,7 @@ static int	open_file(char *file, int direction, t_data *context)
 
 static void	update_fds(int *fds, int fd, int type)
 {
-	if (type == REDIN)
+	if (type == REDIN || type == HEREDOC)
 	{
 		if (fds[0] != -1)
 			close(fds[0]);
