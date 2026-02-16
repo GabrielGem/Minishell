@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:11:26 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/13 16:07:47 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:43:07 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static void	update_fds(int *fds, int fd, int type)
 static int	*handle_error(int *fds, char *file)
 {
 	ft_putstr_fd("minishell: ", 2);
-	perror(file);
+	ft_putstr_fd(file, 2);
+	perror(":\b");
 	close_fds(fds);
 	fds[0] = 1;
 	fds[1] = 1;
