@@ -6,13 +6,13 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 11:49:45 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/16 14:42:16 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/16 18:31:02 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	process_heredoc(char *delimiter, char *temp_file, t_data *context)
+void	process_heredoc(char *delimiter, char *temp_file)
 {
 	char	*line;
 	int		fd;
@@ -36,8 +36,4 @@ int	process_heredoc(char *delimiter, char *temp_file, t_data *context)
 		free(line);
 	}
 	close(fd);
-	fd = open(temp_file, O_RDONLY);
-	unlink(temp_file);
-	free(temp_file);
-	return (fd);
 }
