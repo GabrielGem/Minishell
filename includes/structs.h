@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:11:10 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/13 17:53:50 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/17 10:22:32 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_data
 	int				stdout_backup;
 	t_list			*fds;
 	t_list			*pids;
+	int				count_line;
 	int				exit_status;
 }	t_data;
 
