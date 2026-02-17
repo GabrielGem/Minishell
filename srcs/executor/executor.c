@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 13:14:12 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/23 17:23:41 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/17 11:20:43 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ int	executor(t_ast_node *root, t_data *context)
 		&handle_command,
 		&handle_pipe
 	};
+	int				exit_status;
 
 	if (root == NULL)
 		return (0);
 	ft = map[root->type.base];
-	context->exit_status = ft(root, context);
-	return (context->exit_status);
+	exit_status = ft(root, context);
+	return (exit_status);
 }
