@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 15:05:55 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/11 18:50:19 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/17 21:51:13 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,18 @@ int	b_cd(t_data *context, char **args)
 
 	if (args[2] != NULL)
 	{
-		ft_putstr_fd("minishell: cd: too many argunts\n", STDOUT_FILENO);
+		ft_putstr_fd("minishell: cd: too many arguments\n", STDOUT_FILENO);
 		return (1);
 	}
 	if (!args[1] || !ft_strncmp(args[1], "~", 2))
+	{
 		target_dir = hash_search(context->env, "HOME", ENV);
+		// if home not set error msg
+	}
 	else if (!ft_strncmp(args[1], "-", 2))
 	{
 		target_dir = hash_search(context->env, "OLDPWD", ENV);
+		// if pwd not set error msg
 		ft_putendl_fd(target_dir, STDOUT_FILENO);
 	}
 	else
