@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/18 14:08:25 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/18 14:32:04 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ char	is_builtin(char *cmd)
 	if (!ft_strcmp(cmd, "pwd"))
 		return (PWD);
 	if (!ft_strcmp(cmd, "export"))
-		return (EXPORT);
+		return (B_EXPORT);
 	if (!ft_strcmp(cmd, "unset"))
 		return (UNSET);
 	if (!ft_strcmp(cmd, "env"))
-		return (ENV);
+		return (B_ENV);
 	if (!ft_strcmp(cmd, "exit"))
 		return (EXIT);
 	return (0);

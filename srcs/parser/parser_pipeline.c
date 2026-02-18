@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 13:01:25 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/18 14:14:11 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/18 14:28:19 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_ast_node	*parse_pipeline(t_list **tokens, t_data *context)
 	return ((t_ast_node *)left);
 }
 
-void	tree_build(char *line, t_data *context)
+t_ast_node	*tree_build(char *line, t_data *context)
 {
 	t_list		*tokens;
 	t_list		*start;
@@ -42,11 +42,12 @@ void	tree_build(char *line, t_data *context)
 	tokens = NULL;
 	tree = NULL;
 	tokens = tokenizer(line);
+	print_tokens(tokens);
 	start = tokens;
 	if (!tokens)
-		return ;
+		return (NULL);
 	tree = parse_pipeline(&tokens, context);
 	context->root = tree;
-	ft_print_ast(tree);
 	ft_lstclear(&start, free);
+	return (tree);
 }

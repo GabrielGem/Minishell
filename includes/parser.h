@@ -1,7 +1,7 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-void			tree_build(char *line, t_data *context);
+t_ast_node		*tree_build(char *line, t_data *context);
 t_list			*tokenizer(char *line);
 t_list			*remove_spaces(t_list *tokens);
 
@@ -11,7 +11,6 @@ void			*split_token(t_list *tokens, char *cmd, char *forbid);
 void			print_tokens(t_list	*tokens);
 void			str_append(char **str1, char *str2);
 int				check_spaces(char *line);
-int				check_quotes(char *line, char quote);
 t_list			*add_tokens(char *content, char *token_found, char *token);
 t_list			*resolve_quotes(t_list *tokens);
 char			is_quote_token(t_list *token, char tkn);
