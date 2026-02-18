@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 14:12:36 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/14 17:45:01 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/18 17:43:39 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ int	b_env(t_data *context, char **args)
 	t_hash_table	*table;
 	int				i;
 
-	(void)args;
+	if (args[1])
+	{
+		ft_putstr_fd("minishell: env: too many arguments\n", 2);
+		return (127);
+	}
 	table = context->env;
 	i = 0;
 	while (i < table->size)
