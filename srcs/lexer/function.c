@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/14 21:36:14 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/18 14:08:25 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,10 @@ void	*split_token(t_list *tokens, char *token, char *forbid)
 	char	*tkn;
 	t_list	*new_tokens;
 	t_list	*head;
-	t_list	*next_node;
 
 	head = tokens;
 	while (tokens)
 	{
-		next_node = tokens->next;
 		tkn = ft_strnstr(tokens->content, token, ft_strlen(tokens->content));
 		if (tkn && (ft_strlen(token) != ft_strlen(tkn)
 				|| (ft_strlen(tokens->content) != ft_strlen(tkn)))
@@ -82,10 +80,11 @@ void	*split_token(t_list *tokens, char *token, char *forbid)
 		{
 			new_tokens = add_tokens(tokens->content, tkn, token);
 			insert_new_tokens(&head, tokens->prev, new_tokens, tokens->next);
-			ft_lstdelone(tokens, free);
-			tokens = ft_lstfirst(new_tokens);
+ 			ft_lstdelone(tokens, free);
+			tokens = new_tokens;
+			continue ;
 		}
-		tokens = next_node;
+		tokens = tokens->next;
 	}
 	return (head);
 }
