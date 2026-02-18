@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:33:36 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/28 18:09:11 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/18 17:04:13 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*hash_search(t_hash_table *table, char *key, t_hash_type tag)
 	t_hash_item		*actual_item;
 	int				key_len;
 
-	if (!table || !key || tag < ENV || tag > EXPORT)
+	if (!table || !key || tag < ENV || tag > SET)
 		return (NULL);
 	index = hash_function(key, table->size);
 	actual_item = table->items[index];
