@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_util.c                                      :+:      :+:    :+:   */
+/*   lexer_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:57:20 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/03 19:24:25 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/18 14:02:43 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,17 @@ char	is_quote_token(t_list *token, char tkn)
 
 void	insert_new_tokens(t_list **hd, t_list *lt, t_list *md, t_list *rt)
 {
+	t_list	*last_md;
+
+	last_md = ft_lstlast(md);
 	if (lt)
 	{
 		lt->next = md;
 		md->prev = lt;
 	}
-	else if (hd)
-		*hd = md;
-	(ft_lstlast(md))->next = rt;
+	last_md->next = rt;
 	if (rt)
-		rt->prev = ft_lstlast(md);
+	rt->prev = last_md;
+	if (hd)
+		*hd = ft_lstfirst(md);
 }

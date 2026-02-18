@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/17 19:35:33 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/02/18 14:38:23 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,7 @@ LEXER_SRCS = \
 PARSER_SRCS = \
 	parser/parser_pipeline.c \
 	parser/parser_util.c \
-	parser/parsing.c \
-	parser/tree_func.c
+	parser/parsing.c
 
 EXECUTOR_SRCS = \
 	executor/executor.c \

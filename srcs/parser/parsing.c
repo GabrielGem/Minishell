@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 20:20:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/13 17:00:15 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/14 21:28:47 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,12 @@ t_command	*parse_command(t_list **tokens, t_data *context)
 		}
 		else
 		{
-			ft_lstadd_back(&args_list, ft_lstnew(current->content));
+			ft_lstadd_back(&args_list, ft_lstnew(ft_strdup(current->content)));
 			current = current->next;
 		}
 	}
 	cmd->args = list_to_array(args_list);
-	if (cmd->args && cmd->args[0])
-		cmd->is_builtin = is_builtin(cmd->args[0]);
-	else
-		cmd->is_builtin = 0;
+	cmd->is_builtin = is_builtin(cmd->args[0]);
 	*tokens = current;
 	ft_lstclear(&args_list, free);
 	return (cmd);
