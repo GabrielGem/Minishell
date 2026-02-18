@@ -6,39 +6,60 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 15:05:55 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/17 21:51:13 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/18 17:42:41 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	update_work_directory(t_data *data, char *new_dir);
+static int	update_work_directory(t_data *context, char *new_dir);
+static char	*get_target(t_data *context, char **args, char **error_msg);
 
 int	b_cd(t_data *context, char **args)
 {
 	char	*target_dir;
+	char	*error_msg;
 
-	if (args[2] != NULL)
+	if (args[1] && args[2])
 	{
 		ft_putstr_fd("minishell: cd: too many arguments\n", STDOUT_FILENO);
 		return (1);
 	}
-	if (!args[1] || !ft_strncmp(args[1], "~", 2))
+	target_dir = get_target(context, args, &error_msg);
+	if (!target_dir)
 	{
-		target_dir = hash_search(context->env, "HOME", ENV);
-		// if home not set error msg
+		ft_putendl_fd(error_msg, 2);
+		return (1);
 	}
-	else if (!ft_strncmp(args[1], "-", 2))
-	{
-		target_dir = hash_search(context->env, "OLDPWD", ENV);
-		// if pwd not set error msg
-		ft_putendl_fd(target_dir, STDOUT_FILENO);
-	}
-	else
-		target_dir = args[1];
 	if (update_work_directory(context, target_dir))
 		return (1);
 	return (0);
+}
+
+static char	*get_target(t_data *context, char **args, char **error_msg)
+{
+	char	*dir;
+
+	if (!args[1])
+	{
+		dir = hash_search(context->env, "HOME", ENV);
+		*error_msg = "minishell: cd: HOME not set\n";
+	}
+	else if (!ft_strncmp(args[1], "~", 2))
+	{
+		dir = hash_search(context->env, "HOME2", SET);
+		*error_msg = "minishell: cd: HOME not set\n";
+	}
+	else if (!ft_strncmp(args[1], "-", 2))
+	{
+		dir = hash_search(context->env, "OLDPWD", ENV);
+		if (dir)
+			ft_putendl_fd(dir, STDOUT_FILENO);
+		*error_msg = "minishell: cd: OLDPWD not set\n";
+	}
+	else
+		return (args[1]);
+	return (dir);
 }
 
 static int	update_work_directory(t_data *context, char *new_dir)
