@@ -6,7 +6,7 @@
 #    By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/16 16:36:36 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/02/17 19:35:33 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ BUILTINS_SRCS = \
 	builtins/unset.c
 
 UTILS_SRCS = \
+	utils/get_prompt_string.c \
 	utils/binary_search.c \
 	utils/concatenate.c \
 	utils/is_valid_exec.c \

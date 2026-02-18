@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 15:18:09 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/12 16:54:11 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/17 19:23:49 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include "hashtable.h"
 # include "structs.h"
+
+# define GREEN "\001\033[1;32m\002"
+# define BLUE "\001\033[1;34m\002"
+# define RESET "\001\033[0m\002"
+
+char			*get_prompt_string(t_data *context);
 
 void			free_shell(t_data *context);
 void			free_tree(t_ast_node *tree);
