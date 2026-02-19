@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/18 17:37:52 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:24:51 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,22 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	context = init_shell(env);
+	line = ft_strdup("$HOME");
+	line = expand_variable(line, context);
+	ft_printf("%s", line);
+	free(line);
+	free_shell(context);
+}
+
+/*
+int	main(int argc, char **argv, char **env)
+{
+	char	*line;
+	t_data	*context;
+
+	(void)argc;
+	(void)argv;
+	context = init_shell(env);
 	line = readline("$> ");
 	while (line)
 	{
@@ -51,4 +67,4 @@ int	main(int argc, char **argv, char **env)
 	}
 	free_shell(context);
 	rl_clear_history();
-}
+}*/
