@@ -6,13 +6,13 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 16:29:12 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/11 18:08:43 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/19 16:52:21 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hashtable.h"
 
-int	hash_update_tag(t_hash_table *table, char *key, t_hash_type old_tag, \
+int	hash_update_tag(t_hash_table *table, char *key, t_hash_type old_tag,\
 	t_hash_type new_tag)
 {
 	t_hash_item	*item;

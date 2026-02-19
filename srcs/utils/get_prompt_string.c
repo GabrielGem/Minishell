@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 16:48:32 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/18 17:07:50 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:31:23 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static char	*compress_to_tilde(char *cwd, t_hash_table *table);
 static int	calc_prompt_size(char *username, char *hostname, char *cwd);
-static char	*construct_string(char *username, char *hostname, char *cwd, int size);
+static char	*construct_string(char *username, char *hostname, char *cwd,\
+				int size);
 static char	*get_hostname(void);
 
 char	*get_prompt_string(t_data *context)
@@ -95,7 +96,8 @@ static int	calc_prompt_size(char *username, char *hostname, char *cwd)
 	return (size);
 }
 
-static char	*construct_string(char *username, char *hostname, char *cwd, int size)
+static char	*construct_string(char *username, char *hostname, char *cwd,\
+				int size)
 {
 	char	*prompt;
 

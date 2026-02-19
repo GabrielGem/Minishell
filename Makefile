@@ -6,12 +6,12 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/18 14:38:23 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/02/19 16:16:11 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = xaolins
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I./includes -I./libft
 LIBS = -Llibft -lft
 RDFLAGS = -lreadline
@@ -53,6 +53,7 @@ BUILTINS_SRCS = \
 
 UTILS_SRCS = \
 	utils/get_prompt_string.c \
+	utils/get_path.c \
 	utils/binary_search.c \
 	utils/concatenate.c \
 	utils/is_valid_exec.c \
@@ -78,12 +79,8 @@ UTILS_SRCS = \
 	utils/hashtable/hash_destroy_item.c \
 	utils/hashtable/hash_destroy_table.c
 
-TESTS_SRCS = \
-	ft_test/print_functions.c \
-	ft_test/build_tree_polimorphic.c
-
 SRCS := $(MAIN_SRC) $(LEXER_SRCS) $(PARSER_SRCS) \
-		$(EXECUTOR_SRCS) $(BUILTINS_SRCS) $(UTILS_SRCS) $(TESTS_SRCS)
+		$(EXECUTOR_SRCS) $(BUILTINS_SRCS) $(UTILS_SRCS)
 
 SRCS := $(addprefix srcs/, $(SRCS))
 

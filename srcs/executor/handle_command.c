@@ -6,14 +6,15 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:22:38 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/16 17:12:31 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/19 17:05:59 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "tests.h"
 
-int			handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
+int			handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd,\
+	t_data *context);
+static void	setup_io(int input_fd, int output_fd, t_command *cmd,\
 	t_data *context);
 static int	exec_builtin(t_data *context, char **args, int nb_builtin);
 static int	exec_command(t_data *context, char **args);
@@ -32,7 +33,7 @@ int	handle_command(t_ast_node *leaf, t_data *context)
 		pid = fork();
 		if (pid == 0)
 			status = handle_command_fd(leaf, STDIN_FILENO, STDOUT_FILENO, \
-				context);
+context);
 		ft_lstadd_back(&context->pids, ft_lstnew((void *)(long)pid));
 	}
 	if (context->pids != NULL)
@@ -40,14 +41,27 @@ int	handle_command(t_ast_node *leaf, t_data *context)
 	return (status);
 }
 
-int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
+int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd,\
 	t_data *context)
 {
-	int			status;
 	t_command	*cmd;
-	int			*redirect_file;
+	int			status;
 
 	cmd = (t_command *)leaf;
+	setup_io(input_fd, output_fd, cmd, context);
+	if (cmd->is_builtin)
+		status = exec_builtin(context, cmd->args, cmd->is_builtin);
+	else
+		status = exec_command(context, cmd->args);
+	restore_fd(context);
+	return (status);
+}
+
+static void	setup_io(int input_fd, int output_fd, t_command *cmd,\
+	t_data *context)
+{
+	int	*redirect_file;
+
 	setup_pipe(input_fd, output_fd);
 	if (cmd->redirects != NULL)
 	{
@@ -64,13 +78,6 @@ int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
 		}
 		free(redirect_file);
 	}
-	status = 0;
-	if (cmd->is_builtin)
-		status = exec_builtin(context, cmd->args, cmd->is_builtin);
-	else
-		status = exec_command(context, cmd->args);
-	restore_fd(context);
-	return (status);
 }
 
 static int	exec_builtin(t_data *context, char **args, int nb_builtin)
@@ -78,13 +85,13 @@ static int	exec_builtin(t_data *context, char **args, int nb_builtin)
 	int					status;
 	t_builtin			ft;
 	static t_builtin	map[COUNT] = {
-		[ECHO] = b_echo,
-		[CD] = b_cd,
-		[PWD] = b_pwd,
-		[B_EXPORT] = b_export,
-		[UNSET] = b_unset,
-		[B_ENV] = b_env,
-		[EXIT] = b_exit
+	[ECHO] = b_echo,
+	[CD] = b_cd,
+	[PWD] = b_pwd,
+	[B_EXPORT] = b_export,
+	[UNSET] = b_unset,
+	[B_ENV] = b_env,
+	[EXIT] = b_exit
 	};
 
 	ft = map[nb_builtin];

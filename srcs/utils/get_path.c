@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environment.h                                      :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/23 14:26:12 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/19 17:54:18 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/02/19 15:45:17 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/02/19 15:45:37 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRONMENT_H
-# define ENVIRONMENT_H
+#include "minishell.h"
 
-# include "hashtable.h"
+char	*get_path(char *cmd, t_data *context)
+{
+	char	*command_path;
+	char	**path;
 
-char			*binary_search(char **path, char *cmd);
-char			**concatenate(char **strs, char *join);
-t_hash_table	*env_to_table(char **env);
-int				is_valid_executable(char *path);
-char			**table_to_env(t_hash_table *table);
-
-#endif
+	if (ft_strchr(cmd, '/'))
+		command_path = cmd;
+	else
+	{
+		path = ft_split(hash_search(context->env, "PATH", ENV), ':');
+		command_path = binary_search(path, cmd);
+		ft_free_split(path);
+	}
+	return (command_path);
+}

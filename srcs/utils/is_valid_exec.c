@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:26:49 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/12 18:01:39 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:46:29 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,6 @@ int	exit_error(char *cmd, int code, t_data *context)
 	}
 	free_shell(context);
 	exit(code);
-}
-
-char	*get_path(char *cmd, t_data *context)
-{
-	char	*command_path;
-	char	**path;
-
-	if (ft_strchr(cmd, '/'))
-		command_path = cmd;
-	else
-	{
-		path = ft_split(hash_search(context->env, "PATH", ENV), ':');
-		command_path = binary_search(path, cmd);
-		ft_free_split(path);
-	}
-	return (command_path);
 }
 
 int	valid_command(char *cmd)
