@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:37:13 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/19 15:49:53 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/19 18:37:01 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,15 @@ static char	*reshape_string(char *old, char *var_name, char *new, size_t start)
 
 	if (!old || !var_name)
 		return (old);
-	lstr = ft_substr(old, 0, ft_strlen(old) - start);
-	rstr = ft_substr(old, start, ft_strlen(old));
+	lstr = ft_substr(old, 0, start);
+	rstr = ft_substr(old, start + ft_strlen(var_name) + 1, ft_strlen(old));
 	newstr = NULL;
-	if (!ft_strlen(lstr))
-	{
-		free(lstr);
-		lstr = NULL;
-	}
-	if (!ft_strlen(rstr))
-	{
-		free(rstr);
-		rstr = NULL;
-	}
 	str_append(&newstr, lstr);
 	str_append(&newstr, new);
 	str_append(&newstr, rstr);
+	free(old);
+	free(lstr);
+	free(rstr);
 	return (newstr);
 }
 
@@ -60,11 +53,11 @@ char	*expand_variable(char *token, t_data *context)
 		value = ft_itoa(context->exit_status);	
 	else
 	{
-		value = hash_search(context->env, var_name, ENV);
+		value = ft_strdup(hash_search(context->env, var_name, ENV));
 		if (!value)
 			value = ft_strdup("");
 	}
-	new_str = reshape_string(token, var_name, value, ft_strlen(var_name) + 1);
+	new_str = reshape_string(token, var_name, value, dollar - token);
 	free(value);
 	free(var_name);
 	return (new_str);
