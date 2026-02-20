@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/19 19:17:19 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/20 11:18:56 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	free_context(t_data *context)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_list	*line;
+	char	*line;
 	t_data	*context;
 
 	(void)argc;
 	(void)argv;
 	context = init_shell(env);
-	line = ft_lstnew(ft_strdup())
-	line = expand_variable(line, context);
+	line = ft_strdup("$HOME/$USER/postfix.");
+	line = expand_all_var(line, context);
 	ft_printf("%s\n", line);
 	free(line);
 	free_shell(context);

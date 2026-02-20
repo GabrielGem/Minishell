@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:37:13 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/19 18:37:01 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/20 11:17:45 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,24 @@ t_list	*expand_token(t_list *tokens, t_data *context)
 		current = current->next;
 	}
 	return (tokens);
+}
+
+/*
+Expands all variables (strings starting with $) in a string token.
+Returns a new string with all variables replaced with their values.
+*/
+char	*expand_all_vars(char *old, t_data *context)
+{
+	t_list	*lst;
+	char	*new;
+
+	if(!old)
+		return (old);
+	lst = ft_lstnew(old);
+	lst->next = NULL;
+	lst->prev = NULL;
+	lst = expand_token(lst, context);
+	new = lst->content;
+	free(lst);
+	return (new);
 }

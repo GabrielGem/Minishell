@@ -19,6 +19,7 @@ void			insert_new_tokens(t_list **hd, t_list *lt, t_list *md,\
 				t_list *rt);
 char			*extract_name(char	*token);
 char			*expand_variable(char *token, t_data *context);
+char			*expand_all_vars(char *old, t_data *context);
 //parser utils
 char			**list_to_array(t_list *list);
 t_command		*parse_command(t_list **tokens, t_data *context);
