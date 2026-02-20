@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 10:06:38 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/18 18:25:15 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/20 13:35:19 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,15 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*str2;
 	char	*start;
 
-	if (!s1 || !s2)
-		return (NULL);
 	str1 = (char *)s1;
 	str2 = (char *)s2;
 	joined = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, 1);
 	if (!joined)
 		return (NULL);
 	start = joined;
-	while (*str1)
+	while (str1 && *str1)
 		*joined++ = *str1++;
-	while (*str2)
+	while (str2 && *str2)
 		*joined++ = *str2++;
 	return (start);
 }

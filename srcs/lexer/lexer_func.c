@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/13 16:33:09 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/19 14:01:50 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_list	*initial_parser(char *line)
 	return (ft_lstnew(line));
 }
 
-t_list	*tokenizer(char *line)
+t_list	*tokenizer(char *line, t_data *context)
 {
 	t_list	*tokens;
 
@@ -38,5 +38,6 @@ t_list	*tokenizer(char *line)
 	tokens = split_token(tokens, "<<", NULL);
 	tokens = split_token(tokens, ">", ">>");
 	tokens = split_token(tokens, "<", "<<");
+	tokens = expand_token(tokens, context);
 	return (tokens);
 }

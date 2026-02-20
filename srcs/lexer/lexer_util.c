@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:57:20 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/18 14:02:43 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:24:37 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ char	is_quote_token(t_list *token, char tkn)
 	return (0);
 }
 
+/*
+Insert a t_list (can be a list with more than one element) md betweeen lt and 
+rt t_list elements
+*/
 void	insert_new_tokens(t_list **hd, t_list *lt, t_list *md, t_list *rt)
 {
 	t_list	*last_md;
@@ -65,4 +69,28 @@ void	insert_new_tokens(t_list **hd, t_list *lt, t_list *md, t_list *rt)
 	rt->prev = last_md;
 	if (hd)
 		*hd = ft_lstfirst(md);
+}
+
+/*
+Returns a variable name. NULL if it starts with no ? or [a-zA-Z_]
+*/
+char	*extract_name(char	*token)
+{
+	int		i;
+	char	*name;
+
+	if (!token)
+		return (NULL);
+	if (!(ft_isalpha(token[0]) || (token[0] != '_')))
+		return (NULL);
+	i = 0;
+	while (token[i] && (ft_isalnum(token[i]) || token[i] == '_'))
+		i++;
+	name = ft_substr(token, 0, i);
+	if (name && !ft_strlen(name))
+	{
+		free(name);
+		name = NULL;
+	}
+	return (name);
 }
