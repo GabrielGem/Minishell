@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 15:05:55 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/18 17:42:41 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/20 16:27:30 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	update_work_directory(t_data *context, char *new_dir)
 	old_dir = getcwd(NULL, 0);
 	if (chdir(new_dir) == -1)
 	{
-		ft_putstr_fd("minishell: cd", 2);
+		ft_putstr_fd("minishell: cd: ", 2);
 		perror(new_dir);
 		free(old_dir);
 		return (1);
