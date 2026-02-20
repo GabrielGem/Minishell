@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/19 14:05:34 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/02/20 15:25:35 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,8 @@ UTILS_SRCS = \
 	utils/hashtable/hash_search.c \
 	utils/hashtable/hash_delete.c \
 	utils/hashtable/hash_destroy_item.c \
-	utils/hashtable/hash_destroy_table.c
+	utils/hashtable/hash_destroy_table.c \
+	utils/signal/signal_handler.c
 
 TESTS_SRCS = \
 	ft_test/print_functions.c \

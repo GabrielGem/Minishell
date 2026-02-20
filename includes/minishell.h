@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:27 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/12 17:46:38 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:30:38 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+extern volatile sig_atomic_t g_signal_received;
 
 # include "libft.h"
 # include "hashtable.h"

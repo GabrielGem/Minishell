@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:46:16 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/01/15 14:09:48 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/20 13:44:25 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	**ft_join_array_of_pointers(void **a1, void **a2);
 
-//Novos projetos
+//Projects beyond libft
 int		ft_printf(const char *format, ...);
 char	*get_next_line(int fd);
 void	gnl_gc(int fd);
