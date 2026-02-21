@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:57:20 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/21 14:10:28 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/21 16:15:39 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,6 @@ int	check_spaces(char *line)
 		if (!ft_isspace(line[i]))
 			return (0);
 	return (1);
-}
-
-char	is_quote_token(t_list *token, char tkn)
-{
-	char	*str;
-
-	if (!token || !token->content)
-		return (0);
-	str = token->content;
-	if (str[0] == tkn && str[ft_strlen(str) - 1] == tkn)
-		return (1);
-	return (0);
 }
 
 /*

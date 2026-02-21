@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 20:20:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/21 15:50:37 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/21 16:19:11 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_command	*parse_command(t_list **tokens, t_data *context)
 			redir = ft_calloc(1, sizeof(t_redir));
 			redir->type = get_redirect_type(current->content);
 			current = current->next;
-			if (is_quote_token(current, '\'') || is_quote_token('\"'))
+			if (is_single_or_double_quotes(current))
 				redir->expand = 0;
 			else
 				redir->expand = 1;
