@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 16:43:27 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/17 10:24:53 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:53:39 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	handle_command_heredoc(t_ast_node *leaf, t_data *context)
 		if (redir->type == HEREDOC)
 		{
 			name = generate_unique_name();
-			count = process_heredoc(redir->filename, name, context->count_line);
+			count = heredoc(name, redir, context);
 			free(redir->filename);
 			redir->filename = name;
 		}
@@ -52,6 +52,8 @@ static char	*generate_unique_name(void)
 	address = ft_uitoa_base((unsigned long int)num, "0123456789abcdef");
 	temp = ft_strjoin("/tmp/.heredoc_temp_", address);
 	name = ft_strjoin(temp, num);
+	free(address);
+	free(num);
 	free(temp);
 	return (name);
 }
