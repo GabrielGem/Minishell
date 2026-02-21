@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:22:38 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/19 17:05:59 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/21 11:45:15 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ int	handle_command(t_ast_node *leaf, t_data *context)
 	{
 		pid = fork();
 		if (pid == 0)
+		{
+			setup_signals_exec();
 			status = handle_command_fd(leaf, STDIN_FILENO, STDOUT_FILENO, \
 context);
+		}
 		ft_lstadd_back(&context->pids, ft_lstnew((void *)(long)pid));
 	}
 	if (context->pids != NULL)

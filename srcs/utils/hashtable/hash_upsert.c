@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:35:42 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/19 16:53:45 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/21 15:17:36 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,14 @@ static int	update_if_exists(t_hash_item *item, char *key, char *value,\
 	{
 		if (ft_strncmp(actual_item->key, key, key_len) == 0)
 		{
-			new_value = ft_strdup(value);
-			if (!new_value)
-				return (-1);
-			free(actual_item->value);
-			actual_item->value = new_value;
+			if (value)
+			{
+				new_value = ft_strdup(value);
+				if (!new_value)
+					return (-1);
+				free(actual_item->value);
+				actual_item->value = new_value;
+			}
 			actual_item->tag = tag;
 			return (1);
 		}
