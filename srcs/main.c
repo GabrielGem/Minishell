@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/20 15:31:31 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/21 15:37:58 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_data	*context;
-	t_list	*tokens;
 
 	(void)argc;
 	(void)argv;
@@ -49,9 +48,8 @@ int	main(int argc, char **argv, char **env)
 	while (line)
 	{
 		add_history(line);
-		tokens = tokenizer(line, context);
-		print_tokens(tokens);
-		ft_lstclear(&tokens, free);
+		tree_build(line, context);
+		context->exit_status = executor(context->root, context);
 		line = readline("$> ");
 	}
 	rl_clear_history();
