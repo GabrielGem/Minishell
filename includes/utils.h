@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 15:18:09 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/19 17:55:22 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/21 11:27:35 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,7 @@ char			*extract_key(char *line);
 int				is_valid_identifier(char *str);
 void			print_invalid_identifier(char *identifier);
 
+//Signal handler
+void			handle_sigint_interactive(int sig);
+void			setup_signals_interactive(void);
 #endif

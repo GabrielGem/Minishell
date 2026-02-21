@@ -6,12 +6,14 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/20 11:18:56 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:31:31 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "tests.h"
+
+volatile sig_atomic_t g_signal_received = 0;
 
 t_data	*init_shell(char **envp)
 {
@@ -37,14 +39,22 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_data	*context;
+	t_list	*tokens;
 
 	(void)argc;
 	(void)argv;
+	setup_signals_interactive();
 	context = init_shell(env);
-	line = ft_strdup("$HOME/$USER/postfix.");
-	line = expand_all_var(line, context);
-	ft_printf("%s\n", line);
-	free(line);
+	line = readline("$> ");
+	while (line)
+	{
+		add_history(line);
+		tokens = tokenizer(line, context);
+		print_tokens(tokens);
+		ft_lstclear(&tokens, free);
+		line = readline("$> ");
+	}
+	rl_clear_history();
 	free_shell(context);
 }
 
