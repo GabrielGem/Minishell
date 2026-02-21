@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:11:10 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/13 17:53:50 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/21 15:41:27 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_redir
 {
 	t_type_redir	type;
 	char			*filename;
+	int				expand;
 }	t_redir;
 
 typedef struct s_node

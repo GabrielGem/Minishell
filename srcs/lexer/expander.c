@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:37:13 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/20 11:17:45 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/21 15:34:30 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ char	*expand_variable(char *token, t_data *context)
 		return (token);
 	var_name = extract_name(dollar + 1);
 	if (!ft_strcmp("?", var_name))
-		value = ft_itoa(context->exit_status);	
+		value = ft_itoa(context->exit_status);
+	else if (token[1] == ' ')
+		return (token);
 	else
 	{
 		value = ft_strdup(hash_search(context->env, var_name, ENV));
@@ -81,8 +83,13 @@ t_list	*expand_token(t_list *tokens, t_data *context)
 		}
 		if (ft_strchr(current->content, '$'))
 		{
-			current->content = expand_variable(current->content, context);
-			continue ;
+			if (ft_strlen(current->content) == 1)
+			{
+				current = current->next;
+				continue ;
+			}
+			else
+				current->content = expand_variable(current->content, context);
 		}
 		current = current->next;
 	}
