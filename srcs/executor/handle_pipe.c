@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 10:34:18 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/19 17:13:05 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/21 11:45:50 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static int	left_branch(t_ast_node *leaf, int input_fd, int *pipefd,\
 	pid_left = fork();
 	if (pid_left == 0)
 	{
+		setup_signals_exec();
 		close(pipefd[0]);
 		status = pipe_recursive((t_ast_node *)leaf->left, input_fd, pipefd[1], \
 context);
@@ -82,6 +83,7 @@ static int	right_branch(t_ast_node *leaf, int output_fd, int *pipefd,\
 	pid_right = fork();
 	if (pid_right == 0)
 	{
+		setup_signals_exec();
 		close(pipefd[1]);
 		pipe_recursive((t_ast_node *)leaf->right, pipefd[0], output_fd, \
 context);
