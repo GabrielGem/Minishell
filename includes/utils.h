@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 15:18:09 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/21 11:27:35 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/21 11:49:48 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ void			print_invalid_identifier(char *identifier);
 //Signal handler
 void			handle_sigint_interactive(int sig);
 void			setup_signals_interactive(void);
+void			setup_signals_exec(void);
 #endif
