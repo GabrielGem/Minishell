@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/21 15:37:58 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/21 17:32:03 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		add_history(line);
 		tree_build(line, context);
-		context->exit_status = executor(context->root, context);
+		//context->exit_status = executor(context->root, context);
 		line = readline("$> ");
 	}
 	rl_clear_history();
