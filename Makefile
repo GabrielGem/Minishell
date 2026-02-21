@@ -6,12 +6,12 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/21 17:37:53 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/02/21 18:00:03 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = xaolins
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 INCLUDES = -I./includes -I./libft
 LIBS = -Llibft -lft
 RDFLAGS = -lreadline

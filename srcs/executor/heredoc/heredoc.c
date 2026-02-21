@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 11:49:45 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/20 16:02:17 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/21 17:48:59 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static int	process_heredoc(t_redir *redir, int fd, int *lines, t_data *context)
 			free(line);
 			return (0);
 		}
-		line = expand_all_vars(line, context);
+		if (redir->expand)
+			line = expand_all_vars(line, context);
 		ft_putstr_fd(line, fd);
 		free(line);
 		(*lines)++;

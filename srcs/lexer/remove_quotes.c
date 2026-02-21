@@ -6,13 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:10:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/21 17:36:18 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/21 18:04:23 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*remove_quote(char *old)
+char	*remove_quote(char *old)
 {
 	size_t	len;
 	char	*new;
