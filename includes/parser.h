@@ -7,6 +7,7 @@ t_ast_node		*tree_build(char *line, t_data *context);
 t_list			*tokenizer(char *line, t_data *context);
 t_list			*remove_spaces(t_list *tokens);
 t_list			*expand_token(t_list *tokens, t_data *context);
+t_list			*initial_parser(char *line);
 
 char			is_builtin(char *cmd);
 void			*split_token(t_list *tokens, char *cmd, char *forbid);

@@ -6,162 +6,90 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 14:47:15 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 16:59:20 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-Append a single char to the end of str1, if str1 is NULL c will be the first
-char.
+Add content to end of list and update counter
 */
-void	append_char(char **str1, char c)
+static void	add_to_list(t_list **l, char **new, char *token_to_add)
 {
-	char	str[2];
-
-	str[0] = c;
-	str[1] = '\0';
-	str_append(str1, str);
+	if (*new)
+	{
+		ft_lstadd_back(l, ft_lstnew(ft_strdup(*new)));
+		free(*new);
+		*new = NULL;
+	}
+	if (token_to_add)
+		ft_lstadd_back(l, ft_lstnew(ft_strdup(token_to_add)));
 }
 
+/*
+Update state and append char to string.
+*/
 static	t_quote_state update_state(char **new, char append, t_quote_state st)
 {
 	append_char(new, append);
 	return (st);
 }
 
-t_list	*new_initial_parser(char *token)
+static void state_quote(char token_state, char token, t_quote_state *st, \
+	char **new)
+{
+	if (token == token_state)
+		*st = update_state(new, token, NORMAL);
+	else
+		append_char(new, token);
+}
+
+static	void	state_normal(t_quote_state *state, char *token, \
+	t_list **list, char **new)
+{
+	if (ft_isspace(*token))
+		add_to_list(list, new, NULL);
+	else if (*token == '\'')
+		*state = update_state(new, *token, IN_SINGLE_QUOTE);
+	else if (*token == '\"')
+		*state = update_state(new, *token, IN_DOUBLE_QUOTE);
+	else if (*token == '<' && token[1] == '<')
+		add_to_list(list, new, "<<");
+	else if (*token == '>' && token[1] == '>')
+		add_to_list(list, new, ">>");
+	else if (*token == '|')
+		add_to_list(list, new, "|");
+	else if (*token == '>')
+		add_to_list(list, new, ">");
+	else if (*token == '<')
+		add_to_list(list, new, "<");
+	else
+		append_char(new, *token);
+}
+
+t_list	*initial_parser(char *token)
 {
 	t_quote_state	state;
 	t_list			*lst;
+	char			*current;
 	char			*new;
-	int				i;
 
 	state = NORMAL;
 	new = NULL;
 	lst = NULL;
-	i = 0;
-	while (token[i])
+	current = token;
+	while (*current)
 	{
 		if (state == NORMAL)
-		{
-			if (ft_isspace(token[i]))
-			{
-				ft_lstadd_back(&lst, ft_lstnew(ft_strdup(new)));
-				free(new);
-				new = NULL;
-			}
-			else if (token[i] == '\'')
-			{
-				append_char(&new, token[i]);
-				state = IN_SINGLE_QUOTE;
-			}
-			else if (token[i] == '\"')
-			{
-				append_char(&new, token[i]);
-				state = IN_DOUBLE_QUOTE;
-			}
-			else if (token[i] == '<' && token[i + 1] == '<')
-			{
-				if (new)
-				{
-					ft_lstadd_back(&lst, ft_lstnew(ft_strdup(new)));
-					free(new);
-					new = NULL;
-				}
-				ft_lstadd_back(&lst, ft_lstnew(ft_strdup("<<")));
-				i++;
-			}
-			else if (token[i] == '>' && token[i + 1] == '>')
-			{
-				if (new)
-				{
-					ft_lstadd_back(&lst, ft_lstnew(ft_strdup(new)));
-					free(new);
-					new = NULL;
-				}
-				ft_lstadd_back(&lst, ft_lstnew(ft_strdup(">>")));
-				i++;
-			}
-			else if (token[i] == '|')
-			{
-				if (new)
-				{
-					ft_lstadd_back(&lst, ft_lstnew(ft_strdup(new)));
-					free(new);
-					new = NULL;
-				}
-				ft_lstadd_back(&lst, ft_lstnew(ft_strdup("|")));
-			}
-			else if (token[i] == '>')
-			{
-				if (new)
-				{
-					ft_lstadd_back(&lst, ft_lstnew(ft_strdup(new)));
-					free(new);
-					new = NULL;
-				}
-				ft_lstadd_back(&lst, ft_lstnew(ft_strdup(">")));
-			}
-			else if (token[i] == '<')
-			{
-				if (new)
-				{
-					ft_lstadd_back(&lst, ft_lstnew(ft_strdup(new)));
-					free(new);
-					new = NULL;
-				}
-				ft_lstadd_back(&lst, ft_lstnew(ft_strdup("<")));
-			}
-			else
-				append_char(&new, token[i]);
-		}
+			state_normal(&state, current, &lst, &new);
 		else if (state == IN_SINGLE_QUOTE)
-		{
-			if (token[i] == '\'')
-			{
-				append_char(&new, token[i]);
-				state = NORMAL;
-			}
-			else
-				append_char(&new, token[i]);// adiciona char ao token (tudo é literal aqui)
-		}
+			state_quote('\'', *current, &state, &new);
 		else if (state == IN_DOUBLE_QUOTE)
-		{
-			if (token[i] == '\"')
-			{
-				append_char(&new, token[i]);
-				state = NORMAL;
-			}
-			else
-				append_char(&new, token[i]);// adiciona char ao token (expansao de $ ainda acontece aqui)
-		}
-		i++;
+			state_quote('\"', *current, &state, &new);
+		current++;
 	}
-	if(new)
-	{
-		ft_lstadd_back(&lst, ft_lstnew(ft_strdup(new)));
-		free(new);
-	}
+	add_to_list(&lst, &new, NULL);
 	free(token);
 	return (lst);
-}
-
-t_list	*tokenizer(char *line, t_data *context)
-{
-	t_list	*tokens;
-
-	if (!line)
-		return (NULL);
-	if (check_spaces(line))
-	{
-		free(line);
-		return (NULL);
-	}
-	tokens = new_initial_parser(line);
-	tokens = remove_spaces(tokens);
-	tokens = expand_token(tokens, context);
-	remove_quotes(tokens);
-	return (tokens);
 }

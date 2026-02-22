@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 14:35:18 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:02:53 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,12 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	setup_signals_interactive();
 	context = init_shell(env);
-	line = ft_strdup("cat << EOF");
-	while (line)
+	line = readline("$> ");
 	{
 		if(!check_spaces(line))
 			add_history(line);
 		tree_build(line, context);
-		//context->exit_status = executor(context->root, context);
+		context->exit_status = executor(context->root, context);
 		free_context(context);
 		line = readline("$> ");
 	}
