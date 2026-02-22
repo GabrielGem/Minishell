@@ -1,4 +1,5 @@
 NAME = libft.a
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c	ft_isspace.c\
 ft_isascii.c	ft_isprint.c	ft_strlen.c		ft_strlcat.c\
@@ -15,21 +16,26 @@ ft_lstiter_bonus.c	ft_lstlast_bonus.c	ft_lstmap_bonus.c	ft_lstnew_bonus.c\
 ft_lstadd_after.c	ft_lstadd_before.c	ft_lstfirst.c\
 ft_lstsize_bonus.c	gnl_gc.c ft_join_array_of_pointers.c ft_uitoa_base.c
 
-OBJ = $(SRC:.c=.o)
-
-CFLAGS = -Wall -Wextra -Werror -g
-
-.PHONY: all clean fclean re
+OBJDIR = objdir
+OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rcs $@ $(OBJ)
 
+$(OBJDIR)/%.o: %.c | $(OBJDIR)
+	cc $(CFLAGS) -c $< -o $@
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
