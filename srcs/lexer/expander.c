@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:37:13 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 17:50:41 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:48:21 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 /*
 Remove var_name from old string and insert new where var_name start
 */
-static char	*reshape_string(char *old, char *var_name, char *new, size_t start)
+static char	*reshape_string(char *old, char *var, char *value, size_t start)
 {
 	char	*lstr;
 	char	*rstr;
 	char	*newstr;
 
-	if (!old || !var_name)
+	if (!old || !var)
 		return (old);
 	lstr = ft_substr(old, 0, start);
-	rstr = ft_substr(old, start + ft_strlen(var_name) + 1, ft_strlen(old));
+	rstr = ft_substr(old, start + ft_strlen(var) + 1, ft_strlen(old));
 	newstr = NULL;
 	str_append(&newstr, lstr);
-	str_append(&newstr, new);
+	str_append(&newstr, value);
 	str_append(&newstr, rstr);
 	free(old);
 	free(lstr);
@@ -66,6 +66,31 @@ char	*expand_variable(char *token, t_data *context)
 }
 
 /*
+Expand tilde with the same content $HOME usually stores
+*/
+static char	*expand_tilde(char	*old, t_data *context)
+{
+	char	*new;
+	char	*value;
+	char	*old_w_dollar;
+
+	if (!old)
+		return (old);
+	if (old[0] == '~' && old[1] == '~')
+		return (old);
+	if (old[0] != '~')
+		return (old);
+	old_w_dollar = NULL;
+	str_append(&old_w_dollar, "$");
+	str_append(&old_w_dollar, old);
+	free(old);
+	value = ft_strdup(hash_search(context->env, "HOME_BKP", SET));
+	new = reshape_string(old_w_dollar, "~", value, 0);
+	free(value);
+	return (new);
+}
+
+/*
 Expands variables (if any) on a given token
 */
 t_list	*expand_token(t_list *tokens, t_data *context)
@@ -81,6 +106,8 @@ t_list	*expand_token(t_list *tokens, t_data *context)
 			current = current->next;
 			continue ;
 		}
+		if (ft_strchr(current->content, '~'))
+			current->content = expand_tilde(current->content, context);
 		if (ft_strchr(current->content, '$'))
 		{
 			if (ft_strlen(current->content) == 1)

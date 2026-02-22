@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 17:12:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 17:15:42 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:40:37 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_list			*initial_parser(char *line);
 char			is_builtin(char *cmd);
 void			*split_token(t_list *tokens, char *cmd, char *forbid);
 void			remove_quotes(t_list *tokens);
-char			*remove_quote(char *old);
+char			*remove_quote_from_ends(char *old);
+void			remove_param_quotes(t_list *tokens);
 //lexer utils
 void			print_tokens(t_list	*tokens);
 void			str_append(char **str1, char *str2);
