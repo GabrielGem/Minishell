@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:37:13 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/21 15:34:30 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 15:09:29 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,10 @@ t_list	*expand_token(t_list *tokens, t_data *context)
 		if (ft_strchr(current->content, '$'))
 		{
 			if (ft_strlen(current->content) == 1)
-			{
 				current = current->next;
-				continue ;
-			}
 			else
 				current->content = expand_variable(current->content, context);
+			continue ;
 		}
 		current = current->next;
 	}
