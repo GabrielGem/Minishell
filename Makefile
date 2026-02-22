@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/21 17:20:19 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/02/22 13:17:23 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ BUILTINS_SRCS = \
 	builtins/unset.c
 
 UTILS_SRCS = \
+	utils/fallback_mechanism.c \
 	utils/get_prompt_string.c \
 	utils/get_path.c \
 	utils/binary_search.c \
@@ -71,6 +72,7 @@ UTILS_SRCS = \
 	utils/export_utils/print_invalid_identifier.c \
 	utils/free/free_tree.c \
 	utils/free/free_shell.c \
+	utils/free/free_context.c \
 	utils/hashtable/hash.c \
 	utils/hashtable/hash_item.c \
 	utils/hashtable/hash_table.c \
