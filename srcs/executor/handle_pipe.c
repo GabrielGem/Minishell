@@ -6,19 +6,19 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 10:34:18 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/21 11:45:50 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/22 15:48:23 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	pipe_recursive(t_ast_node *leaf, int input_fd, int output_fd,\
-	t_data *context);
+static int	pipe_recursive(t_ast_node *leaf, int input_fd, int output_fd, \
+t_data *context);
 void		close_pid(void *pid);
-static int	left_branch(t_ast_node *leaf, int input_fd, int *pipefd,\
-	t_data *context);
-static int	right_branch(t_ast_node *leaf, int output_fd, int *pipefd,\
-	t_data *context);
+static int	left_branch(t_ast_node *leaf, int input_fd, int *pipefd, \
+t_data *context);
+static int	right_branch(t_ast_node *leaf, int output_fd, int *pipefd, \
+t_data *context);
 
 int	handle_pipe(t_ast_node *leaf, t_data *context)
 {
@@ -29,8 +29,8 @@ int	handle_pipe(t_ast_node *leaf, t_data *context)
 	return (last_status);
 }
 
-static int	pipe_recursive(t_ast_node *leaf, int input_fd, int output_fd,\
-	t_data *context)
+static int	pipe_recursive(t_ast_node *leaf, int input_fd, int output_fd, \
+t_data *context)
 {
 	int		pipefd[2];
 	int		status;
@@ -51,8 +51,8 @@ static int	pipe_recursive(t_ast_node *leaf, int input_fd, int output_fd,\
 	return (status);
 }
 
-static int	left_branch(t_ast_node *leaf, int input_fd, int *pipefd,\
-	t_data *context)
+static int	left_branch(t_ast_node *leaf, int input_fd, int *pipefd, \
+t_data *context)
 {
 	pid_t	pid_left;
 	int		status;
@@ -73,8 +73,8 @@ context);
 	return (status);
 }
 
-static int	right_branch(t_ast_node *leaf, int output_fd, int *pipefd,\
-	t_data *context)
+static int	right_branch(t_ast_node *leaf, int output_fd, int *pipefd, \
+t_data *context)
 {
 	pid_t	pid_right;
 	int		status;

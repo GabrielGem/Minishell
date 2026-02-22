@@ -6,16 +6,16 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:22:38 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/21 11:45:15 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/22 15:47:01 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd,\
-	t_data *context);
-static void	setup_io(int input_fd, int output_fd, t_command *cmd,\
-	t_data *context);
+int			handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
+t_data *context);
+static void	setup_io(int input_fd, int output_fd, t_command *cmd, \
+t_data *context);
 static int	exec_builtin(t_data *context, char **args, int nb_builtin);
 static int	exec_command(t_data *context, char **args);
 
@@ -44,8 +44,8 @@ context);
 	return (status);
 }
 
-int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd,\
-	t_data *context)
+int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd, \
+t_data *context)
 {
 	t_command	*cmd;
 	int			status;
@@ -60,8 +60,8 @@ int	handle_command_fd(t_ast_node *leaf, int input_fd, int output_fd,\
 	return (status);
 }
 
-static void	setup_io(int input_fd, int output_fd, t_command *cmd,\
-	t_data *context)
+static void	setup_io(int input_fd, int output_fd, t_command *cmd, \
+t_data *context)
 {
 	int	*redirect_file;
 

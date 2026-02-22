@@ -6,13 +6,14 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 11:49:45 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/20 16:02:17 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/22 15:50:14 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	process_heredoc(t_redir *redir, int fd, int *lines, t_data *context);
+static int	process_heredoc(t_redir *redir, int fd, int *lines, \
+t_data *context);
 
 int	heredoc(char *temp_file, t_redir *redir, t_data *context)
 {
@@ -23,7 +24,8 @@ int	heredoc(char *temp_file, t_redir *redir, t_data *context)
 	lines = 0;
 	if (process_heredoc(redir, fd, &lines, context))
 	{
-		printf("\nminishell: warning: here-document at line %d ", context->count_line);
+		printf("\nminishell: warning: ");
+		printf("here-document at line %d ", context->count_line);
 		printf("delimited by end-of-file (wanted `%s')\n", redir->filename);
 	}
 	close(fd);
