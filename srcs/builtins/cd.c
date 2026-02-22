@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 15:05:55 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/20 16:27:30 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/22 11:55:31 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*get_target(t_data *context, char **args, char **error_msg)
 	}
 	else if (!ft_strncmp(args[1], "~", 2))
 	{
-		dir = hash_search(context->env, "HOME2", SET);
+		dir = hash_search(context->env, "HOME_BKP", SET);
 		*error_msg = "minishell: cd: HOME not set\n";
 	}
 	else if (!ft_strncmp(args[1], "-", 2))
