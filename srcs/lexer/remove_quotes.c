@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:10:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 17:11:39 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:40:23 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,18 @@ void	remove_quotes(t_list *tokens)
 		if (!is_single_or_double_quotes(tokens) && !dollar)
 			tokens->content = remove_all_quotes(tokens->content);
 		tokens = tokens->next;
+	}
+}
+
+/*
+Remove quotes mark from parameter list
+*/
+void	remove_param_quotes(t_list *tokens)
+{
+	while (tokens)
+	{
+		if (is_single_or_double_quotes(tokens))
+			tokens->content = remove_quote_from_ends(tokens->content);
+		tokens = tokens->next;	
 	}
 }

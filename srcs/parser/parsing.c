@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 20:20:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/21 18:08:52 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:40:04 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_command	*parse_command(t_list **tokens, t_data *context)
 			if (is_single_or_double_quotes(current))
 			{
 				redir->expand = 0;
-				current->content = remove_quote(current->content);
+				current->content = remove_quote_from_ends(current->content);
 			}
 			else
 				redir->expand = 1;
@@ -60,6 +60,7 @@ t_command	*parse_command(t_list **tokens, t_data *context)
 			current = current->next;
 		}
 	}
+	remove_param_quotes(args_list);
 	cmd->args = list_to_array(args_list);
 	cmd->is_builtin = is_builtin(cmd->args[0]);
 	*tokens = current;
