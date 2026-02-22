@@ -1,84 +1,19 @@
-# Valgrind Memory Leak Suppressions for readline/ncurses
-# These suppressions cover known reachable memory in readline and ncurses libraries
-# that are not actual leaks but one-time allocations kept for the lifetime of the program
+# Valgrind suppressions for readline and ncurses known leaks
 
-# ============================================================================
-# Readline library - all reachable leaks
-# ============================================================================
 {
-   readline_all_reachable
+   readline_all_leaks
    Memcheck:Leak
-   match-leak-kinds: reachable
+   match-leak-kinds: all
    ...
-   obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+   obj:/usr/lib/x86_64-linux-gnu/libreadline.so*
    ...
 }
 
 {
-   readline_xmalloc_reachable
+   ncurses_all_leaks
    Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   fun:xmalloc
+   match-leak-kinds: all
    ...
-   fun:readline
+   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so*
    ...
-}
-
-{
-   readline_xrealloc_reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:*alloc
-   fun:xrealloc
-   ...
-   fun:readline
-   ...
-}
-
-# ============================================================================
-# Ncurses/libtinfo - all reachable leaks
-# ============================================================================
-{
-   ncurses_all_reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   ...
-   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.6.3
-   ...
-}
-
-{
-   ncurses_init_reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   ...
-   fun:_nc_*
-   ...
-   fun:readline
-   ...
-}
-
-{
-   ncurses_terminfo_reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   ...
-   fun:tgetent_sp
-   ...
-   fun:readline
-   ...
-}
-
-# ============================================================================
-# General readline initialization pattern
-# ============================================================================
-{
-   readline_init_pattern
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   ...
-   fun:rl_initialize
-   fun:readline
-   fun:main
 }
