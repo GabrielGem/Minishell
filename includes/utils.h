@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 15:18:09 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/21 11:49:48 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/22 13:28:20 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,13 @@
 
 char			*get_prompt_string(t_data *context);
 
+void			fallback_update(t_data *context);
+
 void			free_shell(t_data *context);
 void			free_tree(t_ast_node *tree);
+void			free_context(t_data *context);
+void			close_fd(void *fd);
+void			close_pid(void *pid);
 
 char			*get_path(char *cmd, t_data *contexte);
 char			*binary_search(char **path, char *cmd);
@@ -52,4 +57,5 @@ void			print_invalid_identifier(char *identifier);
 void			handle_sigint_interactive(int sig);
 void			setup_signals_interactive(void);
 void			setup_signals_exec(void);
+
 #endif

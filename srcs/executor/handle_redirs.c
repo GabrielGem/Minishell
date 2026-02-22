@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:11:26 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/20 18:02:55 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/22 15:49:02 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static int	*handle_error(int *fds, char *file)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(file, 2);
-	//perror(":\b");
 	ft_putstr_fd(": No such file or directory\n", 2);
 	close_fds(fds);
 	fds[0] = 1;

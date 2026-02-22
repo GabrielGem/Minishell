@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.h                                            :+:      :+:    :+:   */
+/*   fallback_mechanism.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/06 15:57:57 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/22 13:28:12 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/02/22 13:16:13 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/02/22 13:16:47 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TESTS_H
-# define TESTS_H
+#include "minishell.h"
 
-void		ft_print_ast(t_ast_node *root);
-void		print_tree(t_ast_node *tree);
-void		print_hash_table(t_hash_table *table);
-t_ast_node	*build_tree_polimorphic(void);
+void	fallback_update(t_data *context)
+{
+	char	*home;
+	char	*username;
 
-#endif
+	home = hash_search(context->env, "HOME", ENV);
+	if (home)
+		hash_upsert(context->env, "HOME_BKP", home, SET);
+	username = hash_search(context->env, "LOGNAME", ENV);
+	if (username)
+		hash_upsert(context->env, "LOGNAME_BKP", username, SET);
+}
