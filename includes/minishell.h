@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:27 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/20 15:30:38 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 13:44:02 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-extern volatile sig_atomic_t g_signal_received;
-
 # include "libft.h"
 # include "hashtable.h"
 # include "structs.h"
@@ -33,5 +31,7 @@ extern volatile sig_atomic_t g_signal_received;
 # include "utils.h"
 # include "executor.h"
 # include "builtin.h"
+
+extern volatile sig_atomic_t	g_signal_received;
 
 #endif
