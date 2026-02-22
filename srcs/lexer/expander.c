@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:37:13 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 17:25:43 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:50:41 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_list	*expand_token(t_list *tokens, t_data *context)
 	while (current)
 	{
 		if ((current->prev && !ft_strcmp("<<", current->prev->content))
-		||	is_quote_token(current, '\''))
+			|| is_quote_token(current, '\''))
 		{
 			current = current->next;
 			continue ;
@@ -103,7 +103,7 @@ char	*expand_all_vars(char *old, t_data *context)
 	t_list	*lst;
 	char	*new;
 
-	if(!old)
+	if (!old)
 		return (old);
 	lst = ft_lstnew(old);
 	lst->next = NULL;

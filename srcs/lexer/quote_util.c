@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 16:15:30 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/21 16:17:28 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:43:05 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ char	is_quote_token(t_list *token, char tkn)
 
 char	is_single_or_double_quotes(t_list *token)
 {
-	return (is_quote_token(token, '\'')
-		|| is_quote_token(token, '\"'));
+	return (is_quote_token(token, '\'') || is_quote_token(token, '\"'));
 }

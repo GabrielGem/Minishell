@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 19:25:01 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/13 17:01:26 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:55:55 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ Check if a token is a redirect
 */
 char	is_redirect(char *token)
 {
-	return (!ft_strcmp(">", token) 
-		|| !ft_strcmp("<", token) 
+	return (!ft_strcmp(">", token)
+		|| !ft_strcmp("<", token)
 		|| !ft_strcmp("<<", token)
 		|| !ft_strcmp(">>", token));
 }
@@ -58,5 +58,5 @@ t_type_redir	get_redirect_type(char *token)
 		return (HEREDOC);
 	if (!ft_strcmp(">>", token))
 		return (APPEND);
-	return 0;
+	return (0);
 }

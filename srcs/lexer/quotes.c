@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 13:20:38 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 11:31:47 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:47:06 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,3 @@ t_list	*resolve_quotes(t_list *tokens)
 	}
 	return (first);
 }
-

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 09:21:05 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/14 20:13:32 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:44:49 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_list	*str_tok(t_list *token, char sep)
 	while (split[++i])
 		ft_lstadd_back(&new_list, ft_lstnew(split[i]));
 	free(split[i]);
-	free(split);	
+	free(split);
 	return (new_list);
 }
 

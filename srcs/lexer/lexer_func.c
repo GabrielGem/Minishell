@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 17:11:11 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:46:33 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static void	add_to_list(t_list **l, char **new, char *token_to_add)
 /*
 Update state and append char to string.
 */
-static	t_quote_state update_state(char **new, char append, t_quote_state st)
+static	t_quote_state	update_state(char **new, char append, t_quote_state st)
 {
 	append_char(new, append);
 	return (st);
 }
 
-static void state_quote(char token_state, char token, t_quote_state *st, \
+static void	state_quote(char token_state, char token, t_quote_state *st, \
 	char **new)
 {
 	if (token == token_state)

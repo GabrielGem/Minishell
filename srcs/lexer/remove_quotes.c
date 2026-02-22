@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:10:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 17:11:39 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:54:44 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	remove_quotes(t_list *tokens)
 {
 	char	*dollar;
 
-	while(tokens)
+	while (tokens)
 	{
-		dollar = ft_strchr(tokens->content,'$');
+		dollar = ft_strchr(tokens->content, '$');
 		if (!is_single_or_double_quotes(tokens) && !dollar)
 			tokens->content = remove_all_quotes(tokens->content);
 		tokens = tokens->next;
