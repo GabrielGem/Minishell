@@ -8,6 +8,8 @@ t_list			*expand_token(t_list *tokens, t_data *context);
 
 char			is_builtin(char *cmd);
 void			*split_token(t_list *tokens, char *cmd, char *forbid);
+void			remove_quotes(t_list *tokens);
+char			*remove_quote(char *old);
 //lexer utils
 void			print_tokens(t_list	*tokens);
 void			str_append(char **str1, char *str2);

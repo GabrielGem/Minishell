@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 20:20:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/21 16:24:16 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/21 18:08:52 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ t_command	*parse_command(t_list **tokens, t_data *context)
 			redir->type = get_redirect_type(current->content);
 			current = current->next;
 			if (is_single_or_double_quotes(current))
+			{
 				redir->expand = 0;
+				current->content = remove_quote(current->content);
+			}
 			else
 				redir->expand = 1;
 			//remover aspas tanto duplas ou simples.
