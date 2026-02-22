@@ -6,12 +6,15 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:57:20 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/21 16:15:39 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 14:06:01 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+Append str2 at end of str1.
+*/
 void	str_append(char **str1, char *str2)
 {
 	char	*append;

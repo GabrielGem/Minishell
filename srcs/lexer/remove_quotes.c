@@ -6,13 +6,16 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:10:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/21 17:36:18 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/22 14:22:59 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*remove_quote(char *old)
+/*
+Remove only quotes from ends.
+*/
+char	*remove_quote_from_ends(char *old)
 {
 	size_t	len;
 	char	*new;
@@ -26,14 +29,39 @@ static char	*remove_quote(char *old)
 }
 
 /*
-Remove quotation marks from the ends.
+Remove all quotes.
+*/
+char	*remove_all_quotes(char *old)
+{
+	char	*new;
+	int		i;
+
+	new = NULL;
+	i = 0;
+	if (!old)
+		return (old);
+	while (old[i])
+	{
+		if (old[i] != '\"' && old[i] != '\'')
+			append_char(&new, old[i]);
+		i++;
+	}
+	free(old);
+	return (new);
+}
+
+/*
+Remove quotation marks.
 */
 void	remove_quotes(t_list *tokens)
 {
+	char	*dollar;
+
 	while(tokens)
 	{
-		if (is_single_or_double_quotes(tokens))
-			tokens->content = remove_quote(tokens->content);
+		dollar = ft_strchr(tokens->content,'$');
+		if (!is_single_or_double_quotes(tokens) && !dollar)
+			tokens->content = remove_all_quotes(tokens->content);
 		tokens = tokens->next;
 	}
 }
