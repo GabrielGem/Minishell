@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 14:56:36 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/31 16:21:06 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:59:03 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 void	print_invalid_identifier(char *identifier)
 {
-	printf("minishell: export: `%s': not a valid identifier\n", identifier);
+	ft_putstr_fd("minishell: export: `", 2);
+	ft_putstr_fd(identifier, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
 }
