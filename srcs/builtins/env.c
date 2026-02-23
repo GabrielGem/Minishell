@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 14:12:36 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/18 17:43:39 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/23 19:19:37 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	b_env(t_data *context, char **args)
 		while (item)
 		{
 			if (item->tag == ENV)
-				printf("%s=\"%s\"\n", item->key, item->value);
+				printf("%s=%s\n", item->key, item->value);
 			item = item->next;
 		}
 		i++;
