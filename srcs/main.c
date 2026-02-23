@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 16:37:54 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:41:14 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,18 @@ static void	run_shell(t_data *context)
 
 	while (1)
 	{
-		prompt = get_prompt_string(context);
-		line = readline(prompt);
- 		free(prompt);
+		if (isatty(STDIN_FILENO))
+		{
+			prompt = get_prompt_string(context);
+			line = readline(prompt);
+			free(prompt);
+		}
+		else
+		{
+			line = get_next_line(STDIN_FILENO);
+			if (line && line[ft_strlen(line) - 1] == '\n')
+				line[ft_strlen(line) - 1] = '\0';
+		}
 		if (!line)
 			break ;
 		if (!check_spaces(line))
