@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:37:13 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 18:48:21 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/23 16:25:33 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,23 @@ static char	*expand_tilde(char	*old, t_data *context)
 	return (new);
 }
 
+static void	evaluate_dollar(t_list **current, char *dollar, t_data *context)
+{
+	if (ft_strlen((*current)->content) == 1)
+		(*current) = (*current)->next;
+	else if (dollar && *(dollar + 1) == '\0')
+		(*current) = (*current)->next;
+	else
+		(*current)->content = expand_variable((*current)->content, context);
+}
+
 /*
 Expands variables (if any) on a given token
 */
 t_list	*expand_token(t_list *tokens, t_data *context)
 {
 	t_list	*current;
+	char	*dollar;
 
 	current = tokens;
 	while (current)
@@ -108,12 +119,10 @@ t_list	*expand_token(t_list *tokens, t_data *context)
 		}
 		if (ft_strchr(current->content, '~'))
 			current->content = expand_tilde(current->content, context);
-		if (ft_strchr(current->content, '$'))
+		dollar = ft_strchr(current->content, '$');
+		if (dollar)
 		{
-			if (ft_strlen(current->content) == 1)
-				current = current->next;
-			else
-				current->content = expand_variable(current->content, context);
+			evaluate_dollar(&current, dollar, context);
 			continue ;
 		}
 		current = current->next;
@@ -121,22 +130,3 @@ t_list	*expand_token(t_list *tokens, t_data *context)
 	return (tokens);
 }
 
-/*
-Expands all variables (strings starting with $) in a string token.
-Returns a new string with all variables replaced with their values.
-*/
-char	*expand_all_vars(char *old, t_data *context)
-{
-	t_list	*lst;
-	char	*new;
-
-	if (!old)
-		return (old);
-	lst = ft_lstnew(old);
-	lst->next = NULL;
-	lst->prev = NULL;
-	lst = expand_token(lst, context);
-	new = lst->content;
-	free(lst);
-	return (new);
-}

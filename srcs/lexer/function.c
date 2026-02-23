@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 17:53:47 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/23 16:28:09 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,35 +62,28 @@ t_list	*add_tokens(char *content, char *token_found, char *token)
 }
 
 /*
-When finding a token create its token and...
+Expands all variables (strings starting with $) in a string token.
+Returns a new string with all variables replaced with their values.
 */
-void	*split_token(t_list *tokens, char *token, char *forbid)
+char	*expand_all_vars(char *old, t_data *context)
 {
-	char	*tkn;
-	t_list	*new_tokens;
-	t_list	*head;
-	size_t	len;
+	t_list	*lst;
+	char	*new;
 
-	head = tokens;
-	while (tokens)
-	{
-		tkn = ft_strnstr(tokens->content, token, ft_strlen(tokens->content));
-		len = ft_strlen(tkn);
-		if (tkn && ft_strcmp(tkn, forbid)
-			&& (ft_strlen(token) != len || (ft_strlen(tokens->content) != len))
-			&& !is_single_or_double_quotes(tokens))
-		{
-			new_tokens = add_tokens(tokens->content, tkn, token);
-			insert_new_tokens(&head, tokens->prev, new_tokens, tokens->next);
-			ft_lstdelone(tokens, free);
-			tokens = new_tokens;
-			continue ;
-		}
-		tokens = tokens->next;
-	}
-	return (head);
+	if(!old)
+		return (old);
+	lst = ft_lstnew(old);
+	lst->next = NULL;
+	lst->prev = NULL;
+	lst = expand_token(lst, context);
+	new = lst->content;
+	free(lst);
+	return (new);
 }
 
+/*
+Print the list of tokens
+*/
 void	print_tokens(t_list	*tokens)
 {
 	if (!tokens)

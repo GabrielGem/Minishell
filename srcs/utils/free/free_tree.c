@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 21:18:57 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/01/23 20:15:15 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/20 19:37:11 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_tree(t_ast_node *tree)
 		free_command((t_command *)tree);
 }
 
-static void	free_command(t_command *cmd)
+void	free_command(t_command *cmd)
 {
 	ft_free_split(cmd->args);
 	if (cmd->redirects)

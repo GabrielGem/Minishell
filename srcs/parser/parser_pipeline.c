@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 13:01:25 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 17:56:29 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/23 16:32:32 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ t_ast_node	*tree_build(char *line, t_data *context)
 	tokens = tokenizer(line, context);
 	start = tokens;
 	if (!tokens)
+	{
+		context->root = NULL;
 		return (NULL);
+	}
 	tree = parse_pipeline(&tokens, context);
 	context->root = tree;
 	ft_lstclear(&start, free);
