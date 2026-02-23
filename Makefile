@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/22 17:27:38 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/02/23 13:05:53 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ LEXER_SRCS = \
 	lexer/lexer_util.c\
 	lexer/lexer_func.c\
 	lexer/quote_util.c \
-	lexer/quotes.c \
 	lexer/remove_quotes.c \
 	lexer/spaces.c \
 	lexer/expander.c \
