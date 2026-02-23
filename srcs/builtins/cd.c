@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 15:05:55 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/22 11:55:31 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/23 19:01:27 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	b_cd(t_data *context, char **args)
 
 	if (args[1] && args[2])
 	{
-		ft_putstr_fd("minishell: cd: too many arguments\n", STDOUT_FILENO);
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		return (1);
 	}
 	target_dir = get_target(context, args, &error_msg);

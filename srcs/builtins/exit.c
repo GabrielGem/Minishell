@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:08:48 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/09 16:49:46 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/23 19:04:14 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ int	b_exit(t_data *context, char **args)
 	if (args[1] && !valid_argument(args[1]))
 	{
 		dup2(context->stdout_backup, STDOUT_FILENO);
-		printf("minishell: exit: %s: numeric argument required\n", args[1]);
+		ft_putstr_fd("minishell: exit: ", 2);
+		ft_putstr_fd(args[1], 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
 		exit_code = 2;
 	}
 	else if (args[1] && args[2])
 	{
 		dup2(context->stdout_backup, STDOUT_FILENO);
-		printf("minishell: exit: too many arguments\n");
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		exit_code = 1;
 	}
 	else if (args[1])
