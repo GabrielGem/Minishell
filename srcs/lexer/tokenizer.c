@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 15:36:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 21:34:04 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:17:20 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ t_list	*tokenizer(char *line, t_data *context)
 		return (NULL);
 	}
 	tokens = initial_parser(line);
-	// tokens = remove_spaces(tokens);
 	tokens = expand_token(tokens, context);
 	remove_quotes(tokens);
+	if (!is_command_valid(tokens, context))
+	{
+		ft_lstclear(&tokens, free);
+		return (NULL);
+	}
 	return (tokens);
 }

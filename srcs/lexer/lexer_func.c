@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 17:46:33 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/24 13:50:29 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 Add content to end of list and update counter
 */
-static void	add_to_list(t_list **l, char **new, char *token_to_add)
+static void	add_to_list(t_list **l, char **new, char *token_to_add, char **curr)
 {
 	if (*new)
 	{
@@ -25,6 +25,8 @@ static void	add_to_list(t_list **l, char **new, char *token_to_add)
 	}
 	if (token_to_add)
 		ft_lstadd_back(l, ft_lstnew(ft_strdup(token_to_add)));
+	if (curr)
+		(*curr)++;
 }
 
 /*
@@ -45,27 +47,27 @@ static void	state_quote(char token_state, char token, t_quote_state *st, \
 		append_char(new, token);
 }
 
-static	void	state_normal(t_quote_state *state, char *token, \
+static	void	state_normal(t_quote_state *state, char **current, \
 	t_list **list, char **new)
 {
-	if (ft_isspace(*token))
-		add_to_list(list, new, NULL);
-	else if (*token == '\'')
-		*state = update_state(new, *token, IN_SINGLE_QUOTE);
-	else if (*token == '\"')
-		*state = update_state(new, *token, IN_DOUBLE_QUOTE);
-	else if (*token == '<' && token[1] == '<')
-		add_to_list(list, new, "<<");
-	else if (*token == '>' && token[1] == '>')
-		add_to_list(list, new, ">>");
-	else if (*token == '|')
-		add_to_list(list, new, "|");
-	else if (*token == '>')
-		add_to_list(list, new, ">");
-	else if (*token == '<')
-		add_to_list(list, new, "<");
+	if (ft_isspace(**current))
+		add_to_list(list, new, NULL, 0);
+	else if (**current == '\'')
+		*state = update_state(new, **current, IN_SINGLE_QUOTE);
+	else if (**current == '\"')
+		*state = update_state(new, **current, IN_DOUBLE_QUOTE);
+	else if (**current == '<' && current[0][1] == '<')
+		add_to_list(list, new, "<<", current);
+	else if (**current == '>' && current[0][1] == '>')
+		add_to_list(list, new, ">>", current);
+	else if (**current == '|')
+		add_to_list(list, new, "|", NULL);
+	else if (**current == '>')
+		add_to_list(list, new, ">", NULL);
+	else if (**current == '<')
+		add_to_list(list, new, "<", NULL);
 	else
-		append_char(new, *token);
+		append_char(new, **current);
 }
 
 t_list	*initial_parser(char *token)
@@ -82,14 +84,14 @@ t_list	*initial_parser(char *token)
 	while (*current)
 	{
 		if (state == NORMAL)
-			state_normal(&state, current, &lst, &new);
+			state_normal(&state, &current, &lst, &new);
 		else if (state == IN_SINGLE_QUOTE)
 			state_quote('\'', *current, &state, &new);
 		else if (state == IN_DOUBLE_QUOTE)
 			state_quote('\"', *current, &state, &new);
 		current++;
 	}
-	add_to_list(&lst, &new, NULL);
+	add_to_list(&lst, &new, NULL, 0);
 	free(token);
 	return (lst);
 }
