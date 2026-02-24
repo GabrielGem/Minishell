@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:43:36 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/24 14:24:17 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 15:33:43 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	b_echo(t_data *context, char **args)
 	args++;
 	while (*args)
 	{
-		ft_putstr_fd(*args, STDOUT_FILENO);
+		ft_putstr_fd(*args, 1);
 		if (*(args + 1))
-			ft_putstr_fd(" ", STDOUT_FILENO);
+			ft_putstr_fd(" ", 1);
 		args++;
 	}
 	if (!new_line_flag)
-		ft_putchar_fd('\n', STDOUT_FILENO);
+		ft_putchar_fd('\n', 1);
 	return (0);
 }
