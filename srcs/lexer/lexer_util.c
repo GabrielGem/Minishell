@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:57:20 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 10:47:22 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:19:32 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,6 @@ int	check_spaces(char *line)
 		if (!ft_isspace(line[i]))
 			return (0);
 	return (1);
-}
-
-/*
-Insert a t_list (can be a list with more than one element) md betweeen lt and 
-rt t_list elements
-*/
-void	insert_new_tokens(t_list **hd, t_list *lt, t_list *md, t_list *rt)
-{
-	t_list	*last_md;
-
-	last_md = ft_lstlast(md);
-	if (lt)
-	{
-		lt->next = md;
-		md->prev = lt;
-	}
-	last_md->next = rt;
-	if (rt)
-	rt->prev = last_md;
-	if (hd)
-		*hd = ft_lstfirst(md);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 17:12:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/24 11:15:37 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:19:46 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int				check_spaces(char *line);
 t_list			*add_tokens(char *content, char *token_found, char *token);
 char			is_quote_token(t_list *token, char tkn);
 char			is_single_or_double_quotes(t_list *token);
-void			insert_new_tokens(t_list **hd, t_list *lt, t_list *md, \
-	t_list *rt);
 char			*extract_name(char	*token);
 char			*expand_variable(char *token, t_data *context);
 char			*expand_all_vars(char *old, t_data *context);

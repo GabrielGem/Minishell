@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 19:25:01 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 17:55:55 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:26:08 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	**list_to_array(t_list *list)
 	if (!array)
 		return (NULL);
 	i = 0;
+	if (!ft_strlen(list->content))
+		list = list->next;
 	while (list)
 	{
 		array[i] = ft_strdup(list->content);
