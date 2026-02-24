@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 15:18:09 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/22 13:28:20 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:51:38 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ void			print_invalid_identifier(char *identifier);
 void			handle_sigint_interactive(int sig);
 void			setup_signals_interactive(void);
 void			setup_signals_exec(void);
+void			handle_sigint_heredoc(int sig);
+void			setup_signals_heredoc(void);
 
 #endif

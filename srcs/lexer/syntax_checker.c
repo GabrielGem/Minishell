@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:51:35 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/24 15:06:16 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 17:24:08 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,28 @@
 
 static char	print_message1(t_data *context)
 {
-	ft_printf("syntax error near unexpected token 'newline'\n");
+	ft_putstr_fd("syntax error near unexpected token 'newline'\n", 2);
 	context->exit_status = 2;
 	return (0);
 }
 
 static char	print_message2(t_data *context)
 {
-	ft_printf("syntax error near unexpected token '|'\n");
+	ft_putstr_fd("syntax error near unexpected token '|'\n", 2);
 	context->exit_status = 2;
 	return (0);
 }
 
 static char	print_message3(t_data *context, char *str)
 {
-	ft_printf("syntax error near unexpected token '%s'\n", str);
+	char	*message;
+
+	message = NULL;
+	str_append(&message, "syntax error near unexpected token '");
+	str_append(&message, str);
+	str_append(&message, "'\n");
+	ft_putstr_fd(message, 2);
+	free(message);
 	context->exit_status = 2;
 	return (0);
 }
