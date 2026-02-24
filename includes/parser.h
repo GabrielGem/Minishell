@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 17:12:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 13:05:03 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/23 22:08:57 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char			*expand_variable(char *token, t_data *context);
 char			*expand_all_vars(char *old, t_data *context);
 //parser utils
 char			**list_to_array(t_list *list);
-t_command		*parse_command(t_list **tokens, t_data *context);
+t_command		*parse_command(t_list **tokens);
 char			is_redirect(char *token);
 t_type_redir	get_redirect_type(char *token);
 #endif

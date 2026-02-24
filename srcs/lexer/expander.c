@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:37:13 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 16:25:33 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/23 20:42:16 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,26 @@ static char	*expand_tilde(char	*old, t_data *context)
 	return (new);
 }
 
-static void	evaluate_dollar(t_list **current, char *dollar, t_data *context)
-{
-	if (ft_strlen((*current)->content) == 1)
-		(*current) = (*current)->next;
-	else if (dollar && *(dollar + 1) == '\0')
-		(*current) = (*current)->next;
+static void	evaluate_dollar(t_list **curr, char *dol, t_data *context)
+{	
+	char	*var;
+	char	*content;
+
+	var = NULL;
+	content = (*curr)->content;
+	if ((ft_strlen(content) == 1)
+		|| (*(dol + 1) == '\0')
+		|| (*(dol + 1) == ' ')
+		|| (*(dol + 1) == '\'' || *(dol + 1) == '\"'))
+		*curr = (*curr)->next;
+	else if (ft_isdigit(*(dol + 1)))
+	{
+		append_char(&var, *(dol + 1));
+		(*curr)->content = reshape_string(content, var, NULL, dol - content);
+		free(var);
+	}
 	else
-		(*current)->content = expand_variable((*current)->content, context);
+		(*curr)->content = expand_variable(content, context);
 }
 
 /*

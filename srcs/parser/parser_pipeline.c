@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 13:01:25 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 16:32:32 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/23 22:08:29 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_ast_node	*parse_pipeline(t_list **tokens, t_data *context)
 	t_ast_node	*pipe_node;
 	t_command	*left;
 
-	left = parse_command(tokens, context);
+	left = parse_command(tokens);
 	if (!left)
 		return (NULL);
 	if (*tokens && !ft_strcmp("|", (*tokens)->content))

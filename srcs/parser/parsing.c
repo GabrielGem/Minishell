@@ -6,13 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 20:20:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/22 18:40:04 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/23 22:07:54 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command	*parse_command(t_list **tokens, t_data *context)
+t_command	*parse_command(t_list **tokens)
 {
 	t_command	*cmd;
 	t_list		*args_list;
@@ -38,18 +38,6 @@ t_command	*parse_command(t_list **tokens, t_data *context)
 			}
 			else
 				redir->expand = 1;
-			//remover aspas tanto duplas ou simples.
-			if (!current || !ft_strcmp("|", current->content) 
-				|| is_redirect(current->content))
-			{
-				ft_printf("minishell: syntax error near unexpected %s\n", \
-					current->content);
-				free(redir);
-				context->exit_status = 2;
-				ft_lstclear(&cmd->redirects, free);
-				free(cmd);
-				return (NULL);
-			}
 			redir->filename = ft_strdup(current->content);
 			ft_lstadd_back(&cmd->redirects, ft_lstnew(redir));
 			current = current->next;
