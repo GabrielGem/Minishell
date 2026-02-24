@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/24 14:01:40 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:40:44 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,7 @@ static void	run_shell(t_data *context)
 			free(prompt);
 		}
 		else
-		{
-			line = get_next_line(STDIN_FILENO);
-			if (line && line[ft_strlen(line) - 1] == '\n')
-				line[ft_strlen(line) - 1] = '\0';
-		}
+			line = ft_strtrim(get_next_line(STDIN_FILENO), "\n");
 		if (!line)
 			break ;
 		if (!check_spaces(line))

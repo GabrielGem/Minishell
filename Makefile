@@ -6,12 +6,12 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/24 16:20:00 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/02/24 17:31:03 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = xaolins
-CFLAGS = -Wall -Wextra -Werror -g3
+NAME = minishell
+CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I./includes -I./libft
 LIBS = -Llibft -lft
 RDFLAGS = -lreadline
@@ -85,10 +85,6 @@ UTILS_SRCS = \
 	utils/hashtable/hash_destroy_table.c \
 	utils/signal/signal_handler.c
 
-TESTS_SRCS = \
-	ft_test/print_functions.c \
-	ft_test/build_tree_polimorphic.c
-
 SRCS := $(MAIN_SRC) $(LEXER_SRCS) $(PARSER_SRCS) \
 		$(EXECUTOR_SRCS) $(BUILTINS_SRCS) $(UTILS_SRCS)
 
@@ -121,6 +117,9 @@ val:
 	@valgrind -q --leak-check=full --track-origins=yes \
 	--track-fds=yes --show-leak-kinds=all \
 	--suppressions=readline.supp ./$(NAME)
+
+debug: CFLAGS += -g
+debug: re
 
 clean:
 	$(MAKE) -C $(DIR_LIBFT) clean
