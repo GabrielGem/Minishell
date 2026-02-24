@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:08:48 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/23 19:04:14 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/24 12:57:35 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	b_exit(t_data *context, char **args)
 	{
 		dup2(context->stdout_backup, STDOUT_FILENO);
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-		exit_code = 1;
+		return (1);
 	}
 	else if (args[1])
 		exit_code = ft_atoi(args[1]);
