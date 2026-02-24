@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:22:38 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/22 15:47:01 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:17:09 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ static int	exec_builtin(t_data *context, char **args, int nb_builtin)
 	[EXIT] = b_exit
 	};
 
+	if (nb_builtin == EMPTY)
+		return (0);
 	ft = map[nb_builtin];
 	status = ft(context, args);
 	return (status);

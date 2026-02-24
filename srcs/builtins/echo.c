@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:43:36 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/16 17:23:40 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:24:17 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	b_echo(t_data *context, char **args)
 
 	(void)context;
 	new_line_flag = 0;
-	if (!ft_strncmp(args[1], "-n", 3))
+	if (args[1] && !ft_strncmp(args[1], "-n", 3))
 	{
 		new_line_flag = 1;
 		args++;

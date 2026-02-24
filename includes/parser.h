@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 17:12:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 22:08:57 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:15:37 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char			is_builtin(char *cmd);
 void			remove_quotes(t_list *tokens);
 char			*remove_quote_from_ends(char *old);
 void			remove_param_quotes(t_list *tokens);
+char			is_command_valid(t_list *tokens, t_data *context);
 //lexer utils
 void			print_tokens(t_list	*tokens);
 void			str_append(char **str1, char *str2);

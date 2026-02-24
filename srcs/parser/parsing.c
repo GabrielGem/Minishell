@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 20:20:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 22:07:54 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:09:36 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ t_command	*parse_command(t_list **tokens)
 	}
 	remove_param_quotes(args_list);
 	cmd->args = list_to_array(args_list);
-	cmd->is_builtin = is_builtin(cmd->args[0]);
+	if (!cmd->args)
+		cmd->is_builtin = EMPTY;
+	else
+		cmd->is_builtin = is_builtin(cmd->args[0]);
 	*tokens = current;
 	ft_lstclear(&args_list, free);
 	return (cmd);
