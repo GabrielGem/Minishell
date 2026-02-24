@@ -1,4 +1,0 @@
-echo $?
-export HELLO="beatiful world"
-echo - "" "  " hello
-unset PATH -> ls
