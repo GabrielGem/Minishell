@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 14:12:36 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/24 13:11:17 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:50:54 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	b_env(t_data *context, char **args)
 
 	if (args[1])
 	{
-		ft_putstr_fd("minishell: env: too many arguments\n", 2);
+		ft_putendl_fd("minishell: env: too many arguments", 2);
 		return (127);
 	}
 	table = context->env;
@@ -31,12 +31,7 @@ int	b_env(t_data *context, char **args)
 		while (item)
 		{
 			if (item->tag == ENV)
-			{
-				ft_putstr_fd(item->key, 1);
-				ft_putstr_fd("=", 1);
-				ft_putendl_fd(item->value, 1);
-				//printf("%s=%s\n", item->key, item->value);
-			}
+				ft_printf("%s=%s\n", item->key, item->value);
 			item = item->next;
 		}
 		i++;
