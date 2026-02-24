@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 15:55:05 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/20 17:58:59 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/02/24 12:47:31 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	wait_processes(t_list *pids)
 	last_status = 0;
 	while (current)
 	{
-		if (waitpid((pid_t)(long)current->content, &status, 0) == last_pid)
+		waitpid((pid_t)(long)current->content, &status, 0);
+		if ((pid_t)(long)current->content == last_pid)
 		{
 			if (WIFEXITED(status))
 				last_status = WEXITSTATUS(status);
