@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   free_context.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 17:16:45 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/19 14:23:40 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/02/22 13:03:44 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/02/22 13:29:05 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Return 1 if c is a digit between [0-9]
-*/
-int	ft_isdigit(int c)
+#include "minishell.h"
+
+void	free_context(t_data *context)
 {
-	if (c >= '0' && c <= '9')
-		return (c);
-	else
-		return (0);
+	free_tree(context->root);
+	context->root = NULL;
+	ft_lstclear(&context->fds, close_fd);
+	ft_lstclear(&context->pids, close_pid);
+	fallback_update(context);
 }

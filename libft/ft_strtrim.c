@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 13:58:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/07/30 12:26:05 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 17:15:08 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,3 @@ char	*ft_strtrim(const char *s1, const char *set)
 	else
 		return (ft_strdup((char *)""));
 }
-/*
-#include <stdio.h>
-#include <bsd/string.h>
-int	main()
-{
-	char *s1 = "abcdba";
-	char *set = "acb";
-	char *ret = ft_strtrim(s1, set);
-
-	printf("%s\n", ret);
-}*/

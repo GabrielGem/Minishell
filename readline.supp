@@ -1,0 +1,19 @@
+# Valgrind suppressions for readline and ncurses known leaks
+
+{
+   readline_all_leaks
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libreadline.so*
+   ...
+}
+
+{
+   ncurses_all_leaks
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so*
+   ...
+}

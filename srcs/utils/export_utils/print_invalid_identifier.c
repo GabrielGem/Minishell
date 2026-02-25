@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_invalid_identifier.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/19 14:59:52 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/01/31 14:56:36 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/02/23 18:59:03 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/minishell.h"
+#include "minishell.h"
 
-int	main(void)
+void	print_invalid_identifier(char *identifier)
 {
-	char	*line = NULL;
-
-	line = readline("$> ");
-	while (line)
-	{
-		build_tree(line);
-		free(line);
-		line = readline("$> ");
-	}	
+	ft_putstr_fd("minishell: export: `", 2);
+	ft_putstr_fd(identifier, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
 }

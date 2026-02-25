@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_lstadd_before.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 14:51:49 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/12 14:13:06 by mmaquine         ###   ########.fr       */
+/*   Created: 2025/12/23 16:46:32 by mmaquine          #+#    #+#             */
+/*   Updated: 2025/12/29 13:56:13 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-/*
-Adds the node 'new' at the end of the list.
-lst: The address of a pointer to the first node of a list.
-new: The address of a pointer to the node to be added.
-*/
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*nxt;
 
-	if (!lst)
+/*
+	Add element new right before current. If current is the root node then
+	ft_lstadd_back is called instead.
+*/
+void	ft_lstadd_before(t_list *current, t_list *new)
+{
+	if (!current || !new)
 		return ;
-	if (!(*lst))
-		(*lst) = new;
-	else
+	if (!current->prev)
 	{
-		nxt = ft_lstlast(*lst);
-		nxt->next = new;
-		new->prev = nxt;
+		ft_lstadd_back(&current, new);
+		return ;
 	}
+	new->next = current;
+	new->prev = current->prev;
+	current->prev->next = new;
+	current->prev = new;
 }

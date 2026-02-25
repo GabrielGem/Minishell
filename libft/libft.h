@@ -6,18 +6,21 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:46:16 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/11/10 10:40:34 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/21 11:27:58 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 1
 # endif
+
 # ifndef MAX_FD
 #  define MAX_FD 8192
 # endif
@@ -34,6 +37,7 @@ int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
+int		ft_isspace(int c);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcat(char *dst, const char *src, size_t dsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dsize);
@@ -68,14 +72,19 @@ long	ft_putnbr_fd(long n, int fd);
 int		ft_putnbr_u(unsigned int n, int fd);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_after(t_list *current, t_list *new);
+t_list	*ft_lstfirst(t_list *lst);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-//Novos projetos
+void	**ft_join_array_of_pointers(void **a1, void **a2);
+char	*ft_uitoa_base(unsigned long int n, char *symbols);
+
+//Projects beyond libft
 int		ft_printf(const char *format, ...);
 char	*get_next_line(int fd);
 void	gnl_gc(int fd);

@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 14:51:49 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/12 14:13:06 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/01/15 14:00:37 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/01/15 14:12:18 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 /*
-Adds the node 'new' at the end of the list.
-lst: The address of a pointer to the first node of a list.
-new: The address of a pointer to the node to be added.
+	Checks for white-space characters. In the "C" and "POSIX" locales, these
+	are: space, form-feed('\f'), newline ('\n'), carriage return ('\r'), hori-
+	zontal tab ('\t'), and vertical tab ('\v')
 */
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	ft_isspace(int c)
 {
-	t_list	*nxt;
-
-	if (!lst)
-		return ;
-	if (!(*lst))
-		(*lst) = new;
+	if (c == ' ' || (c >= 9 && c <= 13))
+		return (1);
 	else
-	{
-		nxt = ft_lstlast(*lst);
-		nxt->next = new;
-		new->prev = nxt;
-	}
+		return (0);
 }

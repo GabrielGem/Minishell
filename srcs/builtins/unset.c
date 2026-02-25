@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 17:16:45 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/19 14:23:40 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/02/09 14:44:52 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/02/09 15:04:02 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Return 1 if c is a digit between [0-9]
-*/
-int	ft_isdigit(int c)
+#include "minishell.h"
+
+int	b_unset(t_data *context, char **args)
 {
-	if (c >= '0' && c <= '9')
-		return (c);
-	else
+	int	i;
+
+	if (args[1] == NULL)
 		return (0);
+	i = 1;
+	while (args[i])
+	{
+		if (hash_delete(context->env, args[i], ENV) == 1)
+			hash_delete(context->env, args[i], EXPORT);
+		i++;
+	}
+	return (0);
 }

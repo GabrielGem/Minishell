@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   extract_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 17:16:45 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/19 14:23:40 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/01/30 14:15:16 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/01/30 15:31:08 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Return 1 if c is a digit between [0-9]
-*/
-int	ft_isdigit(int c)
+#include "minishell.h"
+
+char	*extract_value(char *line)
 {
-	if (c >= '0' && c <= '9')
-		return (c);
-	else
-		return (0);
+	char	*equal_sign;
+	char	*value;
+
+	if (!line)
+		return (NULL);
+	equal_sign = ft_strchr(line, '=');
+	if (!equal_sign)
+		return (NULL);
+	value = ft_strdup(equal_sign + 1);
+	return (value);
 }

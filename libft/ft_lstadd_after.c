@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_st.h                                     :+:      :+:    :+:   */
+/*   ft_lstadd_after.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 15:59:24 by mmaquine          #+#    #+#             */
-/*   Updated: 2025/12/19 16:04:36 by mmaquine         ###   ########.fr       */
+/*   Created: 2025/12/23 15:48:41 by mmaquine          #+#    #+#             */
+/*   Updated: 2025/12/23 17:17:40 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_ST_H
-# define MINISHELL_ST_H
+#include "libft.h"
 
-typedef enum e_node_type
+/*
+	Add element after right after element current.
+*/
+void	ft_lstadd_after(t_list *current, t_list *after)
 {
-	NODE_COMMAND,
-	NODE_PIPE,
-	NODE_AND,
-	NODE_OR,
-	NODE_REDIRECT,
-	NODE_SEQUENCE
-}	t_node_type;
-
-typedef struct s_ast_node
-{
-	t_node_type			type;
-	struct s_ast_node	*left;
-	struct s_ast_node	*right;
-	char				**param;
-	t_list				*redirects;
-}	t_ast_node;
-
-#endif
+	if (!current || !after)
+		return ;
+	if (!current->next)
+	{
+		ft_lstadd_front(&current, after);
+		return ;
+	}
+	after->next = current->next;
+	after->prev = current;
+	current->next->prev = after;
+	current->next = after;
+}

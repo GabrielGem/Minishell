@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   concatenate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 17:16:45 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/19 14:23:40 by mmaquine         ###   ########.fr       */
+/*   Created: 2025/12/23 10:42:47 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/01/09 16:28:15 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Return 1 if c is a digit between [0-9]
-*/
-int	ft_isdigit(int c)
+#include "minishell.h"
+
+char	**concatenate(char **strs, char *join)
 {
-	if (c >= '0' && c <= '9')
-		return (c);
-	else
-		return (0);
+	char	*temp;
+	int		i;
+
+	i = 0;
+	while (strs[i])
+	{
+		temp = ft_strjoin(strs[i], join);
+		free(strs[i]);
+		strs[i] = temp;
+		i++;
+	}
+	return (strs);
 }

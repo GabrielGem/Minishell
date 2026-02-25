@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 17:16:45 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/19 14:23:40 by mmaquine         ###   ########.fr       */
+/*   Created: 2025/12/20 16:14:49 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/01/28 15:31:41 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Return 1 if c is a digit between [0-9]
-*/
-int	ft_isdigit(int c)
+#include "hashtable.h"
+
+unsigned int	hash_function(char *key, int size)
 {
-	if (c >= '0' && c <= '9')
-		return (c);
-	else
-		return (0);
+	unsigned long	hash;
+	char			c;
+
+	hash = 5381;
+	while (*key)
+	{
+		c = *key;
+		hash = ((hash << 5) + hash) + c;
+		key++;
+	}
+	return (hash % size);
 }
