@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 11:49:45 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/24 17:12:21 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/25 11:26:23 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	process_heredoc(t_redir *redir, int fd, int *lines, \
 t_data *context);
+static int	process_signal(char *line, int *lines, int fd);
 
 int	heredoc(char *temp_file, t_redir *redir, t_data *context)
 {
@@ -32,6 +33,16 @@ int	heredoc(char *temp_file, t_redir *redir, t_data *context)
 	return (lines);
 }
 
+static int	process_signal(char *line, int *lines, int fd)
+{
+	free(line);
+	setup_signals_interactive();
+	close(fd);
+	g_signal_received = 0;
+	(*lines)++;
+	return (0);
+}
+
 static int	process_heredoc(t_redir *redir, int fd, int *lines, t_data *context)
 {
 	char	*line;
@@ -43,14 +54,7 @@ static int	process_heredoc(t_redir *redir, int fd, int *lines, t_data *context)
 		ft_putstr_fd("> ", 1);
 		line = get_next_line(0);
 		if (g_signal_received == SIGINT)
-		{
-			free(line);
-			setup_signals_interactive();
-			close(fd);
-			g_signal_received = 0;
-			(*lines)++;
-			return (0);
-		}
+			return (process_signal(line, lines, fd));
 		if (!line)
 			return (1);
 		if (ft_strncmp(line, redir->filename, len) == 0 && line[len] == '\n')

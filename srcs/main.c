@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:58:31 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/24 23:17:26 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/25 12:37:37 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ volatile sig_atomic_t	g_signal_received = 0;
 
 static t_data	*init_shell(char **envp);
 static void		run_shell(t_data *context);
+static void		run_command(t_data *context);
 
 int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)), \
 char **env)
@@ -34,6 +35,7 @@ static void	run_shell(t_data *context)
 {
 	char	*prompt;
 	char	*line;
+	char	*temp;
 
 	while (1)
 	{
@@ -45,17 +47,16 @@ static void	run_shell(t_data *context)
 		}
 		else
 		{
-			line = get_next_line(STDIN_FILENO);
-			line = ft_strtrim(line, "\n");
+			temp = get_next_line(STDIN_FILENO);
+			line = ft_strtrim(temp, "\n");
+			free(temp);
 		}
 		if (!line)
 			break ;
 		if (!check_spaces(line))
 			add_history(line);
-		tree_build(line, context);
-		context->count_line += 1 + hunt_heredoc(context->root, context);
-		context->exit_status = executor(context->root, context);
-		free_context(context);
+		if (tree_build(line, context))
+			run_command(context);
 	}
 }
 
@@ -71,4 +72,11 @@ static t_data	*init_shell(char **envp)
 	context->count_line = 1;
 	context->root = NULL;
 	return (context);
+}
+
+static void	run_command(t_data *context)
+{
+	context->count_line += 1 + hunt_heredoc(context->root, context);
+	context->exit_status = executor(context->root, context);
+	free_context(context);
 }

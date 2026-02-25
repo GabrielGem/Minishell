@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 10:25:43 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/02/24 17:01:14 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/25 11:19:03 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	hunt_heredoc(t_ast_node *tree, t_data *context)
 		&handle_command_heredoc,
 		&handle_pipe_heredoc
 	};
+
 	setup_signals_heredoc();
 	if (tree == NULL)
 		return (0);

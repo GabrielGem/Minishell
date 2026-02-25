@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 11:00:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/24 23:37:29 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/25 11:17:58 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static	t_quote_state	update_state(char **new, char append, t_quote_state st)
 	return (st);
 }
 
-static void	state_quote(char token_state, char token, t_quote_state *st,\
+static void	state_quote(char token_state, char token, t_quote_state *st, \
 	char **new)
 {
 	if (token == token_state)
@@ -47,7 +47,7 @@ static void	state_quote(char token_state, char token, t_quote_state *st,\
 		append_char(new, token);
 }
 
-static	void	state_normal(t_quote_state *state, char **current,\
+static	void	state_normal(t_quote_state *state, char **current, \
 	t_list **list, char **new)
 {
 	if (ft_isspace(**current))
