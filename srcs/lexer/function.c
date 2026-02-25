@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:38:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 16:28:09 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 23:34:10 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*expand_all_vars(char *old, t_data *context)
 	t_list	*lst;
 	char	*new;
 
-	if(!old)
+	if (!old)
 		return (old);
 	lst = ft_lstnew(old);
 	lst->next = NULL;

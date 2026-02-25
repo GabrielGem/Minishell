@@ -6,11 +6,19 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 17:10:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 16:32:20 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 23:39:33 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+Return 1 is string is bounded for any kind of quotes, 0 otherwise.
+*/
+char	is_single_or_double_quotes(t_list *token)
+{
+	return (is_quote_token(token, '\'') || is_quote_token(token, '\"'));
+}
 
 /*
 Remove only quotes from ends.
@@ -74,7 +82,10 @@ void	remove_param_quotes(t_list *tokens)
 	while (tokens)
 	{
 		if (is_single_or_double_quotes(tokens))
+		{
+			tokens->content = remove_internal_quote(tokens->content);
 			tokens->content = remove_quote_from_ends(tokens->content);
-		tokens = tokens->next;	
+		}
+		tokens = tokens->next;
 	}
 }

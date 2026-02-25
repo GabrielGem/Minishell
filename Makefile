@@ -6,12 +6,12 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/02/24 17:31:03 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/02/24 22:44:53 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -I./includes -I./libft
 LIBS = -Llibft -lft
 RDFLAGS = -lreadline

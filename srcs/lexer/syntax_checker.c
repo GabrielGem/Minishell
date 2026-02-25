@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:51:35 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/24 17:24:08 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 23:36:17 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ char	is_command_valid(t_list	*tokens, t_data *context)
 		{
 			if (!tokens->next)
 				return (print_message1(context));
-			if (is_redirect(tokens->next->content) \
+			if (is_redirect(tokens->next->content)
 				|| !ft_strcmp(tokens->next->content, "|"))
 				return (print_message3(context, tokens->next->content));
-		}		
+		}
 		tokens = tokens->next;
 	}
 	return (1);

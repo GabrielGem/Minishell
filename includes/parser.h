@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 17:12:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/24 16:19:46 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 22:20:33 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ char			**list_to_array(t_list *list);
 t_command		*parse_command(t_list **tokens);
 char			is_redirect(char *token);
 t_type_redir	get_redirect_type(char *token);
+char			*remove_internal_quote(char *str);
 #endif

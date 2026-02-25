@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:37:13 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 20:42:16 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/02/24 23:38:55 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static char	*expand_tilde(char	*old, t_data *context)
 }
 
 static void	evaluate_dollar(t_list **curr, char *dol, t_data *context)
-{	
+{
 	char	*var;
 	char	*content;
 
@@ -106,6 +106,12 @@ static void	evaluate_dollar(t_list **curr, char *dol, t_data *context)
 	{
 		append_char(&var, *(dol + 1));
 		(*curr)->content = reshape_string(content, var, NULL, dol - content);
+		free(var);
+	}
+	else if (*(dol + 1) == '$')
+	{
+		var = ft_itoa(getpid());
+		(*curr)->content = reshape_string(content, "$", var, dol - content);
 		free(var);
 	}
 	else
@@ -141,4 +147,3 @@ t_list	*expand_token(t_list *tokens, t_data *context)
 	}
 	return (tokens);
 }
-
