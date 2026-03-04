@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 10:57:20 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/24 16:19:32 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/04 16:00:11 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*extract_name(char	*token)
 
 	if (!token)
 		return (NULL);
-	if (!(ft_isalpha(token[0]) || (token[0] != '_')))
+	if (!ft_isalpha(token[0]) && *token != '_')
 		return (NULL);
 	if (token[0] == '?')
 		return (ft_strdup("?"));
