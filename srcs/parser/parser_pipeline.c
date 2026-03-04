@@ -6,12 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 13:01:25 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/23 22:08:29 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/04 10:41:45 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "tests.h"
 
 t_ast_node	*parse_pipeline(t_list **tokens, t_data *context)
 {
