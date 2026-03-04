@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:37:13 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/02/24 23:38:55 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/04 10:37:46 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ static void	evaluate_dollar(t_list **curr, char *dol, t_data *context)
 	var = NULL;
 	content = (*curr)->content;
 	if ((ft_strlen(content) == 1)
-		|| (*(dol + 1) == '\0')
-		|| (*(dol + 1) == ' ')
+		|| *(dol + 1) == '\0' || (*(dol + 1) == ' ')
 		|| (*(dol + 1) == '\'' || *(dol + 1) == '\"'))
 		*curr = (*curr)->next;
 	else if (ft_isdigit(*(dol + 1)))
